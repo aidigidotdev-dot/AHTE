@@ -339,19 +339,17 @@ const TIMELINE_STEPS: Record<string, {
 };
 
 const COST_ESTIMATOR_SERVICES = [
-  { service: "Epoxy Flooring", minimumArea: 1000, minimumAed: 60.00 },
-  { service: "Kitchen Flooring", minimumArea: 100, minimumAed: 280.00 },
-  { service: "Terrazzo Flooring", minimumArea: 100, minimumAed: 580.00 },
-  { service: "Microcement", minimumArea: 200, minimumAed: 220.00 },
-  { service: "MMA Flooring", minimumArea: 50, minimumAed: 480.00 },
-  { service: "Microconcrete", minimumArea: 200, minimumAed: 395.00 },
+  { service: "Epoxy Flooring", minimumArea: 1000, minimumAed: "60.00" },
+  { service: "Kitchen Flooring", minimumArea: 100, minimumAed: "280.00" },
+  { service: "Terrazzo Flooring", minimumArea: 100, minimumAed: "580.00" },
+  { service: "Microcement", minimumArea: 200, minimumAed: "220.00" },
+  { service: "MMA Flooring", minimumArea: 50, minimumAed: "480.00" },
+  { service: "Microconcrete", minimumArea: 200, minimumAed: "395.00" },
 ];
 
 export default function ServicesView({ onNavigate }: ServicesViewProps) {
   const [selectedServiceForQuote, setSelectedServiceForQuote] = useState<string | null>(null);
   const [areaSquareMeters, setAreaSquareMeters] = useState<number>(150);
-  const [costEstimatorService, setCostEstimatorService] = useState(COST_ESTIMATOR_SERVICES[0].service);
-  const [costEstimatorArea, setCostEstimatorArea] = useState(COST_ESTIMATOR_SERVICES[0].minimumArea);
   const [finishStyle, setFinishStyle] = useState<string>("Satin 400-Grit");
   const [projectSector, setProjectSector] = useState<string>("Commercial");
   const [isQuoteSubmitted, setIsQuoteSubmitted] = useState(false);
@@ -417,10 +415,6 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
   };
 
   const activeServiceObj = SERVICES.find(s => s.id === selectedServiceForQuote);
-  const activeCostEstimatorService =
-    COST_ESTIMATOR_SERVICES.find((item) => item.service === costEstimatorService) || COST_ESTIMATOR_SERVICES[0];
-  const billableCostEstimatorArea = Math.max(costEstimatorArea, activeCostEstimatorService.minimumArea);
-  const estimatedCostTotal = billableCostEstimatorArea * activeCostEstimatorService.minimumAed;
 
   return (
     <div className="bg-[#f5f5f0] min-h-screen py-16 text-[#1a1a1a]">
@@ -441,54 +435,10 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
 
         {/* Cost Estimator */}
         <div className="mb-16 bg-white border border-[#e1e1d7] rounded-[32px] p-6 md:p-8 shadow-sm">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
-            <div className="max-w-2xl">
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#5A5A40] block">
-                Cost Estimator
-              </span>
-              <h2 className="font-serif font-light text-3xl md:text-4xl text-[#1a1a1a] leading-tight mt-3">
-                Dubai Flooring Cost Estimator
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full lg:w-auto lg:min-w-[420px]">
-              <label className="space-y-1.5">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#5a5650] font-bold">
-                  Service
-                </span>
-                <select
-                  value={costEstimatorService}
-                  onChange={(event) => {
-                    const selected = COST_ESTIMATOR_SERVICES.find((item) => item.service === event.target.value);
-                    setCostEstimatorService(event.target.value);
-                    if (selected) setCostEstimatorArea(selected.minimumArea);
-                  }}
-                  className="w-full border border-[#e1e1d7] rounded-lg p-3 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-[#5A5A40]"
-                >
-                  {COST_ESTIMATOR_SERVICES.map((item) => (
-                    <option key={item.service} value={item.service}>
-                      {item.service}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="space-y-1.5">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#5a5650] font-bold">
-                  Area in SQM
-                </span>
-                <input
-                  type="number"
-                  min={activeCostEstimatorService.minimumArea}
-                  value={costEstimatorArea}
-                  onChange={(event) => setCostEstimatorArea(Number(event.target.value))}
-                  className="w-full border border-[#e1e1d7] rounded-lg p-3 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-[#5A5A40]"
-                />
-              </label>
-            </div>
-          </div>
-
-          <div className="overflow-x-auto">
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#5A5A40] block">
+            Cost Estimator
+          </span>
+          <div className="overflow-x-auto mt-6">
             <table className="w-full min-w-[620px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-[#e1e1d7]">
@@ -502,42 +452,12 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
                   <tr key={item.service} className="border-b border-[#f5f5f0] last:border-b-0">
                     <td className="py-3 pr-4 text-sm font-semibold text-[#1a1a1a]">{item.service}</td>
                     <td className="py-3 px-4 text-sm text-[#5a5650]">{item.minimumArea}</td>
-                    <td className="py-3 pl-4 text-sm text-[#1a1a1a] font-bold text-right">
-                      {item.minimumAed.toFixed(2)}
-                    </td>
+                    <td className="py-3 pl-4 text-sm text-[#1a1a1a] font-bold text-right">{item.minimumAed}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
-            <div className="bg-[#f5f5f0] border border-[#e1e1d7] rounded-2xl p-4">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[#a09c94] font-bold block">
-                Selected Service
-              </span>
-              <span className="font-serif font-bold text-xl text-[#1a1a1a] mt-1 block">
-                {activeCostEstimatorService.service}
-              </span>
-            </div>
-            <div className="bg-[#f5f5f0] border border-[#e1e1d7] rounded-2xl p-4">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[#a09c94] font-bold block">
-                Billable SQM
-              </span>
-              <span className="font-serif font-bold text-xl text-[#1a1a1a] mt-1 block">
-                {billableCostEstimatorArea.toLocaleString()} SQM
-              </span>
-            </div>
-            <div className="bg-[#1a1a1a] border border-[#1a1a1a] rounded-2xl p-4">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[#dcd9ce] font-bold block">
-                Estimated Cost
-              </span>
-              <span className="font-serif font-bold text-xl text-white mt-1 block">
-                {estimatedCostTotal.toLocaleString()} AED
-              </span>
-            </div>
-          </div>
-
           <div className="mt-5 text-xs text-[#5a5650] leading-relaxed">
             <p>Above costs are for Dubai based projects only</p>
             <p>Terms and Conditions Apply.</p>
