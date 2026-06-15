@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Layers } from "lucide-react";
+import { Layers, Menu, X } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const getActiveTab = () => {
     if (pathname === "/") return "home";
@@ -20,37 +22,49 @@ export default function Header() {
 
   const activeClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] border-b-2 border-[#5A5A40] pb-1 transition-all cursor-pointer";
   const inactiveClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40]/50 hover:text-[#1a1a1a] border-b-2 border-transparent pb-1 transition-colors cursor-pointer";
+  const mobileActiveClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] bg-[#edebe1] border border-[#e1e1d7] px-4 py-3 rounded-xl transition-all";
+  const mobileInactiveClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] hover:text-[#1a1a1a] hover:bg-[#edebe1]/70 border border-[#e1e1d7] px-4 py-3 rounded-xl transition-colors";
 
-  const renderLinks = () => {
+  const renderLinks = (isMobile = false) => {
+    const linkClass = (tab: string) => {
+      if (isMobile) return currentTab === tab ? mobileActiveClass : mobileInactiveClass;
+      return currentTab === tab ? activeClass : inactiveClass;
+    };
+
     return (
       <>
         <Link
           href="/"
-          className={currentTab === "home" ? activeClass : inactiveClass}
+          onClick={() => setIsMenuOpen(false)}
+          className={linkClass("home")}
         >
           Home
         </Link>
         <Link
           href="/services"
-          className={currentTab === "services" ? activeClass : inactiveClass}
+          onClick={() => setIsMenuOpen(false)}
+          className={linkClass("services")}
         >
           Services
         </Link>
         <Link
           href="/terrazzo"
-          className={currentTab === "terrazzo" ? activeClass : inactiveClass}
+          onClick={() => setIsMenuOpen(false)}
+          className={linkClass("terrazzo")}
         >
           Terrazzo Matrix
         </Link>
         <Link
           href="/gallery"
-          className={currentTab === "gallery" ? activeClass : inactiveClass}
+          onClick={() => setIsMenuOpen(false)}
+          className={linkClass("gallery")}
         >
           Gallery
         </Link>
         <Link
           href="/authority"
-          className={currentTab === "authority" ? activeClass : inactiveClass}
+          onClick={() => setIsMenuOpen(false)}
+          className={linkClass("authority")}
         >
           Topical Hub
         </Link>
@@ -60,32 +74,33 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#f5f5f0]/95 backdrop-blur-md border-b border-[#e1e1d7]">
-      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 min-[1150px]:h-24 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link 
           href="/"
-          className="flex items-center gap-3 cursor-pointer group"
+          onClick={() => setIsMenuOpen(false)}
+          className="flex items-center gap-3 cursor-pointer group min-w-0"
         >
-          <div className="p-2 bg-[#5A5A40] text-[#f5f5f0] rounded-none group-hover:bg-[#1a1a1a] transition-colors">
+          <div className="p-2 bg-[#5A5A40] text-[#f5f5f0] rounded-none group-hover:bg-[#1a1a1a] transition-colors shrink-0">
             <Layers className="w-5 h-5" />
           </div>
-          <div>
-            <span className="font-serif font-bold text-2xl tracking-tighter uppercase italic text-[#1a1a1a] block">
+          <div className="min-w-0">
+            <span className="font-serif font-bold text-xl sm:text-2xl tracking-tighter uppercase italic text-[#1a1a1a] block truncate">
               AHTE Flooring
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold">
+            <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
               Premium Surface Restoration
             </span>
           </div>
         </Link>
 
         {/* Navigation Links */}
-        <nav className="flex items-center gap-8 md:gap-10">
+        <nav className="hidden min-[1150px]:flex items-center gap-8">
           {renderLinks()}
         </nav>
 
         {/* Action Button */}
-        <div className="hidden md:block">
+        <div className="hidden min-[1150px]:block">
           <Link
             href="/terrazzo"
             className="text-[10px] uppercase font-bold tracking-widest text-[#5A5A40] px-5 py-2.5 border border-[#5A5A40] rounded-full hover:bg-[#5A5A40] hover:text-[#f5f5f0] transition-all cursor-pointer"
@@ -93,7 +108,32 @@ export default function Header() {
             Quote Calculator
           </Link>
         </div>
+
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          className="min-[1150px]:hidden inline-flex h-11 w-11 items-center justify-center border border-[#5A5A40]/30 text-[#5A5A40] rounded-full hover:bg-[#5A5A40] hover:text-[#f5f5f0] transition-colors"
+          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {isMenuOpen && (
+        <div className="min-[1150px]:hidden border-t border-[#e1e1d7] bg-[#f5f5f0] shadow-lg">
+          <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 grid gap-2">
+            {renderLinks(true)}
+            <Link
+              href="/terrazzo"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-2 text-center text-[10px] uppercase font-bold tracking-widest text-white bg-[#5A5A40] px-5 py-3 rounded-full hover:bg-[#1a1a1a] transition-colors cursor-pointer"
+            >
+              Quote Calculator
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
