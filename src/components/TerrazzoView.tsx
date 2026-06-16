@@ -7,10 +7,20 @@ interface TerrazzoViewProps {
   onNavigate: (tab: string) => void;
 }
 
+const COST_ESTIMATOR_SERVICES = [
+  { service: "Epoxy Flooring", minimumArea: 1000, minimumAed: 60 },
+  { service: "Kitchen Flooring", minimumArea: 100, minimumAed: 280 },
+  { service: "Terrazzo Flooring", minimumArea: 100, minimumAed: 580 },
+  { service: "Microcement", minimumArea: 200, minimumAed: 220 },
+  { service: "MMA Flooring", minimumArea: 50, minimumAed: 480 },
+  { service: "Microconcrete", minimumArea: 200, minimumAed: 395 },
+];
+
 export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
   const [selectedShade, setSelectedShade] = useState(TERRAZZO_SHADES[0]);
   const [areaInSqm, setAreaInSqm] = useState<number>(120);
   const [useSqft, setUseSqft] = useState<boolean>(false); // toggle sqm vs sqft
+  const [selectedCostService, setSelectedCostService] = useState("Terrazzo Flooring");
 
   // Interactive customizable options
   const [chipDensity, setChipDensity] = useState<number>(75); // 70% to 85%
@@ -25,37 +35,47 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
   const [proposalReady, setProposalReady] = useState(false);
 
   // Constants
-  const basePricePerSqm = 450; // AED standard base
+  const activeCostService =
+    COST_ESTIMATOR_SERVICES.find((item) => item.service === selectedCostService) || COST_ESTIMATOR_SERVICES[2];
+  const isTerrazzoEstimate = activeCostService.service === "Terrazzo Flooring";
+  const basePricePerSqm = activeCostService.minimumAed;
+  const minimumProjectArea = activeCostService.minimumArea;
   const premiumShadeFactor = selectedShade.id === "shade-1a" ? 1.05 : selectedShade.id === "shade-1c" ? 1.1 : 1.0;
 
   // Calculators
   const areaSqmNormal = useSqft ? Math.round(areaInSqm / 10.76) : areaInSqm;
   const areaSqftNormal = useSqft ? areaInSqm : Math.round(areaInSqm * 10.76);
+  const billableAreaSqm = Math.max(areaSqmNormal, minimumProjectArea);
 
   const calculateSubtotal = () => {
-    let price = basePricePerSqm * premiumShadeFactor * areaSqmNormal;
+    let price = basePricePerSqm * billableAreaSqm;
+    if (!isTerrazzoEstimate) return Math.round(price);
+
+    price *= premiumShadeFactor;
     // Add density factor
-    if (chipDensity > 80) price += 40 * areaSqmNormal;
+    if (chipDensity > 80) price += 40 * billableAreaSqm;
     // Shine level
-    if (shineFinish.includes("800-Grit")) price += 35 * areaSqmNormal;
+    if (shineFinish.includes("800-Grit")) price += 35 * billableAreaSqm;
     return Math.round(price);
   };
 
   const calculateInlayCost = () => {
+    if (!isTerrazzoEstimate) return 0;
+
     switch (metalInlaysType) {
       case "Concentric Linear Bands":
-        return Math.round(areaSqmNormal * 25);
+        return Math.round(billableAreaSqm * 25);
       case "Diamond Grid Layout":
-        return Math.round(areaSqmNormal * 45);
+        return Math.round(billableAreaSqm * 45);
       case "Bespoke Geometrical Circles":
-        return Math.round(areaSqmNormal * 65);
+        return Math.round(billableAreaSqm * 65);
       default:
         return 0;
     }
   };
 
   const calculateHeatingSurcharge = () => {
-    return includeUnderfloorHeating ? Math.round(areaSqmNormal * 80) : 0;
+    return isTerrazzoEstimate && includeUnderfloorHeating ? Math.round(billableAreaSqm * 80) : 0;
   };
 
   const calculateTotal = () => {
@@ -75,12 +95,12 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
           name: clientName,
           company: clientCompany,
           phone: clientPhone,
-          flooringType: `Terrazzo (${selectedShade.name})`,
+          flooringType: isTerrazzoEstimate ? `Terrazzo (${selectedShade.name})` : activeCostService.service,
           areaSqm: areaSqmNormal,
           projectSector: "General",
           finishStyle: shineFinish,
           metalInlays: metalInlaysType,
-          underfloorHeating: includeUnderfloorHeating,
+          underfloorHeating: isTerrazzoEstimate && includeUnderfloorHeating,
           estimatedPrice: calculateTotal(),
           leadType: "terrazzo_proposal",
         }),
@@ -105,13 +125,13 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
         {/* Intro */}
         <div className="max-w-3xl mb-12 space-y-4">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#5A5A40] block">
-            Bespoke Flooring Configurator
+            Dubai Flooring Cost Estimation
           </span>
           <h1 className="font-serif font-light text-4xl md:text-5xl text-[#1a1a1a]">
-            Terrazzo Flooring Studio
+            Flooring Cost Estimator
           </h1>
           <p className="text-[#5a5650] text-sm md:text-base leading-relaxed">
-            Configure seamless resinous terrazzo specifications. Browse authorized physical sample bases, customize marble chip aggregate ratios, toggle linear metal partitions, and compute immediate GCC estimations.
+            Select a flooring service, enter the project area, and get a clear Dubai-based estimate before requesting a detailed quote.
           </p>
         </div>
 
@@ -308,25 +328,57 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Budget calculator & Proposal Generator (5 cols) */}
+          {/* RIGHT COLUMN: Cost estimator and quote request (5 cols) */}
           <div className="lg:col-span-5 space-y-8 sticky top-28">
             
-            {/* Real-time calculator panel */}
+            {/* Terrazzo cost estimator panel */}
             <div className="bg-[#1a1a1a] text-white p-6 shadow-xl border border-[#e1e1d7]/10 rounded-[32px] space-y-6 overflow-hidden">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block pb-2 border-b border-[#e1e1d7]/10 font-bold">
-                Area Dimensions & Real-Time Estimate
-              </span>
+              <div className="pb-4 border-b border-[#e1e1d7]/10">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block font-bold">
+                  Cost Estimator
+                </span>
+                <h2 className="font-serif text-2xl font-bold text-white mt-2">
+                  Dubai Cost Estimate
+                </h2>
+                <p className="text-xs text-[#a09c94] mt-2 leading-relaxed">
+                  Based on the selected service minimum area and AED rate.
+                </p>
+              </div>
+
+              <label className="space-y-2 block">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#a09c94] font-bold">
+                  Flooring Service
+                </span>
+                <select
+                  value={selectedCostService}
+                  onChange={(event) => {
+                    const selected = COST_ESTIMATOR_SERVICES.find((item) => item.service === event.target.value);
+                    setSelectedCostService(event.target.value);
+                    if (selected) {
+                      setUseSqft(false);
+                      setAreaInSqm(selected.minimumArea);
+                    }
+                  }}
+                  className="w-full bg-black/40 border border-white/10 p-3 text-sm text-white rounded-xl focus:outline-none focus:border-[#5A5A40]"
+                >
+                  {COST_ESTIMATOR_SERVICES.map((item) => (
+                    <option key={item.service} value={item.service} className="text-[#1a1a1a]">
+                      {item.service}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
               {/* Size input toggles */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-xs font-mono">
-                  <span className="font-bold text-[#edebe1]">SPECIFY COVER SURFACE AREA</span>
+                  <span className="font-bold text-[#edebe1]">Project Area</span>
                   <div className="flex border border-white/10 bg-black/30 rounded-full p-0.5">
                     <button
                       type="button"
                       onClick={() => {
                         if (useSqft) {
-                          setAreaInSqm(Math.round(areaInSqm / 10.76));
+                          setAreaInSqm(Math.max(minimumProjectArea, Math.round(areaInSqm / 10.76)));
                           setUseSqft(false);
                         }
                       }}
@@ -338,7 +390,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                       type="button"
                       onClick={() => {
                         if (!useSqft) {
-                          setAreaInSqm(Math.round(areaInSqm * 10.76));
+                          setAreaInSqm(Math.round(Math.max(minimumProjectArea, areaInSqm) * 10.76));
                           setUseSqft(true);
                         }
                       }}
@@ -353,23 +405,31 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                 <div className="flex gap-4 items-center">
                   <input
                     type="number"
-                    min="20"
+                    min={useSqft ? Math.round(minimumProjectArea * 10.76) : minimumProjectArea}
                     max="5000"
                     value={areaInSqm}
-                    onChange={(e) => setAreaInSqm(Math.max(20, parseInt(e.target.value) || 0))}
+                    onChange={(e) => {
+                      const minArea = useSqft ? Math.round(minimumProjectArea * 10.76) : minimumProjectArea;
+                      setAreaInSqm(Math.max(minArea, parseInt(e.target.value) || 0));
+                    }}
                     className="w-28 bg-black/40 border border-[#e1e1d7]/10 text-white font-mono p-2.5 text-center text-sm focus:outline-none focus:border-[#5A5A40] rounded-xl"
                   />
                   <div className="text-xs text-[#a09c94] font-sans leading-snug">
-                    Equivalent sizing metric:<br />
+                    Converted area:<br />
                     <span className="text-white font-bold font-mono">
                       {useSqft ? `${areaSqmNormal} Sqm` : `${areaSqftNormal} Sqft`}
                     </span>
+                    {areaSqmNormal < minimumProjectArea && (
+                      <span className="block text-[#edebe1] mt-1">
+                        Billing starts from {minimumProjectArea} SQM
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 <input
                   type="range"
-                  min={useSqft ? "200" : "20"}
+                  min={useSqft ? Math.round(minimumProjectArea * 10.76).toString() : minimumProjectArea.toString()}
                   max={useSqft ? "5000" : "500"}
                   step={useSqft ? "100" : "10"}
                   value={areaInSqm}
@@ -379,67 +439,81 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
               </div>
 
               {/* Estimate Calculation Table */}
-              <div className="space-y-2.5 pt-4 border-t border-white/10 text-xs font-mono text-[#a09c94]">
+              <div className="space-y-3 pt-4 border-t border-white/10 text-xs font-mono text-[#a09c94]">
                 <div className="flex justify-between">
-                  <span>Base Terrazzo Rate:</span>
-                  <span className="text-white">AED {basePricePerSqm} /Sqm</span>
+                  <span>Selected rate:</span>
+                  <span className="text-white">AED {basePricePerSqm} / SQM</span>
                 </div>
-                {premiumShadeFactor > 1.0 && (
+                <div className="flex justify-between">
+                  <span>Billable area:</span>
+                  <span className="text-white">{billableAreaSqm.toLocaleString()} SQM</span>
+                </div>
+                {isTerrazzoEstimate && premiumShadeFactor > 1.0 && (
                   <div className="flex justify-between">
-                    <span>Aggregate Hue Surcharge:</span>
+                    <span>Selected shade premium:</span>
                     <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">
                       + {Math.round((premiumShadeFactor - 1.0) * 100)}%
                     </span>
                   </div>
                 )}
-                {chipDensity > 80 && (
+                {isTerrazzoEstimate && chipDensity > 80 && (
                   <div className="flex justify-between">
-                    <span>Density Coefficient (85%):</span>
-                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">+ AED 40 /Sqm</span>
+                    <span>High chip density:</span>
+                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">+ AED 40 / SQM</span>
                   </div>
                 )}
-                {shineFinish.includes("800-Grit") && (
+                {isTerrazzoEstimate && shineFinish.includes("800-Grit") && (
                   <div className="flex justify-between">
-                    <span>800-Grit Mirror Polishing Class:</span>
-                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">+ AED 35 /Sqm</span>
+                    <span>Mirror gloss finish:</span>
+                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">+ AED 35 / SQM</span>
                   </div>
                 )}
-                {metalInlaysType !== "No Dividers (Monolithic Raw)" && (
+                {isTerrazzoEstimate && metalInlaysType !== "No Dividers (Monolithic Raw)" && (
                   <div className="flex justify-between">
-                    <span>{metalInlaysType}:</span>
+                    <span>Metal inlays:</span>
                     <span className="text-white font-bold">AED {calculateInlayCost().toLocaleString()}</span>
                   </div>
                 )}
-                {includeUnderfloorHeating && (
+                {isTerrazzoEstimate && includeUnderfloorHeating && (
                   <div className="flex justify-between">
-                    <span>Glass-fiber flexible add-on:</span>
+                    <span>Underfloor heating add-on:</span>
                     <span className="text-white font-bold">AED {calculateHeatingSurcharge().toLocaleString()}</span>
                   </div>
                 )}
+                {!isTerrazzoEstimate && (
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-[10px] leading-relaxed text-[#dcd9ce]">
+                    Custom terrazzo finish options apply only when Terrazzo Flooring is selected.
+                  </div>
+                )}
                 
-                <div className="flex justify-between text-white border-t border-white/10 pt-4 text-sm font-semibold">
-                  <span className="font-sans font-bold">PROJECT ESTIMATED BID:</span>
-                  <span className="text-white bg-[#5A5A40] px-3.5 py-1 text-lg font-mono rounded-full">{calculateTotal().toLocaleString()} AED</span>
+                <div className="border-t border-white/10 pt-4">
+                  <span className="font-sans font-bold text-white block">Estimated Total</span>
+                  <div className="mt-2 flex items-end justify-between gap-4">
+                    <span className="text-[10px] text-stone-500 uppercase">Excluding 5% VAT</span>
+                    <span className="text-white bg-[#5A5A40] px-4 py-2 text-xl font-mono font-bold rounded-full">
+                      {calculateTotal().toLocaleString()} AED
+                    </span>
+                  </div>
                 </div>
-                <span className="text-[9px] text-stone-500 uppercase block text-right mt-1">* Subject to site inquiry review & VAT 5%</span>
+                <span className="text-[9px] text-stone-500 uppercase block text-right mt-1">Above costs are for Dubai based projects only. Terms and Conditions Apply.</span>
               </div>
 
               {/* Contact Lead Details for PDF Generation */}
               <div className="pt-4 border-t border-white/10 space-y-3">
                 <span className="font-mono text-[9px] uppercase tracking-wider text-[#a09c94] font-bold block">
-                  Assignee Authority Form (For Proposal Generics)
+                  Request Detailed Quote
                 </span>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <input
                     type="text"
-                    placeholder="Representative Name"
+                    placeholder="Your Name"
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     className="w-full bg-black/40 border border-white/10 p-2.5 text-xs text-white rounded-xl placeholder-stone-600 focus:outline-[#5A5A40]"
                   />
                   <input
                     type="text"
-                    placeholder="Company name / Property Lot"
+                    placeholder="Company / Project"
                     value={clientCompany}
                     onChange={(e) => setClientCompany(e.target.value)}
                     className="w-full bg-black/40 border border-white/10 p-2.5 text-xs text-white rounded-xl placeholder-stone-600 focus:outline-[#5A5A40]"
@@ -447,7 +521,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                 </div>
                 <input
                   type="tel"
-                  placeholder="+971 Call Representative"
+                  placeholder="+971 Phone Number"
                   value={clientPhone}
                   onChange={(e) => setClientPhone(e.target.value)}
                   className="w-full bg-black/40 border border-white/10 p-2.5 text-xs text-white rounded-xl placeholder-stone-600 focus:outline-[#5A5A40]"
@@ -464,11 +538,11 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                   }`}
                 >
                   <FileText className="w-4 h-4" />
-                  <span>Generate Specs Sheet Proposal</span>
+                  <span>Submit Estimate Request</span>
                 </button>
                 {!clientName && (
                   <span className="text-[9px] text-[#a09c94] font-mono block text-center mt-1">
-                    * Enter representative details to unlock proposal specs
+                    * Enter your name and phone number to request a quote
                   </span>
                 )}
               </div>
@@ -486,23 +560,33 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                   <p>
                     <strong>Issued To:</strong> {clientName} ({clientCompany || "Private Client"})
                   </p>
-                  <p>
-                    <strong>Floor Base Style:</strong> {selectedShade.name} ({selectedShade.code})
-                  </p>
+                  {isTerrazzoEstimate ? (
+                    <p>
+                      <strong>Floor Base Style:</strong> {selectedShade.name} ({selectedShade.code})
+                    </p>
+                  ) : (
+                    <p>
+                      <strong>Selected Service:</strong> {activeCostService.service}
+                    </p>
+                  )}
                   <p>
                     <strong>Total Area coverage:</strong> {areaSqmNormal} Sqm ({areaSqftNormal} Sqft)
                   </p>
-                  <p>
-                    <strong>Dividers Layout:</strong> {metalInlaysType} system
-                  </p>
-                  <p>
-                    <strong>Underfloor Thermal integration:</strong> {includeUnderfloorHeating ? "Yes (Add-on active)" : "No"}
-                  </p>
-                  <p>
-                    <strong>Polished level:</strong> {shineFinish}
-                  </p>
+                  {isTerrazzoEstimate && (
+                    <>
+                      <p>
+                        <strong>Dividers Layout:</strong> {metalInlaysType} system
+                      </p>
+                      <p>
+                        <strong>Underfloor Thermal integration:</strong> {includeUnderfloorHeating ? "Yes (Add-on active)" : "No"}
+                      </p>
+                      <p>
+                        <strong>Polished level:</strong> {shineFinish}
+                      </p>
+                    </>
+                  )}
                   <p className="border-t border-[#e1e1d7] pt-2 text-[#1a1a1a]">
-                    <strong>Net Dubai Contracting Rate:</strong> <span className="text-sm font-bold font-mono text-[#5A5A40]">{calculateTotal().toLocaleString()} AED</span>
+                    <strong>Estimated Dubai Rate:</strong> <span className="text-sm font-bold font-mono text-[#5A5A40]">{calculateTotal().toLocaleString()} AED</span>
                   </p>
                 </div>
 
