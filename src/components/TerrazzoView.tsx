@@ -552,7 +552,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
             {proposalReady && (
               <div className="bg-white border-2 border-dashed border-[#5A5A40]/30 p-6 rounded-[32px] space-y-4 shadow-sm animate-fade-in text-[#1a1a1a]">
                 <div className="flex justify-between items-center text-xs font-mono text-[#a09c94] pb-2 border-b border-[#e1e1d7]">
-                  <span>AHTE FLOORING SPECIFICATION SHEET</span>
+                  <span>A H T E FLOORING SPECIFICATION SHEET</span>
                   <span className="text-emerald-600 font-bold">&#10003; READY TO LODGE</span>
                 </div>
 
@@ -591,7 +591,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                 </div>
 
                 <button
-                  onClick={() => alert("Specification sheet PDF downloaded successfully. AHTE engineers notified!")}
+                  onClick={() => alert("Specification sheet PDF downloaded successfully. A H T E engineers notified!")}
                   className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-mono text-xs uppercase tracking-widest font-bold transition flex items-center justify-center gap-2 cursor-pointer rounded-full"
                 >
                   <Download className="w-4 h-4" />

@@ -18,7 +18,7 @@ export default function Footer() {
       answer: "Standard projects average 7 to 14 operational days depending on the structural layout complexity. The process involves substrate grinding/preparation, precise brass linear profiling, monolithic casting, a 30-day hydration cure window (for cementitious), followed by multi-stage fine planetary grit polishing and sealing."
     },
     {
-      question: "What structural warranties cover AHTE Flooring systems?",
+      question: "What structural warranties cover A H T E Flooring systems?",
       answer: "We offer a 10-year structural warranty on all residential and commercial epoxy and cementitious terrazzo systems. This warranty covers slab bonding adhesion, pigment UV colorfast stability under GCC heat, and localized micro-fracture prevention (when coupled with underfloor heating flexible latex matrices)."
     }
   ];
@@ -91,7 +91,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="font-serif font-bold text-xl text-white tracking-tighter uppercase italic block">
-                  AHTE Flooring
+                  A H T E Flooring
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block -mt-1 font-semibold">
                   Premium Architectural Floors
@@ -210,7 +210,7 @@ export default function Footer() {
 
         {/* Legal footer rights */}
         <div className="border-t border-[#e1e1d7]/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-[#5a5650]">
-          <span>&copy; {new Date().getFullYear()} AHTE Flooring Contracting LLC. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} A H T E Flooring Contracting LLC. All rights reserved.</span>
           <div className="flex gap-6">
             <span className="hover:text-[#a09c94] transition-colors cursor-pointer">Terms of Service</span>
             <span className="hover:text-[#a09c94] transition-colors cursor-pointer">Privacy Policy</span>

@@ -88,7 +88,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
               Topical Knowledge & <br />Engineering Standards
             </h1>
             <p className="text-sm md:text-base text-[#5a5650] max-w-2xl leading-relaxed">
-              Welcome to the AHTE Flooring UAE engineering portal. Our master craftsmen and concrete technologists compile certified data to align with Dubai Municipality codes, ISO metrics, and BS 8204 building parameters.
+              Welcome to the A H T E Flooring UAE engineering portal. Our master craftsmen and concrete technologists compile certified data to align with Dubai Municipality codes, ISO metrics, and BS 8204 building parameters.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
               REGIONAL DOMAIN
             </span>
             <span className="font-serif font-bold text-2xl block text-[#edebe1] uppercase italic">
-              AHTEFLOORING.AE
+              A H T E FLOORING.AE
             </span>
             <p className="text-[11px] text-[#edebe1]/80 mt-2 leading-relaxed">
               Fully optimized server-side caching and local JSON-LD schemas parsed for UAE crawlers to target Google Dubai Local search indexes.
@@ -162,7 +162,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
                 <span>E-E-A-T SEARCH REPUTATION STATEMENT</span>
               </div>
               <p className="text-[11px] text-[#5a5650] leading-relaxed">
-                By maintaining these documentation logs publicly, AHTE Flooring conforms with Google's search criteria regarding verified Experience, Expertise, and Transparency for industrial flooring categories in Dubai, outranking generic competitors who lack local engineering licenses.
+                By maintaining these documentation logs publicly, A H T E Flooring conforms with Google's search criteria regarding verified Experience, Expertise, and Transparency for industrial flooring categories in Dubai, outranking generic competitors who lack local engineering licenses.
               </p>
             </div>
           </div>
@@ -361,7 +361,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
                 <pre>{`{
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "AHTE Flooring LLC",
+  "name": "A H T E Flooring LLC",
   "image": "https://lh3.googleusercontent.com/aida-public/AB6AX...",
   "@id": "https://ahteflooring.ae/#corporation",
   "url": "https://ahteflooring.ae/",

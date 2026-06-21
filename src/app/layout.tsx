@@ -12,10 +12,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AHTE Flooring UAE | Seamless Terrazzo & Architectural Surfaces Dubai",
+  title: "A H T E Flooring UAE | Seamless Terrazzo & Architectural Surfaces Dubai",
   description: "Specialist contractor for premium seamless terrazzo, metallic epoxy, polished concrete, polyurethane screeds, and microcement flooring across the UAE.",
-  keywords: ["Terrazzo Flooring Dubai", "Epoxy Flooring UAE", "Polished Concrete Dubai", "Microcement Dubai", "AHTE Flooring"],
-  authors: [{ name: "AHTE Flooring Team" }],
+  keywords: ["Terrazzo Flooring Dubai", "Epoxy Flooring UAE", "Polished Concrete Dubai", "Microcement Dubai", "A H T E Flooring"],
+  authors: [{ name: "A H T E Flooring Team" }],
 };
 
 export default function RootLayout({
