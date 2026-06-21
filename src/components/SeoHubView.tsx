@@ -355,7 +355,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
   "image": "https://lh3.googleusercontent.com/aida-public/AB6AX...",
   "@id": "https://ahteflooring.ae/#corporation",
   "url": "https://ahteflooring.ae/",
-  "telephone": "+971501920298",
+  "telephone": "+971 501 920298",
   "priceRange": "AED 180 - AED 450 per Sqm",
   "address": {
     "@type": "PostalAddress",

@@ -78,10 +78,10 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-end gap-5 font-mono text-[10px] uppercase tracking-wider">
           <span className="inline-flex items-center gap-2 text-[#a09c94]">
             <Phone className="w-3.5 h-3.5 text-[#5A5A40]" />
-            +971 50 192 0298
+            +971 501 920298
           </span>
           <span className="text-[#5A5A40]">|</span>
-          <span className="text-[#a09c94]">+971 52 923 4069</span>
+          <span className="text-[#a09c94]">+971 529 234069</span>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 min-[1150px]:h-24 flex items-center justify-between gap-4">

@@ -1159,7 +1159,7 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
                         <label className="text-xs text-[#5a5650] block mb-1">Phone Number</label>
                         <input
                           type="tel"
-                          placeholder="+971 50 XXXXXXX"
+                          placeholder="+971 5XX XXXXXX"
                           value={clientPhone}
                           onChange={(e) => setClientPhone(e.target.value)}
                           className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-[#5A5A40]"
