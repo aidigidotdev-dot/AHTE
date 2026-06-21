@@ -158,7 +158,7 @@ export default function GalleryView({ onNavigate }: GalleryViewProps) {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const message = `Check out this amazing ${proj.type} flooring project: "${proj.title}" in ${proj.location} completed by AHTE Flooring!`;
+                          const message = `Check out this amazing ${proj.type} flooring project: "${proj.title}" in ${proj.location} completed by A H T E Flooring!`;
                           const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + " " + window.location.href)}`;
                           window.open(url, "_blank");
                         }}
@@ -185,7 +185,7 @@ export default function GalleryView({ onNavigate }: GalleryViewProps) {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const text = `Check out "${proj.title}" in ${proj.location} completed by AHTE Flooring!`;
+                          const text = `Check out "${proj.title}" in ${proj.location} completed by A H T E Flooring!`;
                           navigator.clipboard.writeText(window.location.href + "\n" + text).then(() => {
                             setCopiedId(proj.id);
                             setTimeout(() => setCopiedId(null), 2500);
