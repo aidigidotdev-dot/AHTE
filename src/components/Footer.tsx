@@ -165,16 +165,23 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                 <span className="text-[#a09c94] font-sans leading-snug">
-                  {GENERAL_SPECS.headquarters}
+                  Warehouse 2, 364-11A ST, AL Quoz Ind 1st, PO BOX: 8854, Dubai U.A.E
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4.5 h-4.5 text-[#5A5A40] shrink-0" />
-                <span className="text-[#a09c94] font-mono">+971 (4) 340-XXXX</span>
+              <li className="flex items-start gap-3">
+                <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
+                <span className="text-[#a09c94] font-mono leading-snug">
+                  +971 50 192 0298<br />
+                  +971 52 923 4069
+                </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-4.5 h-4.5 text-[#5A5A40] shrink-0" />
-                <span className="text-[#a09c94] font-mono">info@ahteflooring.ae</span>
+              <li className="flex items-start gap-3">
+                <Mail className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
+                <span className="text-[#a09c94] font-mono leading-snug">
+                  hafeez@ahteflooring.com<br />
+                  namish@ahteflooring.com<br />
+                  info@ahteflooring.com
+                </span>
               </li>
             </ul>
           </div>
