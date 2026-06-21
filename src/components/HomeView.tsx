@@ -12,7 +12,7 @@ const GOOGLE_REVIEWS = [
     role: "Villa Owner, Palm Jumeirah",
     rating: 5,
     date: "1 week ago",
-    comment: "A H T E Flooring designed & laid a magnificent seamless white terrazzo floor for our new beach residential villa. The marble chips density and brass metal dividers are absolutely perfect. Truly an outstanding team of professional craftsmen in Dubai.",
+    comment: "A H T E Flooring designed & laid a magnificent seamless white terrazzo floor for our new beach residential villa. The aggregate density and brass metal dividers are absolutely perfect. Truly an outstanding team of professional craftsmen in Dubai.",
     avatarBg: "bg-[#5A5A40]",
     avatarInitials: "TM"
   },
@@ -30,7 +30,7 @@ const GOOGLE_REVIEWS = [
     role: "Operations Director, Al Rigga Group",
     rating: 5,
     date: "1 month ago",
-    comment: "Highly efficient team. They polished 1,200 square meters of commercial concrete subflooring within a tight 10-day timeline. The finished floor is incredibly flat, reflective and easy to maintain. Recommended flooring specialists in UAE.",
+    comment: "Highly efficient team. They completed 1,200 square meters of commercial flooring within a tight 10-day timeline. The finished floor is incredibly flat, reflective and easy to maintain. Recommended flooring specialists in UAE.",
     avatarBg: "bg-[#a09c94]",
     avatarInitials: "FM"
   }
@@ -67,7 +67,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
               <br /><span className="font-bold">Flooring.</span>
             </h1>
             <p className="text-base md:text-lg text-[#a09c94] max-w-md mb-12 leading-relaxed">
-              Specializing in high-end bespoke terrazzo installations and meticulous surface restoration for architectural excellence in GCC climates.
+              Specializing in high-end bespoke terrazzo and seamless flooring systems for architectural excellence in GCC climates.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 mt-4">
@@ -156,7 +156,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
               />
               <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl border border-[#e1e1d7] hidden sm:block shadow-lg">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-[#5A5A40] block font-bold">Head of Craft</span>
-                <span className="font-serif font-semibold text-[#1a1a1a] block mt-1 text-sm italic">Dubai Master Polishing Team</span>
+                <span className="font-serif font-semibold text-[#1a1a1a] block mt-1 text-sm italic">Dubai Flooring Specialists</span>
                 <span className="font-mono text-xs text-[#5A5A40] block mt-1 font-bold">&#9733;&#9733;&#9733;&#9733;&#9733; Verified</span>
               </div>
             </div>
@@ -170,7 +170,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
                 Crafting Exceptional Architectural Foundations for 5 Years &mdash; Al Quoz Dubai.
               </h2>
               <p className="text-base text-[#5a5650] leading-relaxed">
-                A H T E Flooring has designed and laid over 400,000 square meters of high-spec monolithic floors across commercial skyscrapers, palatial residential estates, and industrial hubs. Our team coordinates every stage from base grinding to underfloor heating integration, water-jet brass linear inlay design, and ultimate mirror gloss stages.
+                A H T E Flooring has designed and laid over 400,000 square meters of high-spec monolithic floors across commercial skyscrapers, palatial residential estates, and industrial hubs. Our team coordinates every stage from base grinding to underfloor heating integration and water-jet brass linear inlay design.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
@@ -180,7 +180,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
                   </div>
                   <div>
                     <h4 className="font-serif font-bold text-[#1a1a1a] text-sm">Bespoke Formulating</h4>
-                    <p className="text-xs text-[#a09c94] mt-0.5">Custom cement colors and locally sourced marble chip blending ratios.</p>
+                    <p className="text-xs text-[#a09c94] mt-0.5">Custom cement colors and locally sourced aggregate blending ratios.</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
@@ -475,7 +475,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             Ready to design your bespoke monolithic floor?
           </h2>
           <p className="text-[#a09c94] text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-            Input your dimensions into our proprietary estimator to download a structured specification proposal outlining marble density, grit parameters, and accurate UAE market pricing estimates.
+            Input your dimensions into our proprietary estimator to download a structured specification proposal outlining aggregate density, finish parameters, and accurate UAE market pricing estimates.
           </p>
           <div className="pt-4 animate-bounce">
             <button

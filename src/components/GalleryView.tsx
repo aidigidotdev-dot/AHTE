@@ -39,7 +39,7 @@ export default function GalleryView({ onNavigate }: GalleryViewProps) {
             Contracting Showcases
           </span>
           <h1 className="font-serif font-light text-4xl md:text-5xl text-[#1a1a1a]">
-            A Portfolio of Polished Spaces
+            A Portfolio of Seamless Floors
           </h1>
           <p className="text-[#5a5650] text-sm md:text-base leading-relaxed">
             Take a comprehensive look at completed commercial high-rises, luxury residential villas, and heavy industrial hubs throughout the United Arab Emirates. Every space reflects our standard of quality.
@@ -54,7 +54,6 @@ export default function GalleryView({ onNavigate }: GalleryViewProps) {
               { label: "All Systems", value: "ALL" },
               { label: "Seamless Terrazzo", value: "Terrazzo" },
               { label: "Epoxy", value: "Epoxy" },
-              { label: "Polished Concrete", value: "Concrete" },
               { label: "Industrial Coatings", value: "Industrial" }
             ].map((btn) => (
               <button
@@ -123,12 +122,25 @@ export default function GalleryView({ onNavigate }: GalleryViewProps) {
                   <div className="absolute top-4 left-4 bg-[#5A5A40]/90 text-white font-mono text-[9px] uppercase tracking-wider px-3 py-1 border border-[#e1e1d7]/20 rounded-full">
                     {proj.location}
                   </div>
-                  {/* Hover icon */}
-                  <div className="absolute inset-0 bg-[#1a1a1a]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="p-3 bg-white text-[#1a1a1a] font-bold shadow-lg flex items-center gap-1.5 uppercase tracking-widest text-[10px] font-mono rounded-full">
-                      <Eye className="w-4 h-4 text-[#5A5A40]" />
-                      <span>Explore Technical Specs</span>
-                    </span>
+                  {/* Hover project metadata */}
+                  <div className="absolute inset-0 bg-[#1a1a1a]/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
+                    <div className="w-full p-5 text-white">
+                      <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-[#edebe1] font-bold">
+                        <Eye className="w-3.5 h-3.5 text-[#edebe1]" />
+                        Project Site
+                      </span>
+                      <h4 className="font-serif font-bold text-lg mt-2 leading-tight">
+                        {proj.title}
+                      </h4>
+                      <div className="mt-3 flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-wider font-bold">
+                        <span className="bg-white text-[#1a1a1a] px-3 py-1 rounded-full">
+                          {proj.type} System
+                        </span>
+                        <span className="bg-[#5A5A40] text-white px-3 py-1 rounded-full">
+                          {proj.location}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -301,7 +313,7 @@ export default function GalleryView({ onNavigate }: GalleryViewProps) {
                       </div>
                     )}
                     <div className="flex justify-between border-b border-[#e1e1d7] pb-1.5">
-                      <span className="text-[#a09c94] font-semibold">Polishing Class:</span>
+                      <span className="text-[#a09c94] font-semibold">Finish Class:</span>
                       <span className="font-bold text-[#5A5A40]">{selectedProject.specDetails.finishLevel}</span>
                     </div>
                     <div className="flex justify-between">

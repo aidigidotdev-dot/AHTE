@@ -5,13 +5,13 @@ export const SERVICES: FlooringService[] = [
     id: "terrazzo",
     name: "Terrazzo Flooring",
     type: FlooringType.TERRAZZO,
-    description: "Our signature seamless resinous and cementitious marble-chip surfaces, cured and stage-polished to achieve an exquisite, glass-like sheen. Highly customizable with multi-colored architectural aggregates and dynamic brass metal dividers.",
+    description: "Our signature seamless resinous and cementitious aggregate-chip surfaces, finished to achieve an exquisite, glass-like sheen. Highly customizable with multi-colored architectural aggregates and dynamic brass metal dividers.",
     features: [
       "Completely seamless over expansive monolithic grids",
       "Dynamic patterns using custom water-jet metal divisions",
       "Exceptional compression strength and wear resistance",
       "Zero-VOC eco-friendly formulations",
-      "Available in infinite base color hues and marble percentages"
+      "Available in infinite base color hues and aggregate percentages"
     ],
     thickness: "8mm to 15mm",
     durabilityRating: "Supreme (Grade A+ | 50-Year Lifespan)",
@@ -24,7 +24,7 @@ export const SERVICES: FlooringService[] = [
     type: FlooringType.EPOXY,
     description: "Luxury self-leveling resins with pearlescent metallic micro-pigments that shift under ambient lighting. Designed for high-end residential interiors, luxury retail showrooms, and modern galleries requiring fluid, artistic expression.",
     features: [
-      "Stunning liquid-metal visual depth and unique marbleizing",
+      "Stunning liquid-metal visual depth and unique flowing pattern effects",
       "UV-stable aliphatic topcoat protection to prevent UV ambering",
       "Anti-bacterial, completely non-porous and hygienic",
       "Thermal shock resistance and flexibility",
@@ -34,23 +34,6 @@ export const SERVICES: FlooringService[] = [
     durabilityRating: "Outstanding (Grade A | 15-Year Lifespan)",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-0sk4aRaMkH1nGNuFeXdthLB9hAr6OkdwbRkslKdDSOJr-6xKh8cGlaj6_timRs30GJnNwNTg_BdW-B553cA7gFKxO9F-CW-nVgHu4yDTpgoYQk9D1uE25UEoPqAf957yDkplSBsBnf203APhHOOMktUYE5UChIxWhZOPw3BBcrxqOnTF76xbD7xQwHoLtDRboVVkMSZ4pwBUhjwF3WZg7uCWS0_NBR9KE8Bsi20pAD0UnJrOn50dgTJLmNOI6XIlbriPNunJGNc",
     pricePerSqmEstimate: 280
-  },
-  {
-    id: "polished-concrete",
-    name: "Super-Polished Concrete",
-    type: FlooringType.POLISHED_CONCRETE,
-    description: "Direct mechanical polishing of concrete substrates utilizing heavy lithium densifiers and premium diamond tooling. Offers a beautiful industrial-chic minimal aesthetic with high thermal mass efficiency and zero surface coatings.",
-    features: [
-      "Harnesses and improves the existing structural slab integrity",
-      "Extreme light-reflectivity, reducing indoor electrical load requirements",
-      "No coatings to chip, peel, flag, or bubblize",
-      "Exceptional slip resistance (tested dry & wet standard floors)",
-      "High thermal conductivity ideal for underfloor heating"
-    ],
-    thickness: "N/A (Slab Grinding & Polishing process)",
-    durabilityRating: "Supreme (Grade A+ | Undefined Lifespan)",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA307EuexMqdZB6XvSVf_9Be5KDE4J1asenVbb1g6LinhKruCTiZ3Whi6MYfMtLil_V_3mBBLJml4SnehCIGIzIPlUhHOfM24q-kTSZ0fWdmJ0nvR_bjXN7JTaoxUNajUSJ96_JWETzBkJ2-mSiAH__XxEwZyosM_qAk_px1kQjAwSWPPlRkfswonKDmYB9aqoMA279tmQx0CJcS5yiRk-AwtIgTA7JCMRtJArqKNIWtY_VjvS7ksmG8GhR9tQ9nsZ3hcbJP41zd9c",
-    pricePerSqmEstimate: 180
   },
   {
     id: "industrial",
@@ -96,7 +79,7 @@ export const GALLERY: GalleryProject[] = [
     type: FlooringType.TERRAZZO,
     serviceId: "terrazzo",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLUDsAPVCvATOX65uzjix_jcJY8OfWVERef06Xj9qb0stcPXfr6OSS6OQopf_23e4RKuiTDqGsOwHOoT7SMmioqmorgKiWlvpG3KzCmmW-6-E5QEiG9ooqK6ZtpGO_saSwoHprFCGvv6tanzsCXESdvJwvn67oWLSON0XEWbeXgLImospoARBXvDOCP9PKgoihHCJiRLEsbOvNUK6Jfbr7TVQpQgWLfE2vkFmchQjbnj87gY3GjdQIA6rSfPqIrGYeYBLj_k70CR8",
-    description: "A monumental 1,200 square meter seamless Terrazzo floor designed using White Alabaster resin and premium Carrara Marble aggregate. Strategically positioned copper-inlay bands form concentric geometrical frames referencing classical waves.",
+    description: "A monumental 1,200 square meter seamless Terrazzo floor designed using White Alabaster resin and premium Carrara aggregate. Strategically positioned copper-inlay bands form concentric geometrical frames referencing classical waves.",
     area: "1,200 sqm",
     year: "2025",
     specDetails: {
@@ -133,7 +116,7 @@ export const GALLERY: GalleryProject[] = [
     year: "2025",
     specDetails: {
       baseColor: "Muted Premium Charcoal",
-      aggregateType: "Snowflake White Marble & Nero Marquina",
+      aggregateType: "Snowflake White Aggregate & Nero Marquina",
       finishLevel: "800-Grit Mirror Reflective"
     }
   },
@@ -150,22 +133,6 @@ export const GALLERY: GalleryProject[] = [
     specDetails: {
       baseColor: "Obsidian Bronze Metallic",
       finishLevel: "Dynamic High-Reflection Gloss"
-    }
-  },
-  {
-    id: "p4",
-    title: "Ultra-Modern Palm Jumeirah Sky Villa",
-    location: "Palm Jumeirah, Dubai",
-    type: FlooringType.POLISHED_CONCRETE,
-    serviceId: "polished-concrete",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBwF1T3WWKUvyedyiOBXOPaha9zpds81B-Za_kNFT-Up-D4FXQSMnU3bvZDDide2q-bltdsXCfhk8l5LuUqPiZYC4lOnXKtfz6oLXsa4Q7FsRvBBXOit_65w0OW4ahjlyy4h1U8nYLYrHGUWPP1CGBr0rRcK5ESeOpdhgkXZw3mgWxB7AQM25MUfHaU3nhjgKQaHsv69vN9BLfTo8OyIAd6XKRdC6vpUICP5pBbhzkMaDzSHxpqWXId38zt_NXuNIhPYH-w9OwUPoE",
-    description: "Subslab diamond polished concrete utilizing deep exposure aggregates to simulate a modern grey granite appearance. Designed with zero seam layouts to flow continuously into the outdoor infinity pool deck.",
-    area: "580 sqm",
-    year: "2025",
-    specDetails: {
-      baseColor: "Subslab Silica Grey",
-      aggregateType: "Granite & Basalt Fine Exposures",
-      finishLevel: "800-Grit High-Sheen Polish"
     }
   },
   {
@@ -192,7 +159,7 @@ export const TERRAZZO_SHADES: TerrazzoShade[] = [
     code: "TS-101A",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDGaMha45ZQGrkg6pp-380iDuwH-SRiy3P-Bg2DRNyjX4UWBvITNSghSwET2cnXEun5yfZl4aMYzJuySYFXLJZPD2a1upLeQFNYXrOXpff7dDG7P8R9gxRJ9-C_whyBbFDALyLzO-2XSySaK8I0fX9CDPc7bWqAtohYfXrLcgPOMdKNBMF8gkDHg_lrhi2FcEEvkMsGqQNi2Td8vzg48YEV44U7AnlQhtp9F_dG032zM1pIwo68RPNHaDouI3kRNprItVblQNcSnyI",
     baseColor: "#FAF8F5",
-    aggregates: ["Verona White Marble", "Carrara Quartz", "Clear Glass"],
+    aggregates: ["Verona White Aggregate", "Carrara Quartz", "Clear Glass"],
     popularFor: "Luxury Villas, Art Galleries, Retail Boutiques",
     tone: "light"
   },
@@ -202,7 +169,7 @@ export const TERRAZZO_SHADES: TerrazzoShade[] = [
     code: "TS-102B",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBm_IaKltN9Tp9WeBq_0w0FLRHRxitI9PfKffkw24FdcPissJhjyNnnpuOKL4eys0bzhb8vgnW2cb7fD2bdlm4mRIDYmpnKi4StixdPDc1P8IfAm6WApYUfIcMn559Zxws2UASKMpeAbX283tavcM2UuogibY-vaapRa5n4VdeJ6Ooki41e92asEiKYRhkgeTsQe60mroDhUmvVL634CVIcQzhN3et-2-24C7C5y9Rh45hCNzcKQTgwPriyP5q1jH2YM5sJ2SvwnSk",
     baseColor: "#EAE2D5",
-    aggregates: ["Terracotta Chips", "Warm Sienna Marble", "Basalt Dust"],
+    aggregates: ["Terracotta Chips", "Warm Sienna Aggregate", "Basalt Dust"],
     popularFor: "Hotel Atriums, Residential Courtyards, Spas",
     tone: "medium"
   },
@@ -212,7 +179,7 @@ export const TERRAZZO_SHADES: TerrazzoShade[] = [
     code: "TS-103C",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFxpIwKkZeTcg_AX_yKnSN4aWJmBrKKILR1eJA1Q7fpRAD-Aet2fklOU35sFlJ3UwpCyGxi4bx9erMCnXepj5-k-pb8vJOScUyx5ubhlcPneJrbI2nxZ0JcVyRVSlAm6CMls2TBtwIhmPIZzR-fbrCoMPoVlT7urcXe9-jf3bnCGUmhHUylKiPd2jC1J12JEHuwkbrGTv0P1u6-2LB1xAnOdEwdPa5P2qKJKNro_CikrwAPX0TEDJ-hJwGdafxxFjZ2olOD6LYFcY",
     baseColor: "#2F3135",
-    aggregates: ["Nero Marquina", "Snowflake White Marble", "Granite Sparkle"],
+    aggregates: ["Nero Marquina", "Snowflake White Aggregate", "Granite Sparkle"],
     popularFor: "Modern Offices, Penthouses, Cocktail Lounges",
     tone: "dark"
   }

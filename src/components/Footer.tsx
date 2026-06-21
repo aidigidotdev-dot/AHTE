@@ -15,7 +15,7 @@ export default function Footer() {
     },
     {
       question: "What is the typical timeline for a seamless floor installation?",
-      answer: "Standard projects average 7 to 14 operational days depending on the structural layout complexity. The process involves substrate grinding/preparation, precise brass linear profiling, monolithic casting, a 30-day hydration cure window (for cementitious), followed by multi-stage fine planetary grit polishing and sealing."
+      answer: "Standard projects average 7 to 14 operational days depending on the structural layout complexity. The process involves substrate preparation, precise brass linear profiling, monolithic casting, a 30-day hydration cure window (for cementitious), followed by finishing and sealing."
     },
     {
       question: "What structural warranties cover A H T E Flooring systems?",
@@ -44,7 +44,7 @@ export default function Footer() {
                 Surface & Service FAQs
               </h4>
               <p className="text-sm text-[#5a5650] max-w-sm leading-relaxed font-sans">
-                Review verified structural insights regarding our architectural masonry curing, polishing procedures, and long-term structural warranties.
+                Review verified structural insights regarding our architectural flooring systems, curing procedures, and long-term structural warranties.
               </p>
             </div>
             
@@ -99,7 +99,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-[#a09c94] leading-relaxed font-sans">
-              Dubai's choice commercial & residential flooring contractor. Pioneering high-gloss seamless Terrazzo and ultra-flat concrete polishing systems.
+              Dubai's choice commercial & residential flooring contractor. Pioneering seamless Terrazzo and durable architectural flooring systems.
             </p>
             <div className="pt-2 flex flex-col gap-1.5 font-mono text-xs text-[#5A5A40]">
               <span className="text-[#a09c94]">Experience: <span className="text-white font-semibold">{GENERAL_SPECS.yearsInBusiness}</span></span>

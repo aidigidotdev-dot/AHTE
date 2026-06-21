@@ -43,27 +43,9 @@ const COMPARISON_DATA = [
     vocStatus: "Low-VOC (Al Sa'fat Compliant)",
     installCrew: "Specialist Contractor Required",
     suitability: {
-      "Residential Villa": "Excellent (Show garages / Playful spaces)",
+      "Residential Villa": "Excellent (Feature interiors / Playful spaces)",
       "Commercial": "Excellent (High-end retail showrooms & galleries)",
       "Industrial Facility": "Moderate (Susceptible to heavy steel scratch)"
-    }
-  },
-  {
-    id: "polished-concrete",
-    name: "Super-Polished Concrete",
-    thickness: "N/A (Slab mechanical grind)",
-    durability: "Supreme (Undefeated wear life)",
-    basePrice: 180,
-    finish: "400-Grit Satin / 800-Grit High-Sheen",
-    moistureResist: "High (Requires active densifiers)",
-    sustainabilityNote: "High (Uses pre-existing thermal mass)",
-    dubaiApproved: "Yes (Fully Certified DM-SPEC-2026)",
-    vocStatus: "Low-VOC (Al Sa'fat Compliant)",
-    installCrew: "Specialist Contractor Required",
-    suitability: {
-      "Residential Villa": "Excellent (Minimalist modern lofts)",
-      "Commercial": "Exceptional (Supermarkets / Design studios)",
-      "Industrial Facility": "Excellent (Logistics, storage, loading yards)"
     }
   },
   {
@@ -142,7 +124,7 @@ const TIMELINE_STEPS: Record<string, {
       {
         stage: "03",
         title: "Monolithic Aggregate Casting",
-        description: "Combine select aggregate combinations (Italian & local UAE marble chips) with high-strength binders (white cementitious mix or pure aliphatic resins) and pour seamlessly.",
+        description: "Combine select aggregate combinations with high-strength binders (white cementitious mix or pure aliphatic resins) and pour seamlessly.",
         specText: "High-density aggregates distributed at uniform 70% ratios.",
         equipment: "Monolithic Mixing Drums, Trowel Levelers",
         gccMitigation: "Aggressive humidity control maintained to ensure the matrix doesn't dry prematurely.",
@@ -159,10 +141,10 @@ const TIMELINE_STEPS: Record<string, {
       },
       {
         stage: "05",
-        title: "Planetary Diamond Polishing",
+        title: "Final Surface Finishing",
         description: "Incorporate high-speed grinding heads with diamond grits ranging from 50 (coarse levels) scaling progressively upwards to 400 (honed satin) or 800 (high key mirror). Treat with lithium densifiers.",
-        specText: "Polished to 800-grit level, sealed with silicate crystalizers.",
-        equipment: "3-Phase Planetary Diamond Grinding & Wet Polishing Units",
+        specText: "Finished to project specification and sealed with silicate crystalizers.",
+        equipment: "3-Phase Surface Preparation & Finishing Units",
         gccMitigation: "Wet-vacuum systems capture 100% of silica particulate, maintaining Al Sa'fat air indexes.",
         status: "Exposing Aggregate"
       }
@@ -207,48 +189,6 @@ const TIMELINE_STEPS: Record<string, {
         equipment: "Microfiber rollers, Precision spray mutes",
         gccMitigation: "Blocks UAE intense ambient solar radiation from disfiguring or yellowing clear resins.",
         status: "Protective Shield"
-      }
-    ]
-  },
-  "polished-concrete": {
-    systemName: "Super-Polished Concrete",
-    duration: "5 - 7 Days Active",
-    steps: [
-      {
-        stage: "01",
-        title: "Coarse Grit Aggressive Honing",
-        description: "Mow down the concrete top paste using aggressive metal-bond diamond grits (30 to 70) to expose a flat plane of internal volcanic aggregates.",
-        specText: "Achieves optimal flat surfaces for pristine reflection indices.",
-        equipment: "Multi-Head 3-Phase Planetary Grinders",
-        gccMitigation: "Operated with specialized dust shroud collectors to certify zero health code hazards.",
-        status: "De-scaling Paste"
-      },
-      {
-        stage: "02",
-        title: "Active Lithium Silicate Penetration",
-        description: "Flood concrete with liquid lithium silicates. The molecules actively react with calcium hydroxide in the cement to grow dense crystal structures.",
-        specText: "Increases surface mohs hardness from 4 to past 7.",
-        equipment: "Low-Pressure Spray Pumps, Industrial Soft Broom Uniformity",
-        gccMitigation: "Injected during cool morning shifts to maximize slow structural penetration depth.",
-        status: "Crystal densifying"
-      },
-      {
-        stage: "03",
-        title: "Fine Diamond Grit Polishing",
-        description: "Transition from metal shoes to fine resin-bond diamond pads (100, 200, 400, up to 800 grits) to polish the dense concrete cells into a beautiful sheen.",
-        specText: "Honed to precise customer requirements (matte, satin, mirror).",
-        equipment: "Resin Grit Grinding disks, High-speed floor burnishers",
-        gccMitigation: "Controlled wet sanding loops eliminate dry air particulates and stabilize slab cooling.",
-        status: "Grit Transition"
-      },
-      {
-        stage: "04",
-        title: "Anti-Stain Penetrating Shield & Burnish",
-        description: "Apply an ultra-fine concrete sealer protector that reacts under thermal friction. Burnish at high speeds to melt and fuse the shield into glass.",
-        specText: "Blocks grease, wine, coffee, and hydraulic oils.",
-        equipment: "High-speed 2000-RPM Propane Burnisher, Diamond Hair Pads",
-        gccMitigation: "Ensures heavy tires in prestigious commercial showrooms run slick with zero black marks.",
-        status: "Thermal Sealing"
       }
     ]
   },
@@ -319,7 +259,7 @@ const TIMELINE_STEPS: Record<string, {
       {
         stage: "03",
         title: "Cloudy Satin Pigmented Overlay",
-        description: "Trowel down ultra-fine marble powders enriched with color aggregates. Installer applies micro circular motion strokes to form natural mineral shadows.",
+        description: "Trowel down ultra-fine mineral powders enriched with color aggregates. Installer applies micro circular motion strokes to form natural mineral shadows.",
         specText: "Precision 1.5mm architectural finish, highly satin to touch.",
         equipment: "Exquisite Venetian flexible metal trowels, hand sanders",
         gccMitigation: "Expert hand movements guarantee custom texture shadows, achieving high aesthetic density.",
@@ -367,7 +307,7 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
   const calculateServiceCost = (pricePerSqm: number) => {
     let base = areaSquareMeters * pricePerSqm;
     if (projectSector === "Commercial") base *= 1.1; // commercial premium layout
-    if (finishStyle.includes("800-Grit")) base *= 1.15; // mirror polishing add-on
+    if (finishStyle.includes("800-Grit")) base *= 1.15; // mirror finish add-on
     return Math.round(base);
   };
 
@@ -553,7 +493,7 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
               On-Site Installation Timeline & Stages
             </h2>
             <p className="text-xs md:text-sm text-[#5a5650] leading-relaxed">
-              Explore our precise, stage-by-stage physical installation workflows from raw substrate grinding to the final diamond gloss seal. Select a system below to inspect climate-mitigated execution steps.
+              Explore our precise, stage-by-stage physical workflows from raw substrate preparation to the final sealed finish. Select a system below to inspect climate-mitigated execution steps.
             </p>
           </div>
 
@@ -562,7 +502,6 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
             {[
               { id: "terrazzo", name: "Terrazzo System", icon: Layers },
               { id: "epoxy", name: "Pearlescent Epoxy", icon: Sparkles },
-              { id: "polished-concrete", name: "Polished Concrete", icon: Wrench },
               { id: "industrial", name: "Industrial Polyurethane", icon: Hammer },
               { id: "microcement", name: "Microcement Overlay", icon: Activity }
             ].map((system) => {
@@ -816,8 +755,8 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
 
           {/* Table Container with horizontal scrolling on mobile/tablet, full grid on desktop */}
           <div className="overflow-x-auto -mx-8 md:-mx-12 px-8 md:px-12">
-            <div className="min-w-[1000px]">
-              <div className="grid grid-cols-5 gap-6">
+            <div className="min-w-[800px]">
+              <div className="grid grid-cols-4 gap-6">
                 {COMPARISON_DATA.map((sys) => {
                   const srvPrice = sys.basePrice;
                   // Dynamic display calculation matching the single quote tool exactly
@@ -1073,13 +1012,13 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
             </div>
             <div className="p-6 border border-[#e1e1d7] bg-[#edebe1]/60 rounded-[24px]">
               <span className="font-mono text-[10px] uppercase font-bold text-[#5A5A40] tracking-wider">Commercial & Retail Areas</span>
-              <h4 className="font-serif font-bold text-[#1a1a1a] mt-2">Super-Polished Concrete</h4>
+                    <h4 className="font-serif font-bold text-[#1a1a1a] mt-2">Microcement & Decorative Screeds</h4>
               <p className="text-xs text-[#5a5650] mt-2 lines-clamp-3 leading-relaxed">
-                Direct diamond grinding offers a highly durable, modern slate reflection that is fully scratch-proof under persistent shopping cart and high-traffic heavy footfall.
+                    Continuous microcement offers a durable, modern surface finish for retail, boutique, and residential interior applications.
               </p>
             </div>
             <div className="p-6 border border-[#e1e1d7] bg-[#dcd9ce]/40 rounded-[24px]">
-              <span className="font-mono text-[10px] uppercase font-bold text-[#5a5650] tracking-wider">Automotive & Factories</span>
+              <span className="font-mono text-[10px] uppercase font-bold text-[#5a5650] tracking-wider">Factories & Industrial Areas</span>
               <h4 className="font-serif font-bold text-[#1a1a1a] mt-2">Heavy-Duty Polyurethane Screeds</h4>
               <p className="text-xs text-[#5a5650] mt-2 lines-clamp-3 leading-relaxed">
                 Extreme chemical resilience prevents oils and heavy machine washdowns from eroding the substrate steel rebar, adhering strictly to safety laws.
@@ -1141,7 +1080,7 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
                   {/* Surface Finish Grade */}
                   <div className="space-y-2">
                     <span className="font-mono text-xs text-[#1a1a1a] block uppercase font-bold tracking-wider">
-                      Polishing Finish Preference
+                      Finish Preference
                     </span>
                     <div className="grid grid-cols-2 gap-3 text-xs font-mono">
                       {[
