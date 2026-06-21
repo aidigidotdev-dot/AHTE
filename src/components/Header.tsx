@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Layers, Menu, X } from "lucide-react";
+import { Layers, Menu, Phone, X } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -74,6 +74,16 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#f5f5f0]/95 backdrop-blur-md border-b border-[#e1e1d7]">
+      <div className="hidden min-[1150px]:block bg-[#1a1a1a] text-[#edebe1] border-b border-[#e1e1d7]/10">
+        <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-end gap-5 font-mono text-[10px] uppercase tracking-wider">
+          <span className="inline-flex items-center gap-2 text-[#a09c94]">
+            <Phone className="w-3.5 h-3.5 text-[#5A5A40]" />
+            +971 50 192 0298
+          </span>
+          <span className="text-[#5A5A40]">|</span>
+          <span className="text-[#a09c94]">+971 52 923 4069</span>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 min-[1150px]:h-24 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link 
@@ -89,7 +99,7 @@ export default function Header() {
               A H T E Flooring
             </span>
             <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
-              Premium Surface Restoration
+              Premium Architectural Floors
             </span>
           </div>
         </Link>

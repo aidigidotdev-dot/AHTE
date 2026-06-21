@@ -13,8 +13,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "A H T E Flooring UAE | Seamless Terrazzo & Architectural Surfaces Dubai",
-  description: "Specialist contractor for premium seamless terrazzo, metallic epoxy, polished concrete, polyurethane screeds, and microcement flooring across the UAE.",
-  keywords: ["Terrazzo Flooring Dubai", "Epoxy Flooring UAE", "Polished Concrete Dubai", "Microcement Dubai", "A H T E Flooring"],
+  description: "Specialist contractor for premium seamless terrazzo, metallic epoxy, polyurethane screeds, and microcement flooring across the UAE.",
+  keywords: ["Terrazzo Flooring Dubai", "Epoxy Flooring UAE", "Microcement Dubai", "A H T E Flooring"],
   authors: [{ name: "A H T E Flooring Team" }],
 };
 

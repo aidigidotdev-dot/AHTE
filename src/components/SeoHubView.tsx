@@ -26,13 +26,13 @@ const NEIGHBORHOOD_GUIDES = [
   {
     area: "Downtown Dubai & DIFC Commercial Atriums",
     challenge: "Extreme daily foot traffic (millions of steps yearly) requiring mirror high-gloss finishes with low maintenance cycles under bright spotlights.",
-    strategy: "Premium cementitious terrazzo (monolithic casting) combined with state-of-the-art clear lithium silicate densifying treatments. Dual stage planetary polishing up to 800-grit to create a scratch-proof reflective surface.",
+    strategy: "Premium cementitious terrazzo (monolithic casting) combined with state-of-the-art clear lithium silicate densifying treatments. Controlled finishing stages create a scratch-resistant reflective surface.",
     spec: "Damp-cured for 28 days with zero VOCs and high interior light bounce.",
-    system: "800-Grit Mirror Polished Terrazzo"
+    system: "800-Grit Mirror Finish Terrazzo"
   },
   {
     area: "Emirates Hills & Private Residential Villas",
-    challenge: "Integration over modern under-floor climate water matrices and fluid indoor-outdoor marble layouts with zero expansion visible.",
+    challenge: "Integration over modern under-floor climate water matrices and fluid indoor-outdoor flooring layouts with zero expansion visible.",
     strategy: "Application of flexible latex-modified polymer matrices allowing subtle thermal expansion contraction without cracking. Precision water-jet cut brass joints matching geometric structural layouts.",
     spec: "Flexible latex substrate reinforcement layers complying with UAE residential building safety manuals.",
     system: "Microcement Coating & Decorative Screeds"
@@ -170,7 +170,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
                 content: "In Dubai, rapid temperature differentials can cause subfloor micro-movements. Brass and zinc control linear dividers serve a structural role by matching internal concrete expansion lines. Strips are cast directly over active crack joints to isolate slab stress. Our flexible resin binders utilize specialized elastic properties that distribute expansion tension evenly across seamless grids up to 150 sqm without causing local stress fractures."
               },
               {
-                title: "In-Situ Terrazzo Curing & Planetary Diamond Polishing Stages",
+                title: "In-Situ Terrazzo Curing & Final Finishing Stages",
                 summary: "The 28-day concrete curing formula vs. resinous multi-stage diamond grit processes.",
                 content: "For cementitious terrazzo systems, water-sprinkled damp curing is maintained for 21 to 28 days to yield optimal silica strength. Afterward, heavy planetary diamond grinders with grit speeds scaling from 50 (coarse milling), 120, 220, 400 (satin reflection), up to 800 (high mirror sheen) are deployed wet to ensure dustless execution. For resin systems, grinding can commence 24 hours after cast application, using active lithium densifiers to crystalize aggregate matrices and block moisture pores."
               }
@@ -355,11 +355,11 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
   "image": "https://lh3.googleusercontent.com/aida-public/AB6AX...",
   "@id": "https://ahteflooring.ae/#corporation",
   "url": "https://ahteflooring.ae/",
-  "telephone": "+97143405555",
+  "telephone": "+971501920298",
   "priceRange": "AED 180 - AED 450 per Sqm",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Warehouse 14, Sector 6, Al Quoz Industrial Area 3",
+    "streetAddress": "Warehouse 2, 364-11A ST, AL Quoz Ind 1st, PO BOX: 8854",
     "addressLocality": "Dubai",
     "addressRegion": "Dubai",
     "addressCountry": "AE"
@@ -369,7 +369,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
     "latitude": 25.1278,
     "longitude": 55.2345
   },
-  "knowsAbout": ["Terrazzo Flooring", "Microcement Screeds", "Polished Concrete", "BS 8204 compliance"],
+  "knowsAbout": ["Terrazzo Flooring", "Microcement Screeds", "Epoxy Flooring", "BS 8204 compliance"],
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],

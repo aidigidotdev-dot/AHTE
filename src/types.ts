@@ -1,7 +1,6 @@
 export enum FlooringType {
   TERRAZZO = "Terrazzo",
   EPOXY = "Epoxy",
-  POLISHED_CONCRETE = "Polished Concrete",
   INDUSTRIAL = "Industrial Coating",
   MICROCEMENT = "Microcement",
 }

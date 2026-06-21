@@ -581,7 +581,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                         <strong>Underfloor Thermal integration:</strong> {includeUnderfloorHeating ? "Yes (Add-on active)" : "No"}
                       </p>
                       <p>
-                        <strong>Polished level:</strong> {shineFinish}
+                        <strong>Finish level:</strong> {shineFinish}
                       </p>
                     </>
                   )}
