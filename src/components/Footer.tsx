@@ -19,7 +19,7 @@ export default function Footer() {
     },
     {
       question: "What structural warranties cover A H T E Flooring systems?",
-      answer: "We offer a 10-year structural warranty on all residential and commercial epoxy and cementitious terrazzo systems. This warranty covers slab bonding adhesion, pigment UV colorfast stability under GCC heat, and localized micro-fracture prevention (when coupled with underfloor heating flexible latex matrices)."
+      answer: "We offer a 5-year structural warranty on residential and commercial epoxy and cementitious terrazzo systems. This warranty covers slab bonding adhesion, pigment UV colorfast stability under GCC heat, and localized micro-fracture prevention when installed according to approved site conditions."
     }
   ];
 
@@ -201,7 +201,7 @@ export default function Footer() {
               <li className="pt-2 flex items-center gap-2">
                 <Award className="w-4 h-4 text-[#5A5A40]" />
                 <span className="font-mono text-[10px] uppercase text-[#5a5650] font-bold tracking-widest">
-                  Est. 2008 in Dubai UAE
+                  5 Years in Dubai UAE
                 </span>
               </li>
             </ul>
