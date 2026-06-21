@@ -219,9 +219,9 @@ export const TERRAZZO_SHADES: TerrazzoShade[] = [
 ];
 
 export const GENERAL_SPECS = {
-  yearsInBusiness: "18+ Years",
+  yearsInBusiness: "5 Years",
   projectsCompleted: "450+ Major Projects across UAE",
   headquarters: "Al Quoz Industrial 3, Dubai, UAE",
-  certifications: ["ISO 9001:2015 Approved", "LEED Green Building Contributor", "Dubai Municipality Quality Compliant"],
+  certifications: ["Dubai Municipality Quality Compliant"],
   averageTurnaround: "6-12 working days depending on surface area",
 };

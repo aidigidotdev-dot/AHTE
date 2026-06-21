@@ -20,7 +20,7 @@ const COMPARISON_DATA = [
     basePrice: 450,
     finish: "Custom Gloss (400 to 800 Grit)",
     moistureResist: "Excellent (With DPM membrane)",
-    leedPoints: "Maximum (Natural local stone)",
+    sustainabilityNote: "Maximum (Natural local stone)",
     dubaiApproved: "Yes (Fully Certified DM-SPEC-2026)",
     vocStatus: "Low-VOC (Al Sa'fat Compliant)",
     installCrew: "Specialist Contractor Required",
@@ -38,7 +38,7 @@ const COMPARISON_DATA = [
     basePrice: 280,
     finish: "High-Gloss Liquid Pearlescent Glaze",
     moistureResist: "Absolute (Seamless resinous skin)",
-    leedPoints: "Medium (Low-VOC polymers)",
+    sustainabilityNote: "Medium (Low-VOC polymers)",
     dubaiApproved: "Yes (Fully Certified DM-SPEC-2026)",
     vocStatus: "Low-VOC (Al Sa'fat Compliant)",
     installCrew: "Specialist Contractor Required",
@@ -56,7 +56,7 @@ const COMPARISON_DATA = [
     basePrice: 180,
     finish: "400-Grit Satin / 800-Grit High-Sheen",
     moistureResist: "High (Requires active densifiers)",
-    leedPoints: "High (Uses pre-existing thermal mass)",
+    sustainabilityNote: "High (Uses pre-existing thermal mass)",
     dubaiApproved: "Yes (Fully Certified DM-SPEC-2026)",
     vocStatus: "Low-VOC (Al Sa'fat Compliant)",
     installCrew: "Specialist Contractor Required",
@@ -74,7 +74,7 @@ const COMPARISON_DATA = [
     basePrice: 220,
     finish: "Medium-Grit Slip-Resistant Texture",
     moistureResist: "Absolute (Vapor dry options standard)",
-    leedPoints: "Medium (Zero VOC, decreases replacement costs)",
+    sustainabilityNote: "Medium (Zero VOC, decreases replacement costs)",
     dubaiApproved: "Yes (Fully Certified DM-SPEC-2026)",
     vocStatus: "Low-VOC (Al Sa'fat Compliant)",
     installCrew: "Specialist Contractor Required",
@@ -92,7 +92,7 @@ const COMPARISON_DATA = [
     basePrice: 320,
     finish: "Soft-Satin Cloudy Slate Texture",
     moistureResist: "100% Waterproof (Bath & spa sealer specs)",
-    leedPoints: "High (Low volume overlay, no quarry extraction)",
+    sustainabilityNote: "High (Low volume overlay, no quarry extraction)",
     dubaiApproved: "Yes (Fully Certified DM-SPEC-2026)",
     vocStatus: "Low-VOC (Al Sa'fat Compliant)",
     installCrew: "Specialist Contractor Required",
@@ -935,21 +935,21 @@ export default function ServicesView({ onNavigate }: ServicesViewProps) {
                             <p className="text-[#1a1a1a] text-[11px] font-semibold">{sys.moistureResist}</p>
                           </div>
 
-                          {/* Green criteria / LEED */}
+                          {/* Sustainability criteria */}
                           <div className={`space-y-1 transition-all duration-300 ${
-                            highlightDifferences && isFeatureIdentical("leedPoints") 
+                            highlightDifferences && isFeatureIdentical("sustainabilityNote") 
                               ? "opacity-25 grayscale scale-98" 
                               : "opacity-100"
                           }`}>
                             <span className="font-mono text-[9px] text-[#5A5A40] uppercase font-bold tracking-wider flex items-center justify-between">
                               <span className="flex items-center gap-1.5">
-                                <Leaf className="w-3.5 h-3.5" /> LEED Green Score
+                                <Leaf className="w-3.5 h-3.5" /> Sustainability Notes
                               </span>
-                              {highlightDifferences && !isFeatureIdentical("leedPoints") && (
+                              {highlightDifferences && !isFeatureIdentical("sustainabilityNote") && (
                                 <span className="text-[8px] font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded tracking-wider uppercase">Unique</span>
                               )}
                             </span>
-                            <p className="text-[#1a1a1a] text-[11px] font-medium">{sys.leedPoints}</p>
+                            <p className="text-[#1a1a1a] text-[11px] font-medium">{sys.sustainabilityNote}</p>
                           </div>
 
                           {/* Dubai Approved (Identical Baseline Feature) */}

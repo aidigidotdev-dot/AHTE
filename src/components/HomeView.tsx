@@ -63,8 +63,8 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
               Premium Surface Artisan
             </span>
             <h1 className="text-5xl md:text-7xl font-light mb-8 leading-[1.05]" style={{ fontFamily: "'Georgia', serif" }}>
-              Timeless <br /><i className="font-light italic text-[#edebe1]">Terrazzo</i> &
-              <br /><span className="font-bold">Stonework.</span>
+              Timeless <br /><i className="font-light italic text-[#edebe1]">Terrazzo</i>
+              <br /><span className="font-bold">Flooring.</span>
             </h1>
             <p className="text-base md:text-lg text-[#a09c94] max-w-md mb-12 leading-relaxed">
               Specializing in high-end bespoke terrazzo installations and meticulous surface restoration for architectural excellence in GCC climates.
@@ -94,7 +94,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
           <div className="max-w-7xl mx-auto px-6 flex justify-between text-[10px] font-bold uppercase tracking-[0.25em] text-[#a09c94]">
             <span>HEADQUARTERS: AL QUOZ, DUBAI</span>
             <span>DUBAI MUNICIPALITY QUALITY COMPLIANT</span>
-            <span>LEED REGISTERED SUSTAINABLE MATERIALS</span>
+            <span>DUBAI-BASED FLOORING SPECIALISTS</span>
             <span>SEAMLESS WORK ACROSS UAE</span>
           </div>
         </div>
@@ -130,10 +130,10 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             </div>
             <div className="text-center md:text-left">
               <span className="font-serif font-bold text-4xl text-[#1a1a1a] block">
-                ISO 9001
+                5 Years
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5A5A40] block mt-1 font-bold">
-                Certified Quality standard
+                Project Experience
               </span>
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
                 Our Heritage & Standards
               </span>
               <h2 className="font-serif font-light text-3xl md:text-5xl text-[#1a1a1a] tracking-tight leading-tight">
-                Crafting Exceptional Architectural Foundations Since 2008 &mdash; Al Quoz Dubai.
+                Crafting Exceptional Architectural Foundations for 5 Years &mdash; Al Quoz Dubai.
               </h2>
               <p className="text-base text-[#5a5650] leading-relaxed">
                 A H T E Flooring has designed and laid over 400,000 square meters of high-spec monolithic floors across commercial skyscrapers, palatial residential estates, and industrial hubs. Our team coordinates every stage from base grinding to underfloor heating integration, water-jet brass linear inlay design, and ultimate mirror gloss stages.

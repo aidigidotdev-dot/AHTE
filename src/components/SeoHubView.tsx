@@ -27,7 +27,7 @@ const NEIGHBORHOOD_GUIDES = [
     area: "Downtown Dubai & DIFC Commercial Atriums",
     challenge: "Extreme daily foot traffic (millions of steps yearly) requiring mirror high-gloss finishes with low maintenance cycles under bright spotlights.",
     strategy: "Premium cementitious terrazzo (monolithic casting) combined with state-of-the-art clear lithium silicate densifying treatments. Dual stage planetary polishing up to 800-grit to create a scratch-proof reflective surface.",
-    spec: "Damp-cured for 28 days with zero VOCs, maximizing LEED points and interior light bounce.",
+    spec: "Damp-cured for 28 days with zero VOCs and high interior light bounce.",
     system: "800-Grit Mirror Polished Terrazzo"
   },
   {
@@ -55,16 +55,6 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
       code: "DM-SPEC-2026/F"
     },
     {
-      title: "ISO 9001:2015 Quality Management Certified",
-      description: "Every stage, from subfloor moisture diagnostics to high-gloss planetary diamond grinding, is executed in compliance with strict quality management system audits.",
-      code: "Certificate # UAE-9001Q-411"
-    },
-    {
-      title: "LEED & Al Sa'fat Green Building Compliant",
-      description: "Our flooring formulas contribute directly to LEED Gold/Platinum scores inside Dubai. Natural local marble aggregates and zero-VOC resin bases ensure healthy air indexes for schools, hospitals, and residences.",
-      code: "Al Sa'fat Certified"
-    },
-    {
       title: "British Standard (BS 8204) Installation Guidelines",
       description: "We strictly implement BS 8204 concrete substrate preparation testing protocols. Moisture profiles are verified utilizing moisture meters to be below 4.0% dry equivalents prior to bonding.",
       code: "BS 8204 Part 4/6/8"
@@ -88,7 +78,7 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
               Topical Knowledge & <br />Engineering Standards
             </h1>
             <p className="text-sm md:text-base text-[#5a5650] max-w-2xl leading-relaxed">
-              Welcome to the A H T E Flooring UAE engineering portal. Our master craftsmen and concrete technologists compile certified data to align with Dubai Municipality codes, ISO metrics, and BS 8204 building parameters.
+              Welcome to the A H T E Flooring UAE engineering portal. Our master craftsmen and concrete technologists compile practical data to align with Dubai Municipality codes and BS 8204 building parameters.
             </p>
           </div>
 
