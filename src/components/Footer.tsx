@@ -171,8 +171,8 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                 <span className="text-[#a09c94] font-mono leading-snug">
-                  +971 50 192 0298<br />
-                  +971 52 923 4069
+                  +971 501 920298<br />
+                  +971 529 234069
                 </span>
               </li>
               <li className="flex items-start gap-3">
