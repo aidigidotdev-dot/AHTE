@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { query } from '../../../lib/db';
 
 type LeadEmailPayload = {
-  id: number;
+  id?: number;
   createdAt: string | Date;
   name: string;
   email?: string;
@@ -58,7 +58,7 @@ function formatMoney(value: number) {
 
 function getLeadRows(payload: LeadEmailPayload) {
   return [
-    ['Lead ID', String(payload.id)],
+    ['Lead ID', payload.id ? String(payload.id) : 'Email notification only'],
     ['Received', formatDate(payload.createdAt)],
     ['Lead Type', payload.leadType],
     ['Name', payload.name],
@@ -222,15 +222,23 @@ export async function POST(request: Request) {
       leadType
     ];
 
-    const result = await query(insertQuery, values);
-    const newLead = result.rows[0];
+    let savedLead: { id: number; created_at: string | Date } | null = null;
+    let databaseStatus: { status: 'saved'; id: number } | { status: 'failed' } = { status: 'failed' };
+
+    try {
+      const result = await query(insertQuery, values);
+      savedLead = result.rows[0];
+      databaseStatus = { status: 'saved', id: savedLead.id };
+    } catch (databaseError) {
+      console.error('Lead database save failed; continuing with email notification:', databaseError);
+    }
 
     let emailNotification: Awaited<ReturnType<typeof sendLeadEmail>> | { status: 'failed' } = { status: 'skipped', recipients: [] };
 
     try {
       emailNotification = await sendLeadEmail({
-        id: newLead.id,
-        createdAt: newLead.created_at,
+        id: savedLead?.id,
+        createdAt: savedLead?.created_at || new Date(),
         name,
         email,
         phone,
@@ -245,17 +253,31 @@ export async function POST(request: Request) {
         leadType
       });
     } catch (emailError) {
-      console.error('Lead saved, but email notification failed:', emailError);
+      console.error('Lead email notification failed:', emailError);
       emailNotification = { status: 'failed' };
+    }
+
+    if (databaseStatus.status === 'failed' && emailNotification.status !== 'sent') {
+      return NextResponse.json(
+        {
+          error: 'Lead could not be stored because database is unavailable and email notifications are not configured.',
+          databaseStatus,
+          emailNotification
+        },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Lead registered in PostgreSQL database.',
+      message: databaseStatus.status === 'saved'
+        ? 'Lead registered successfully.'
+        : 'Lead email notification sent successfully.',
       lead: {
-        id: newLead.id,
-        createdAt: newLead.created_at
+        id: savedLead?.id || null,
+        createdAt: savedLead?.created_at || null
       },
+      databaseStatus,
       emailNotification
     });
   } catch (error: any) {
