@@ -170,18 +170,31 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
-                <span className="text-[#a09c94] font-mono leading-snug">
-                  +971 501 920298<br />
-                  +971 529 234069
-                </span>
+                <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
+                  <a href="tel:+971501920298" className="hover:text-white transition-colors">
+                    +971 501 920298
+                  </a>
+                  <a href="tel:+971529234069" className="hover:text-white transition-colors">
+                    +971 529 234069
+                  </a>
+                  <a href="tel:+971525461728" className="hover:text-white transition-colors">
+                    +971 525 461728
+                  </a>
+                </div>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
-                <span className="text-[#a09c94] font-mono leading-snug">
-                  hafeez@ahteflooring.com<br />
-                  namish@ahteflooring.com<br />
-                  info@ahteflooring.com
-                </span>
+                <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
+                  <a href="mailto:hafeez@ahteflooring.com" className="hover:text-white transition-colors">
+                    hafeez@ahteflooring.com
+                  </a>
+                  <a href="mailto:namish@ahteflooring.com" className="hover:text-white transition-colors">
+                    namish@ahteflooring.com
+                  </a>
+                  <a href="mailto:info@ahteflooring.com" className="hover:text-white transition-colors">
+                    info@ahteflooring.com
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
