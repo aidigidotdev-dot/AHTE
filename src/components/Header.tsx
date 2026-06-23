@@ -76,12 +76,18 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-[#f5f5f0]/95 backdrop-blur-md border-b border-[#e1e1d7]">
       <div className="hidden min-[1150px]:block bg-[#1a1a1a] text-[#edebe1] border-b border-[#e1e1d7]/10">
         <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-end gap-5 font-mono text-[10px] uppercase tracking-wider">
-          <span className="inline-flex items-center gap-2 text-[#a09c94]">
+          <a href="tel:+971501920298" className="inline-flex items-center gap-2 text-[#a09c94] hover:text-white transition-colors">
             <Phone className="w-3.5 h-3.5 text-[#5A5A40]" />
-            +971 501 920298
-          </span>
+            +971 50 1920298
+          </a>
           <span className="text-[#5A5A40]">|</span>
-          <span className="text-[#a09c94]">+971 529 234069</span>
+          <a href="tel:+971529234069" className="text-[#a09c94] hover:text-white transition-colors">
+            +971 52 9234069
+          </a>
+          <span className="text-[#5A5A40]">|</span>
+          <a href="tel:+971525461728" className="text-[#a09c94] hover:text-white transition-colors">
+            +971 52 5461728
+          </a>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 min-[1150px]:h-24 flex items-center justify-between gap-4">

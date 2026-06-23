@@ -355,11 +355,11 @@ export default function SeoHubView({ onNavigate }: SeoHubViewProps) {
   "image": "https://lh3.googleusercontent.com/aida-public/AB6AX...",
   "@id": "https://ahteflooring.ae/#corporation",
   "url": "https://ahteflooring.ae/",
-  "telephone": "+971 501 920298",
+  "telephone": "+971 50 1920298",
   "priceRange": "AED 180 - AED 450 per Sqm",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Warehouse 2, 364-11A ST, AL Quoz Ind 1st, PO BOX: 8854",
+    "streetAddress": "Warehouse 2, 364-11A ST, AI Quoz Ind 1st, PO BOX: 8854",
     "addressLocality": "Dubai",
     "addressRegion": "Dubai",
     "addressCountry": "AE"

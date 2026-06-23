@@ -165,20 +165,20 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                 <span className="text-[#a09c94] font-sans leading-snug">
-                  Warehouse 2, 364-11A ST, AL Quoz Ind 1st, PO BOX: 8854, Dubai U.A.E
+                  Warehouse 2, 364-11A ST, AI Quoz Ind 1st, PO BOX: 8854, Dubai U.A.E
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                 <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
                   <a href="tel:+971501920298" className="hover:text-white transition-colors">
-                    +971 501 920298
+                    +971 50 1920298
                   </a>
                   <a href="tel:+971529234069" className="hover:text-white transition-colors">
-                    +971 529 234069
+                    +971 52 9234069
                   </a>
                   <a href="tel:+971525461728" className="hover:text-white transition-colors">
-                    +971 525 461728
+                    +971 52 5461728
                   </a>
                 </div>
               </li>
