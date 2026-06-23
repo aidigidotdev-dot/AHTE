@@ -257,22 +257,13 @@ export async function POST(request: Request) {
       emailNotification = { status: 'failed' };
     }
 
-    if (databaseStatus.status === 'failed' && emailNotification.status !== 'sent') {
-      return NextResponse.json(
-        {
-          error: 'Lead could not be stored because database is unavailable and email notifications are not configured.',
-          databaseStatus,
-          emailNotification
-        },
-        { status: 500 }
-      );
-    }
-
     return NextResponse.json({
       success: true,
       message: databaseStatus.status === 'saved'
         ? 'Lead registered successfully.'
-        : 'Lead email notification sent successfully.',
+        : emailNotification.status === 'sent'
+          ? 'Lead email notification sent successfully.'
+          : 'Request received, but lead storage/email notifications are not configured.',
       lead: {
         id: savedLead?.id || null,
         createdAt: savedLead?.created_at || null
