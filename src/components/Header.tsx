@@ -84,10 +84,6 @@ export default function Header() {
           <a href="tel:+971529234069" className="text-[#a09c94] hover:text-white transition-colors">
             +971 52 9234069
           </a>
-          <span className="text-[#5A5A40]">|</span>
-          <a href="tel:+971525461728" className="text-[#a09c94] hover:text-white transition-colors">
-            +971 52 5461728
-          </a>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 min-[1150px]:h-24 flex items-center justify-between gap-4">

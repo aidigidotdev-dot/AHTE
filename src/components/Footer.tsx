@@ -177,9 +177,6 @@ export default function Footer() {
                   <a href="tel:+971529234069" className="hover:text-white transition-colors">
                     +971 52 9234069
                   </a>
-                  <a href="tel:+971525461728" className="hover:text-white transition-colors">
-                    +971 52 5461728
-                  </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
