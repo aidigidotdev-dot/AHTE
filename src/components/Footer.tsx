@@ -182,14 +182,14 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                 <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
-                  <a href="mailto:hafeez@ahteflooring.com" className="hover:text-white transition-colors">
-                    hafeez@ahteflooring.com
+                  <a href="mailto:hafeez@ahteflooring.ae" className="hover:text-white transition-colors">
+                    hafeez@ahteflooring.ae
                   </a>
-                  <a href="mailto:namish@ahteflooring.com" className="hover:text-white transition-colors">
-                    namish@ahteflooring.com
+                  <a href="mailto:namish@ahteflooring.ae" className="hover:text-white transition-colors">
+                    namish@ahteflooring.ae
                   </a>
-                  <a href="mailto:info@ahteflooring.com" className="hover:text-white transition-colors">
-                    info@ahteflooring.com
+                  <a href="mailto:info@ahteflooring.ae" className="hover:text-white transition-colors">
+                    info@ahteflooring.ae
                   </a>
                 </div>
               </li>
