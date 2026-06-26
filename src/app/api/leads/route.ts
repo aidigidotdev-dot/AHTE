@@ -60,17 +60,12 @@ function getLeadRows(payload: LeadEmailPayload) {
   return [
     ['Lead ID', payload.id ? String(payload.id) : 'Email notification only'],
     ['Received', formatDate(payload.createdAt)],
-    ['Lead Type', payload.leadType],
     ['Name', payload.name],
     ['Email', payload.email || 'Not provided'],
     ['Phone', payload.phone],
     ['Company / Project', payload.company || 'Not provided'],
     ['Flooring Type', payload.flooringType],
     ['Area', `${payload.areaSqm} sqm`],
-    ['Project Sector', payload.projectSector || 'General'],
-    ['Finish Style', payload.finishStyle || 'Standard'],
-    ['Metal Inlays', payload.metalInlays || 'None'],
-    ['Underfloor Heating', payload.underfloorHeating ? 'Yes' : 'No'],
     ['Estimated Price', formatMoney(payload.estimatedPrice)],
   ];
 }
@@ -168,7 +163,7 @@ export async function POST(request: Request) {
       leadType: rawLeadType
     } = body;
 
-    const name = cleanValue(rawName) as string;
+    const name = (cleanValue(rawName) as string) || 'Website Lead';
     const email = cleanValue(rawEmail) as string | undefined;
     const phone = cleanValue(rawPhone) as string;
     const company = cleanValue(rawCompany) as string | undefined;
@@ -181,9 +176,9 @@ export async function POST(request: Request) {
     const leadType = cleanValue(rawLeadType) as string;
 
     // Validation
-    if (!name || !phone || !flooringType || !Number.isFinite(areaSqm) || !Number.isFinite(estimatedPrice) || !leadType) {
+    if ((!phone && !email) || !flooringType || !Number.isFinite(areaSqm) || !Number.isFinite(estimatedPrice) || !leadType) {
       return NextResponse.json(
-        { error: 'Missing required fields (name, phone, flooringType, areaSqm, estimatedPrice, leadType)' },
+        { error: 'Missing required fields (phone or email, flooringType, areaSqm, estimatedPrice, leadType)' },
         { status: 400 }
       );
     }

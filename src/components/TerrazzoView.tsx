@@ -1,7 +1,5 @@
-import { useState, useRef } from "react";
-import Image from "next/image";
-import { TERRAZZO_SHADES, SERVICES } from "../data";
-import { Sparkles, ShieldCheck, Ruler, Coins, FileText, Download, Check, Settings, Info, InfoIcon, Info as InfoIconLucide } from "lucide-react";
+import { useState } from "react";
+import { Coins, FileText, Ruler } from "lucide-react";
 
 interface TerrazzoViewProps {
   onNavigate: (tab: string) => void;
@@ -17,73 +15,26 @@ const COST_ESTIMATOR_SERVICES = [
 ];
 
 export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
-  const [selectedShade, setSelectedShade] = useState(TERRAZZO_SHADES[0]);
   const [areaInSqm, setAreaInSqm] = useState<number>(120);
-  const [useSqft, setUseSqft] = useState<boolean>(false); // toggle sqm vs sqft
+  const [useSqft, setUseSqft] = useState<boolean>(false);
   const [selectedCostService, setSelectedCostService] = useState("Terrazzo Flooring");
-
-  // Interactive customizable options
-  const [chipDensity, setChipDensity] = useState<number>(75); // 70% to 85%
-  const [shineFinish, setShineFinish] = useState<string>("Mirror-Gloss (800-Grit)");
-  const [includeUnderfloorHeating, setIncludeUnderfloorHeating] = useState<boolean>(false);
-  const [metalInlaysType, setMetalInlaysType] = useState<string>("Concentric Linear Bands");
-
-  // Lead inquiry forms
   const [clientName, setClientName] = useState("");
   const [clientCompany, setClientCompany] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
   const [clientPhone, setClientPhone] = useState("");
-  const [proposalReady, setProposalReady] = useState(false);
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
 
-  // Constants
   const activeCostService =
     COST_ESTIMATOR_SERVICES.find((item) => item.service === selectedCostService) || COST_ESTIMATOR_SERVICES[2];
-  const isTerrazzoEstimate = activeCostService.service === "Terrazzo Flooring";
-  const basePricePerSqm = activeCostService.minimumAed;
   const minimumProjectArea = activeCostService.minimumArea;
-  const premiumShadeFactor = selectedShade.id === "shade-1a" ? 1.05 : selectedShade.id === "shade-1c" ? 1.1 : 1.0;
-
-  // Calculators
   const areaSqmNormal = useSqft ? Math.round(areaInSqm / 10.76) : areaInSqm;
   const areaSqftNormal = useSqft ? areaInSqm : Math.round(areaInSqm * 10.76);
   const billableAreaSqm = Math.max(areaSqmNormal, minimumProjectArea);
+  const estimatedTotal = Math.round(activeCostService.minimumAed * billableAreaSqm);
+  const canSubmitLead = !!clientEmail.trim() || !!clientPhone.trim();
 
-  const calculateSubtotal = () => {
-    let price = basePricePerSqm * billableAreaSqm;
-    if (!isTerrazzoEstimate) return Math.round(price);
-
-    price *= premiumShadeFactor;
-    // Add density factor
-    if (chipDensity > 80) price += 40 * billableAreaSqm;
-    // Shine level
-    if (shineFinish.includes("800-Grit")) price += 35 * billableAreaSqm;
-    return Math.round(price);
-  };
-
-  const calculateInlayCost = () => {
-    if (!isTerrazzoEstimate) return 0;
-
-    switch (metalInlaysType) {
-      case "Concentric Linear Bands":
-        return Math.round(billableAreaSqm * 25);
-      case "Diamond Grid Layout":
-        return Math.round(billableAreaSqm * 45);
-      case "Bespoke Geometrical Circles":
-        return Math.round(billableAreaSqm * 65);
-      default:
-        return 0;
-    }
-  };
-
-  const calculateHeatingSurcharge = () => {
-    return isTerrazzoEstimate && includeUnderfloorHeating ? Math.round(billableAreaSqm * 80) : 0;
-  };
-
-  const calculateTotal = () => {
-    return calculateSubtotal() + calculateInlayCost() + calculateHeatingSurcharge();
-  };
-
-  const triggerExportSimulation = async () => {
-    if (!clientName || !clientPhone) return;
+  const submitEstimateLead = async () => {
+    if (!canSubmitLead) return;
 
     try {
       const response = await fetch("/api/leads", {
@@ -92,25 +43,22 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: clientName,
+          name: clientName || "Website Lead",
+          email: clientEmail,
           company: clientCompany,
           phone: clientPhone,
-          flooringType: isTerrazzoEstimate ? `Terrazzo (${selectedShade.name})` : activeCostService.service,
+          flooringType: activeCostService.service,
           areaSqm: areaSqmNormal,
-          projectSector: "General",
-          finishStyle: shineFinish,
-          metalInlays: metalInlaysType,
-          underfloorHeating: isTerrazzoEstimate && includeUnderfloorHeating,
-          estimatedPrice: calculateTotal(),
-          leadType: "terrazzo_proposal",
+          estimatedPrice: estimatedTotal,
+          leadType: "calculator_estimate",
         }),
       });
 
       if (response.ok) {
-        setProposalReady(true);
+        setLeadSubmitted(true);
       } else {
         const errData = await response.json();
-        alert(`Error generating spec sheet: ${errData.error || "Unknown error"}`);
+        alert(`Error submitting estimate request: ${errData.error || "Unknown error"}`);
       }
     } catch (error) {
       console.error("Submission error:", error);
@@ -120,9 +68,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
 
   return (
     <div className="bg-[#f5f5f0] min-h-screen py-16 text-[#1a1a1a]">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Intro */}
+      <div className="max-w-5xl mx-auto px-6">
         <div className="max-w-3xl mb-12 space-y-4">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#5A5A40] block">
             Dubai Flooring Cost Estimation
@@ -131,249 +77,58 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
             Flooring Cost Estimator
           </h1>
           <p className="text-[#5a5650] text-sm md:text-base leading-relaxed">
-            Select a flooring service, enter the project area, and get a clear Dubai-based estimate before requesting a detailed quote.
+            Select a flooring system, enter the area, and share a mobile number or email so the team can follow up.
           </p>
         </div>
 
-        {/* Studio Workspace Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          
-          {/* LEFT COLUMN: Designer & customizer options (7 cols) */}
-          <div className="lg:col-span-7 space-y-8">
-            
-            {/* Step 1: Base Shade selection */}
-            <div className="bg-white border border-[#e1e1d7] rounded-[32px] p-8 shadow-sm">
-              <span className="font-mono text-[10px] uppercase text-[#5A5A40] font-bold block mb-4">
-                01. Authorize Aggregate Shade Base
-              </span>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {TERRAZZO_SHADES.map((shade) => {
-                  const isSelected = selectedShade.id === shade.id;
-                  return (
-                    <div
-                      key={shade.id}
-                      onClick={() => setSelectedShade(shade)}
-                      className={`border overflow-hidden cursor-pointer transition-all rounded-[20px] ${
-                        isSelected
-                          ? "border-[#5A5A40] bg-[#f5f5f0] ring-1 ring-[#5A5A40]"
-                          : "border-[#e1e1d7] hover:border-[#5A5A40] bg-white"
-                      }`}
-                    >
-                      <div className="h-40 overflow-hidden relative">
-                        <Image
-                          src={shade.image}
-                          alt={shade.name}
-                          className={`object-cover transition-all ${isSelected ? 'scale-102' : 'hover:scale-101'}`}
-                          fill
-                          sizes="(max-w-7xl) 33vw, 100vw"
-                        />
-                        {isSelected && (
-                          <div className="absolute top-2 right-2 bg-[#5A5A40] text-white p-1 rounded-full border border-white/20">
-                            <Check className="w-3.5 h-3.5" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4 font-mono">
-                        <span className="text-[10px] text-[#a09c94] font-bold block">{shade.code}</span>
-                        <h4 className="font-serif font-bold text-sm text-[#1a1a1a] mt-1 line-clamp-1">
-                          {shade.name}
-                        </h4>
-                        <div className="flex items-center gap-1.5 mt-2">
-                          <span
-                            className="w-3.5 h-3.5 border border-[#e1e1d7] block shrink-0 rounded-sm"
-                            style={{ backgroundColor: shade.baseColor }}
-                          ></span>
-                          <span className="text-[10px] text-[#a09c94] uppercase font-bold">Base hue matched</span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Selection details */}
-              <div className="mt-6 bg-[#f5f5f0] border border-[#e1e1d7] p-5 rounded-[20px] space-y-3">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className="font-mono text-[9px] uppercase text-[#a09c94] font-bold">Selected Aggregate Specs</span>
-                    <h4 className="font-serif font-bold text-[#1a1a1a] mt-0.5">{selectedShade.name}</h4>
-                  </div>
-                  <span className="font-mono text-xs text-[#5A5A40] font-bold bg-[#5A5A40]/10 px-3 py-1 rounded-full border border-[#5A5A40]/10">
-                    {selectedShade.tone.toUpperCase()} TONE
+        <div className="bg-white border border-[#e1e1d7] rounded-[32px] shadow-sm overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-5">
+            <div className="lg:col-span-3 p-6 md:p-8 space-y-6">
+              <div className="flex items-start gap-3 pb-5 border-b border-[#e1e1d7]">
+                <div className="w-10 h-10 rounded-full bg-[#5A5A40] text-white flex items-center justify-center shrink-0">
+                  <Coins className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#5A5A40] font-bold">
+                    Cost Estimator
                   </span>
+                  <h2 className="font-serif text-2xl font-bold text-[#1a1a1a] mt-1">
+                    Simple Project Estimate
+                  </h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-[#5a5650] mt-2">
-                  <div>
-                    <strong className="text-[#1a1a1a] block text-[10px] font-mono uppercase font-bold tracking-wider">Authorized Chips:</strong>
-                    <span>{selectedShade.aggregates.join(", ")}</span>
-                  </div>
-                  <div>
-                    <strong className="text-[#1a1a1a] block text-[10px] font-mono uppercase font-bold tracking-wider">Popular Use Designs:</strong>
-                    <span>{selectedShade.popularFor}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2: Custom specifications */}
-            <div className="bg-white border border-[#e1e1d7] rounded-[32px] p-8 shadow-sm space-y-6">
-              <span className="font-mono text-[10px] uppercase text-[#5A5A40] font-bold block">
-                02. Fine-Tune Material Variables
-              </span>
-
-              {/* Sliding Aggregate Percent Density */}
-              <div className="space-y-2">
-                <div className="flex justify-between font-mono text-xs text-[#1a1a1a] font-bold">
-                  <span>AGGREGATE EXPOSURE DENSITY (%)</span>
-                  <span className="text-[#5A5A40] font-bold">{chipDensity}% Coverage</span>
-                </div>
-                <input
-                  type="range"
-                  min="70"
-                  max="85"
-                  step="5"
-                  value={chipDensity}
-                  onChange={(e) => setChipDensity(parseInt(e.target.value))}
-                  className="w-full h-2 bg-[#f5f5f0] accent-[#5A5A40] rounded-lg cursor-pointer"
-                />
-                <span className="font-mono text-[9px] text-[#a09c94] block leading-tight">
-                  High-density layout (80%+) delivers rich architectural terrazzo textures with minimized cement exposure gaps.
-                </span>
-              </div>
-
-              {/* Shine level finish options */}
-              <div className="space-y-2.5">
-                <span className="font-mono text-xs text-[#1a1a1a] block font-bold">
-                  STAGE-POLISH GLOSS CLASS
-                </span>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {[
-                    { label: "Matt (200-Grit)", desc: "Mineral flat modern vibe" },
-                    { label: "Satin Semi-Gloss", desc: "400-Grit low luster slip-safe" },
-                    { label: "Mirror-Gloss (800-Grit)", desc: "High reflectiveness glass-gloss (+35 AED/sqm)" }
-                  ].map((sOption) => (
-                    <button
-                      key={sOption.label}
-                      type="button"
-                      onClick={() => setShineFinish(sOption.label)}
-                      className={`p-4 border text-left cursor-pointer transition-all rounded-2xl ${
-                        shineFinish === sOption.label
-                          ? "border-[#5A5A40] bg-[#5A5A40] text-white"
-                          : "border-[#e1e1d7] hover:border-[#5A5A40] bg-[#edebe1]/20 text-[#5a5650]"
-                      }`}
-                    >
-                      <span className="block font-sans font-bold text-xs">{sOption.label}</span>
-                      <span className={`block text-[10px] mt-1 ${shineFinish === sOption.label ? 'text-[#edebe1]' : 'text-[#a09c94]'}`}>
-                        {sOption.desc}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Inlay grids divider layout */}
-              <div className="space-y-2.5">
-                <span className="font-mono text-xs text-[#1a1a1a] block font-bold">
-                  METAL INLAYS DIVIDER PATTERNING
-                </span>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    { title: "Concentric Linear Bands", rate: "25 AED/sqm", desc: "Elegant rectangular frames" },
-                    { title: "Diamond Grid Layout", rate: "45 AED/sqm", desc: "Classic structural checks" },
-                    { title: "Bespoke Geometrical Circles", rate: "65 AED/sqm", desc: "Custom avant-garde water-jet" },
-                    { title: "No Dividers (Monolithic Raw)", rate: "0 AED/sqm", desc: "Seamless continuous fields" }
-                  ].map((inlay) => (
-                    <button
-                      key={inlay.title}
-                      type="button"
-                      onClick={() => setMetalInlaysType(inlay.title)}
-                      className={`p-4 border text-left cursor-pointer transition-all rounded-2xl ${
-                        metalInlaysType === inlay.title
-                          ? "border-[#5A5A40] bg-[#edebe1] text-[#1a1a1a] font-bold border-l-4 border-l-[#5A5A40]"
-                          : "border-[#e1e1d7] hover:border-[#5A5A40] bg-white text-[#5a5650]"
-                      }`}
-                    >
-                      <span className="block font-sans text-xs">{inlay.title}</span>
-                      <div className="flex justify-between text-[10px] text-[#a09c94] mt-1 font-semibold">
-                        <span>{inlay.desc}</span>
-                        <span className="font-bold text-[#1a1a1a]">{inlay.rate}</span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Underfloor heating safe */}
-              <div className="p-4 border border-[#e1e1d7] bg-[#f5f5f0]/80 flex items-center justify-between rounded-2xl">
-                <div className="flex gap-3 items-start max-w-sm">
-                  <input
-                    id="heating"
-                    type="checkbox"
-                    checked={includeUnderfloorHeating}
-                    onChange={(e) => setIncludeUnderfloorHeating(e.target.checked)}
-                    className="w-4 h-4 text-[#1a1a1a] accent-[#5A5A40] border-[#e1e1d7] mt-1 cursor-pointer"
-                  />
-                  <div>
-                    <label htmlFor="heating" className="font-sans font-bold text-xs text-[#1a1a1a] cursor-pointer block">
-                      Underfloor Heating Compatibility (+80 AED/sqm)
-                    </label>
-                    <span className="font-sans text-[10px] text-[#a09c94] block">
-                      Requires specialized glass-fiber flexible latex additives within cement mixes to tolerate thermal expansions safely.
-                    </span>
-                  </div>
-                </div>
-                <span className="font-mono text-xs font-bold text-[#5A5A40] bg-white px-2.5 py-1 border border-[#e1e1d7] rounded-full">{includeUnderfloorHeating ? "ENABLED" : "DISABLED"}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN: Cost estimator and quote request (5 cols) */}
-          <div className="lg:col-span-5 space-y-8 sticky top-28">
-            
-            {/* Terrazzo cost estimator panel */}
-            <div className="bg-[#1a1a1a] text-white p-6 shadow-xl border border-[#e1e1d7]/10 rounded-[32px] space-y-6 overflow-hidden">
-              <div className="pb-4 border-b border-[#e1e1d7]/10">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block font-bold">
-                  Cost Estimator
-                </span>
-                <h2 className="font-serif text-2xl font-bold text-white mt-2">
-                  Dubai Cost Estimate
-                </h2>
-                <p className="text-xs text-[#a09c94] mt-2 leading-relaxed">
-                  Based on the selected service minimum area and AED rate.
-                </p>
               </div>
 
               <label className="space-y-2 block">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#a09c94] font-bold">
-                  Flooring Service
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#5a5650] font-bold">
+                  Flooring System
                 </span>
                 <select
                   value={selectedCostService}
                   onChange={(event) => {
                     const selected = COST_ESTIMATOR_SERVICES.find((item) => item.service === event.target.value);
                     setSelectedCostService(event.target.value);
+                    setLeadSubmitted(false);
                     if (selected) {
                       setUseSqft(false);
                       setAreaInSqm(selected.minimumArea);
                     }
                   }}
-                  className="w-full bg-black/40 border border-white/10 p-3 text-sm text-white rounded-xl focus:outline-none focus:border-[#5A5A40]"
+                  className="w-full bg-[#f5f5f0] border border-[#e1e1d7] p-3 text-sm text-[#1a1a1a] rounded-xl focus:outline-none focus:border-[#5A5A40]"
                 >
                   {COST_ESTIMATOR_SERVICES.map((item) => (
-                    <option key={item.service} value={item.service} className="text-[#1a1a1a]">
+                    <option key={item.service} value={item.service}>
                       {item.service}
                     </option>
                   ))}
                 </select>
               </label>
 
-              {/* Size input toggles */}
               <div className="space-y-3">
-                <div className="flex justify-between items-center text-xs font-mono">
-                  <span className="font-bold text-[#edebe1]">Project Area</span>
-                  <div className="flex border border-white/10 bg-black/30 rounded-full p-0.5">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#5a5650] font-bold">
+                    Project Area
+                  </span>
+                  <div className="flex border border-[#e1e1d7] bg-[#f5f5f0] rounded-full p-0.5 w-fit">
                     <button
                       type="button"
                       onClick={() => {
@@ -382,7 +137,7 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                           setUseSqft(false);
                         }
                       }}
-                      className={`px-3 py-1 text-[10px] rounded-full cursor-pointer transition-colors ${!useSqft ? 'bg-[#5A5A40] text-white font-bold' : 'text-[#a09c94] hover:text-white'}`}
+                      className={`px-4 py-1.5 text-[10px] rounded-full cursor-pointer transition-colors ${!useSqft ? "bg-[#5A5A40] text-white font-bold" : "text-[#5a5650] hover:text-[#1a1a1a]"}`}
                     >
                       Sqm
                     </button>
@@ -394,15 +149,14 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                           setUseSqft(true);
                         }
                       }}
-                      className={`px-3 py-1 text-[10px] rounded-full cursor-pointer transition-colors ${useSqft ? 'bg-[#5A5A40] text-white font-bold' : 'text-[#a09c94] hover:text-white'}`}
+                      className={`px-4 py-1.5 text-[10px] rounded-full cursor-pointer transition-colors ${useSqft ? "bg-[#5A5A40] text-white font-bold" : "text-[#5a5650] hover:text-[#1a1a1a]"}`}
                     >
                       Sqft
                     </button>
                   </div>
                 </div>
 
-                {/* Number input and slider */}
-                <div className="flex gap-4 items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-4 items-center">
                   <input
                     type="number"
                     min={useSqft ? Math.round(minimumProjectArea * 10.76) : minimumProjectArea}
@@ -410,20 +164,19 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                     value={areaInSqm}
                     onChange={(e) => {
                       const minArea = useSqft ? Math.round(minimumProjectArea * 10.76) : minimumProjectArea;
-                      setAreaInSqm(Math.max(minArea, parseInt(e.target.value) || 0));
+                      setAreaInSqm(Math.max(minArea, parseInt(e.target.value) || minArea));
+                      setLeadSubmitted(false);
                     }}
-                    className="w-28 bg-black/40 border border-[#e1e1d7]/10 text-white font-mono p-2.5 text-center text-sm focus:outline-none focus:border-[#5A5A40] rounded-xl"
+                    className="w-full bg-[#f5f5f0] border border-[#e1e1d7] text-[#1a1a1a] font-mono p-3 text-center text-sm focus:outline-none focus:border-[#5A5A40] rounded-xl"
                   />
-                  <div className="text-xs text-[#a09c94] font-sans leading-snug">
-                    Converted area:<br />
-                    <span className="text-white font-bold font-mono">
-                      {useSqft ? `${areaSqmNormal} Sqm` : `${areaSqftNormal} Sqft`}
+                  <div className="text-xs text-[#5a5650] font-sans leading-snug flex items-center gap-2">
+                    <Ruler className="w-4 h-4 text-[#5A5A40]" />
+                    <span>
+                      Equivalent area:{" "}
+                      <strong className="text-[#1a1a1a] font-mono">
+                        {useSqft ? `${areaSqmNormal} Sqm` : `${areaSqftNormal} Sqft`}
+                      </strong>
                     </span>
-                    {areaSqmNormal < minimumProjectArea && (
-                      <span className="block text-[#edebe1] mt-1">
-                        Billing starts from {minimumProjectArea} SQM
-                      </span>
-                    )}
                   </div>
                 </div>
 
@@ -433,173 +186,122 @@ export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
                   max={useSqft ? "5000" : "500"}
                   step={useSqft ? "100" : "10"}
                   value={areaInSqm}
-                  onChange={(e) => setAreaInSqm(parseInt(e.target.value))}
-                  className="w-full h-1 bg-[#edebe1]/10 accent-white rounded-lg cursor-pointer mt-1"
+                  onChange={(e) => {
+                    setAreaInSqm(parseInt(e.target.value));
+                    setLeadSubmitted(false);
+                  }}
+                  className="w-full h-1 bg-[#e1e1d7] accent-[#5A5A40] rounded-lg cursor-pointer"
                 />
               </div>
 
-              {/* Estimate Calculation Table */}
-              <div className="space-y-3 pt-4 border-t border-white/10 text-xs font-mono text-[#a09c94]">
-                <div className="flex justify-between">
-                  <span>Selected rate:</span>
-                  <span className="text-white">AED {basePricePerSqm} / SQM</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="border border-[#e1e1d7] rounded-2xl p-4 bg-[#f5f5f0]/60">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#5a5650] font-bold block">
+                    Rate
+                  </span>
+                  <strong className="font-serif text-lg text-[#1a1a1a]">AED {activeCostService.minimumAed}</strong>
+                  <span className="text-xs text-[#5a5650]"> / sqm</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Billable area:</span>
-                  <span className="text-white">{billableAreaSqm.toLocaleString()} SQM</span>
+                <div className="border border-[#e1e1d7] rounded-2xl p-4 bg-[#f5f5f0]/60">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#5a5650] font-bold block">
+                    Billable Area
+                  </span>
+                  <strong className="font-serif text-lg text-[#1a1a1a]">{billableAreaSqm.toLocaleString()}</strong>
+                  <span className="text-xs text-[#5a5650]"> sqm</span>
                 </div>
-                {isTerrazzoEstimate && premiumShadeFactor > 1.0 && (
-                  <div className="flex justify-between">
-                    <span>Selected shade premium:</span>
-                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">
-                      + {Math.round((premiumShadeFactor - 1.0) * 100)}%
-                    </span>
-                  </div>
-                )}
-                {isTerrazzoEstimate && chipDensity > 80 && (
-                  <div className="flex justify-between">
-                    <span>High chip density:</span>
-                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">+ AED 40 / SQM</span>
-                  </div>
-                )}
-                {isTerrazzoEstimate && shineFinish.includes("800-Grit") && (
-                  <div className="flex justify-between">
-                    <span>Mirror gloss finish:</span>
-                    <span className="text-white bg-[#5A5A40] px-2 py-0.5 rounded-full text-[9px]">+ AED 35 / SQM</span>
-                  </div>
-                )}
-                {isTerrazzoEstimate && metalInlaysType !== "No Dividers (Monolithic Raw)" && (
-                  <div className="flex justify-between">
-                    <span>Metal inlays:</span>
-                    <span className="text-white font-bold">AED {calculateInlayCost().toLocaleString()}</span>
-                  </div>
-                )}
-                {isTerrazzoEstimate && includeUnderfloorHeating && (
-                  <div className="flex justify-between">
-                    <span>Underfloor heating add-on:</span>
-                    <span className="text-white font-bold">AED {calculateHeatingSurcharge().toLocaleString()}</span>
-                  </div>
-                )}
-                {!isTerrazzoEstimate && (
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-[10px] leading-relaxed text-[#dcd9ce]">
-                    Custom terrazzo finish options apply only when Terrazzo Flooring is selected.
-                  </div>
-                )}
-                
-                <div className="border-t border-white/10 pt-4">
-                  <span className="font-sans font-bold text-white block">Estimated Total</span>
-                  <div className="mt-2 flex items-end justify-between gap-4">
-                    <span className="text-[10px] text-stone-500 uppercase">Excluding 5% VAT</span>
-                    <span className="text-white bg-[#5A5A40] px-4 py-2 text-xl font-mono font-bold rounded-full">
-                      {calculateTotal().toLocaleString()} AED
-                    </span>
-                  </div>
+                <div className="border border-[#1a1a1a] rounded-2xl p-4 bg-[#1a1a1a] text-white">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#a09c94] font-bold block">
+                    Estimated Cost
+                  </span>
+                  <strong className="font-serif text-lg">{estimatedTotal.toLocaleString()} AED</strong>
                 </div>
-                <span className="text-[9px] text-stone-500 uppercase block text-right mt-1">Above costs are for Dubai based projects only. Terms and Conditions Apply.</span>
               </div>
 
-              {/* Contact Lead Details for PDF Generation */}
-              <div className="pt-4 border-t border-white/10 space-y-3">
-                <span className="font-mono text-[9px] uppercase tracking-wider text-[#a09c94] font-bold block">
-                  Request Detailed Quote
+              <p className="text-[10px] text-[#5a5650] leading-relaxed">
+                Above costs are for Dubai based projects only. Terms and Conditions Apply.
+              </p>
+            </div>
+
+            <div className="lg:col-span-2 bg-[#1a1a1a] text-white p-6 md:p-8 space-y-5">
+              <div>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#a09c94] font-bold">
+                  Lead Details
                 </span>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
-                    className="w-full bg-black/40 border border-white/10 p-2.5 text-xs text-white rounded-xl placeholder-stone-600 focus:outline-[#5A5A40]"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Company / Project"
-                    value={clientCompany}
-                    onChange={(e) => setClientCompany(e.target.value)}
-                    className="w-full bg-black/40 border border-white/10 p-2.5 text-xs text-white rounded-xl placeholder-stone-600 focus:outline-[#5A5A40]"
-                  />
-                </div>
+                <h3 className="font-serif text-2xl font-bold mt-1">Request Follow-Up</h3>
+                <p className="text-xs text-[#a09c94] mt-2 leading-relaxed">
+                  Add either a mobile number or email address so the team can contact you.
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={clientName}
+                  onChange={(e) => {
+                    setClientName(e.target.value);
+                    setLeadSubmitted(false);
+                  }}
+                  className="w-full bg-black/40 border border-white/10 p-3 text-xs text-white rounded-xl placeholder-stone-500 focus:outline-[#5A5A40]"
+                />
+                <input
+                  type="text"
+                  placeholder="Company / Project"
+                  value={clientCompany}
+                  onChange={(e) => {
+                    setClientCompany(e.target.value);
+                    setLeadSubmitted(false);
+                  }}
+                  className="w-full bg-black/40 border border-white/10 p-3 text-xs text-white rounded-xl placeholder-stone-500 focus:outline-[#5A5A40]"
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  value={clientEmail}
+                  onChange={(e) => {
+                    setClientEmail(e.target.value);
+                    setLeadSubmitted(false);
+                  }}
+                  className="w-full bg-black/40 border border-white/10 p-3 text-xs text-white rounded-xl placeholder-stone-500 focus:outline-[#5A5A40]"
+                />
                 <input
                   type="tel"
                   placeholder="+971 Phone Number"
                   value={clientPhone}
-                  onChange={(e) => setClientPhone(e.target.value)}
-                  className="w-full bg-black/40 border border-white/10 p-2.5 text-xs text-white rounded-xl placeholder-stone-600 focus:outline-[#5A5A40]"
+                  onChange={(e) => {
+                    setClientPhone(e.target.value);
+                    setLeadSubmitted(false);
+                  }}
+                  className="w-full bg-black/40 border border-white/10 p-3 text-xs text-white rounded-xl placeholder-stone-500 focus:outline-[#5A5A40]"
                 />
-
-                <button
-                  type="button"
-                  onClick={triggerExportSimulation}
-                  disabled={!clientName || !clientPhone}
-                  className={`w-full py-4 font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition rounded-full ${
-                    clientName && clientPhone
-                      ? "bg-[#5A5A40] hover:bg-white hover:text-[#1a1a1a] text-white cursor-pointer shadow-md"
-                      : "bg-[#252520] text-stone-500 cursor-not-allowed border border-[#e1e1d7]/5"
-                  }`}
-                >
-                  <FileText className="w-4 h-4" />
-                  <span>Submit Estimate Request</span>
-                </button>
-                {!clientName && (
-                  <span className="text-[9px] text-[#a09c94] font-mono block text-center mt-1">
-                    * Enter your name and phone number to request a quote
-                  </span>
-                )}
               </div>
+
+              <button
+                type="button"
+                onClick={submitEstimateLead}
+                disabled={!canSubmitLead}
+                className={`w-full py-4 font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition rounded-full ${
+                  canSubmitLead
+                    ? "bg-[#5A5A40] hover:bg-white hover:text-[#1a1a1a] text-white cursor-pointer shadow-md"
+                    : "bg-[#252520] text-stone-500 cursor-not-allowed border border-[#e1e1d7]/5"
+                }`}
+              >
+                <FileText className="w-4 h-4" />
+                <span>Submit Estimate Request</span>
+              </button>
+
+              {!canSubmitLead && (
+                <span className="text-[9px] text-[#a09c94] font-mono block text-center">
+                  * Enter mobile number or email address to submit.
+                </span>
+              )}
+
+              {leadSubmitted && (
+                <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-xs text-emerald-100 leading-relaxed">
+                  Thank you. Your estimate request has been received and the team will follow up shortly.
+                </div>
+              )}
             </div>
-
-            {/* Generated spec proposal box */}
-            {proposalReady && (
-              <div className="bg-white border-2 border-dashed border-[#5A5A40]/30 p-6 rounded-[32px] space-y-4 shadow-sm animate-fade-in text-[#1a1a1a]">
-                <div className="flex justify-between items-center text-xs font-mono text-[#a09c94] pb-2 border-b border-[#e1e1d7]">
-                  <span>A H T E FLOORING SPECIFICATION SHEET</span>
-                  <span className="text-emerald-600 font-bold">&#10003; READY TO LODGE</span>
-                </div>
-
-                <div className="space-y-2 text-xs font-sans text-[#5a5650] leading-relaxed">
-                  <p>
-                    <strong>Issued To:</strong> {clientName} ({clientCompany || "Private Client"})
-                  </p>
-                  {isTerrazzoEstimate ? (
-                    <p>
-                      <strong>Floor Base Style:</strong> {selectedShade.name} ({selectedShade.code})
-                    </p>
-                  ) : (
-                    <p>
-                      <strong>Selected Service:</strong> {activeCostService.service}
-                    </p>
-                  )}
-                  <p>
-                    <strong>Total Area coverage:</strong> {areaSqmNormal} Sqm ({areaSqftNormal} Sqft)
-                  </p>
-                  {isTerrazzoEstimate && (
-                    <>
-                      <p>
-                        <strong>Dividers Layout:</strong> {metalInlaysType} system
-                      </p>
-                      <p>
-                        <strong>Underfloor Thermal integration:</strong> {includeUnderfloorHeating ? "Yes (Add-on active)" : "No"}
-                      </p>
-                      <p>
-                        <strong>Finish level:</strong> {shineFinish}
-                      </p>
-                    </>
-                  )}
-                  <p className="border-t border-[#e1e1d7] pt-2 text-[#1a1a1a]">
-                    <strong>Estimated Dubai Rate:</strong> <span className="text-sm font-bold font-mono text-[#5A5A40]">{calculateTotal().toLocaleString()} AED</span>
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => alert("Specification sheet PDF downloaded successfully. A H T E engineers notified!")}
-                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-mono text-xs uppercase tracking-widest font-bold transition flex items-center justify-center gap-2 cursor-pointer rounded-full"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Export Official Quote & PDF</span>
-                </button>
-              </div>
-            )}
-            
           </div>
         </div>
       </div>
