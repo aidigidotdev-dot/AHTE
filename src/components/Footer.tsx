@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Layers, Mail, Phone, MapPin, Award, CheckCircle, ChevronDown, HelpCircle } from "lucide-react";
+import { Layers, Mail, Phone, MapPin, Award, CheckCircle, ChevronDown, HelpCircle, Instagram, Linkedin } from "lucide-react";
 import { GENERAL_SPECS } from "../data";
 
 export default function Footer() {
@@ -104,6 +104,26 @@ export default function Footer() {
             <div className="pt-2 flex flex-col gap-1.5 font-mono text-xs text-[#5A5A40]">
               <span className="text-[#a09c94]">Experience: <span className="text-white font-semibold">{GENERAL_SPECS.yearsInBusiness}</span></span>
               <span className="text-[#a09c94]">Portfolio: <span className="text-white font-semibold">{GENERAL_SPECS.projectsCompleted}</span></span>
+            </div>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/in/a-h-t-e-flooring-llc-945936220"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="A H T E Flooring on LinkedIn"
+                className="text-[#a09c94] hover:text-white transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/ahte_flooring_llc"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="A H T E Flooring on Instagram"
+                className="text-[#a09c94] hover:text-white transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
