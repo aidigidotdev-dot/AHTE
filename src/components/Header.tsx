@@ -2,75 +2,44 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Layers, Menu, Phone, X } from "lucide-react";
 
 export default function Header() {
-  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const getActiveTab = () => {
-    if (pathname === "/") return "home";
-    if (pathname === "/services") return "services";
-    if (pathname === "/terrazzo") return "terrazzo";
-    if (pathname === "/gallery") return "gallery";
-    if (pathname === "/authority") return "authority";
-    return "home";
-  };
+  const desktopLinkClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40]/70 hover:text-[#1a1a1a] border-b-2 border-transparent hover:border-[#5A5A40] pb-1 transition-colors cursor-pointer";
+  const desktopCalculatorClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] border-b-2 border-[#5A5A40] pb-1 transition-all cursor-pointer";
+  const mobileLinkClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] hover:text-[#1a1a1a] hover:bg-[#edebe1]/70 border border-[#e1e1d7] px-4 py-3 rounded-xl transition-colors";
+  const mobileCalculatorClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] bg-[#edebe1] border border-[#e1e1d7] px-4 py-3 rounded-xl transition-all";
+  const mainSiteLinks = [
+    { href: "https://ahteflooring.ae/about-us/", label: "About Us" },
+    { href: "https://ahteflooring.ae/services", label: "Services" },
+    { href: "https://ahteflooring.ae/gallery", label: "Gallery" },
+  ];
 
-  const currentTab = getActiveTab();
-
-  const activeClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] border-b-2 border-[#5A5A40] pb-1 transition-all cursor-pointer";
-  const inactiveClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40]/50 hover:text-[#1a1a1a] border-b-2 border-transparent pb-1 transition-colors cursor-pointer";
-  const mobileActiveClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] bg-[#edebe1] border border-[#e1e1d7] px-4 py-3 rounded-xl transition-all";
-  const mobileInactiveClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] hover:text-[#1a1a1a] hover:bg-[#edebe1]/70 border border-[#e1e1d7] px-4 py-3 rounded-xl transition-colors";
-
-  const renderLinks = (isMobile = false) => {
-    const linkClass = (tab: string) => {
-      if (isMobile) return currentTab === tab ? mobileActiveClass : mobileInactiveClass;
-      return currentTab === tab ? activeClass : inactiveClass;
-    };
-
-    return (
-      <>
-        <Link
-          href="/"
+  const renderLinks = (isMobile = false) => (
+    <>
+      <Link
+        href="/"
+        onClick={() => setIsMenuOpen(false)}
+        className={isMobile ? mobileCalculatorClass : desktopCalculatorClass}
+      >
+        Cost Calculator
+      </Link>
+      {mainSiteLinks.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setIsMenuOpen(false)}
-          className={linkClass("home")}
+          className={isMobile ? mobileLinkClass : desktopLinkClass}
         >
-          Home
-        </Link>
-        <Link
-          href="/services"
-          onClick={() => setIsMenuOpen(false)}
-          className={linkClass("services")}
-        >
-          Services
-        </Link>
-        <Link
-          href="/terrazzo"
-          onClick={() => setIsMenuOpen(false)}
-          className={linkClass("terrazzo")}
-        >
-          Terrazzo Matrix
-        </Link>
-        <Link
-          href="/gallery"
-          onClick={() => setIsMenuOpen(false)}
-          className={linkClass("gallery")}
-        >
-          Gallery
-        </Link>
-        <Link
-          href="/authority"
-          onClick={() => setIsMenuOpen(false)}
-          className={linkClass("authority")}
-        >
-          Topical Hub
-        </Link>
-      </>
-    );
-  };
+          {link.label}
+        </a>
+      ))}
+    </>
+  );
 
   return (
     <header className="sticky top-0 z-50 bg-[#f5f5f0]/95 backdrop-blur-md border-b border-[#e1e1d7]">
@@ -101,7 +70,7 @@ export default function Header() {
               A H T E Flooring
             </span>
             <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
-              Premium Architectural Floors
+              Flooring Cost Calculator
             </span>
           </div>
         </Link>
@@ -113,12 +82,14 @@ export default function Header() {
 
         {/* Action Button */}
         <div className="hidden min-[1150px]:block">
-          <Link
-            href="/terrazzo"
+          <a
+            href="https://ahteflooring.ae/contact-us/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[10px] uppercase font-bold tracking-widest text-[#5A5A40] px-5 py-2.5 border border-[#5A5A40] rounded-full hover:bg-[#5A5A40] hover:text-[#f5f5f0] transition-all cursor-pointer"
           >
-            Quote Calculator
-          </Link>
+            Contact Us
+          </a>
         </div>
 
         <button
@@ -136,13 +107,15 @@ export default function Header() {
         <div className="min-[1150px]:hidden border-t border-[#e1e1d7] bg-[#f5f5f0] shadow-lg">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 grid gap-2">
             {renderLinks(true)}
-            <Link
-              href="/terrazzo"
+            <a
+              href="https://ahteflooring.ae/contact-us/"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
               className="mt-2 text-center text-[10px] uppercase font-bold tracking-widest text-white bg-[#5A5A40] px-5 py-3 rounded-full hover:bg-[#1a1a1a] transition-colors cursor-pointer"
             >
-              Quote Calculator
-            </Link>
+              Contact Us
+            </a>
           </nav>
         </div>
       )}

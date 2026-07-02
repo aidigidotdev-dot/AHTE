@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+import MainWebsiteFooter from "../components/MainWebsiteFooter";
 import "../index.css";
 
 const inter = Inter({
@@ -12,9 +12,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "A H T E Flooring UAE | Seamless Terrazzo & Architectural Surfaces Dubai",
-  description: "Specialist contractor for premium seamless terrazzo, metallic epoxy, polyurethane screeds, and microcement flooring across the UAE.",
-  keywords: ["Terrazzo Flooring Dubai", "Epoxy Flooring UAE", "Microcement Dubai", "A H T E Flooring"],
+  title: "Flooring Cost Calculator Dubai | A H T E Flooring",
+  description: "Estimate flooring costs in Dubai for terrazzo, epoxy, microcement, MMA, kitchen flooring, and microconcrete projects.",
+  keywords: ["Flooring Cost Calculator Dubai", "Flooring Estimate UAE", "Terrazzo Cost Dubai", "A H T E Flooring"],
   authors: [{ name: "A H T E Flooring Team" }],
 };
 
@@ -30,7 +30,7 @@ export default function RootLayout({
         <main className="flex-grow overflow-x-hidden relative w-full">
           {children}
         </main>
-        <Footer />
+        <MainWebsiteFooter />
       </body>
     </html>
   );

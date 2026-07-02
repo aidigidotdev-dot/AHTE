@@ -1,9 +1,7 @@
+"use client";
+
 import { useState } from "react";
 import { Coins, FileText, Ruler } from "lucide-react";
-
-interface TerrazzoViewProps {
-  onNavigate: (tab: string) => void;
-}
 
 const COST_ESTIMATOR_SERVICES = [
   { service: "Epoxy Flooring", minimumArea: 1000, minimumAed: 60 },
@@ -14,7 +12,7 @@ const COST_ESTIMATOR_SERVICES = [
   { service: "Microconcrete", minimumArea: 200, minimumAed: 395 },
 ];
 
-export default function TerrazzoView({ onNavigate }: TerrazzoViewProps) {
+export default function TerrazzoView() {
   const [areaInSqm, setAreaInSqm] = useState<number>(120);
   const [useSqft, setUseSqft] = useState<boolean>(false);
   const [selectedCostService, setSelectedCostService] = useState("Terrazzo Flooring");

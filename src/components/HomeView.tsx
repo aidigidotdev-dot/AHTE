@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowRight, Sparkles, Shield, Compass, Calendar, Award, Star, ExternalLink } from "lucide-react";
-import { SERVICES, GALLERY, GENERAL_SPECS } from "../data";
+import { SERVICES, GENERAL_SPECS } from "../data";
 
 interface HomeViewProps {
   onNavigate: (tab: string) => void;
@@ -37,9 +37,6 @@ const GOOGLE_REVIEWS = [
 ];
 
 export default function HomeView({ onNavigate }: HomeViewProps) {
-  // Select top projects to preview on Home
-  const featuredProjects = GALLERY.slice(0, 3);
-
   return (
     <div className="bg-[#f5f5f0] min-h-screen text-[#1a1a1a]">
       {/* 1. Hero Section */}
@@ -292,63 +289,6 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
                   >
                     Configure System
                   </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Highlight Projects Slider / Grid */}
-      <section className="py-20 bg-[#f5f5f0]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
-            <div>
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#5A5A40] block mb-2">
-                Dubai Case Studies
-              </span>
-              <h2 className="font-serif font-light text-3xl md:text-5xl text-[#1a1a1a] tracking-tight">
-                Refining Landmark Spaces
-              </h2>
-            </div>
-            <button
-              onClick={() => onNavigate("gallery")}
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] hover:text-[#1a1a1a] transition-all flex items-center gap-2 cursor-pointer"
-            >
-              <span>Explore Complete Gallery</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredProjects.map((p) => (
-              <div
-                key={p.id}
-                className="group cursor-pointer"
-                onClick={() => onNavigate("gallery")}
-              >
-                <div className="h-64 overflow-hidden border border-[#e1e1d7] rounded-[32px] relative mb-4">
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    width={400}
-                    height={256}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/95 text-[#5A5A40] font-mono text-[9px] uppercase tracking-wider px-3 py-1 border border-[#e1e1d7] rounded-full">
-                    {p.location}
-                  </div>
-                </div>
-                <div className="space-y-1.5 px-2">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#5A5A40] font-bold">
-                    {p.type} Project ({p.year})
-                  </span>
-                  <h3 className="font-serif font-bold text-lg text-[#1a1a1a] group-hover:text-[#5A5A40] transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="text-xs text-[#a09c94] line-clamp-2 leading-relaxed">
-                    {p.description}
-                  </p>
                 </div>
               </div>
             ))}
