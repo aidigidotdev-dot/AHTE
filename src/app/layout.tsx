@@ -13,10 +13,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Flooring Cost Calculator Dubai | A H T E Flooring",
-  description: "Estimate flooring costs in Dubai for terrazzo, epoxy, microcement, MMA, kitchen flooring, and microconcrete projects.",
-  keywords: ["Flooring Cost Calculator Dubai", "Flooring Estimate UAE", "Terrazzo Cost Dubai", "A H T E Flooring"],
-  authors: [{ name: "A H T E Flooring Team" }],
+  title: "Flooring Cost Calculator | Seamless Surfaces",
+  description: "Estimate flooring costs for terrazzo, epoxy, microcement, MMA, kitchen flooring, and microconcrete projects.",
+  keywords: ["Flooring Cost Calculator", "Flooring Estimate Template", "Terrazzo Cost Calculator", "Seamless Surfaces"],
+  authors: [{ name: "Flooring Template Team" }],
 };
 
 export default function RootLayout({

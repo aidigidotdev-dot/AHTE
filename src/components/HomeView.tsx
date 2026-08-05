@@ -12,7 +12,7 @@ const GOOGLE_REVIEWS = [
     role: "Villa Owner, Palm Jumeirah",
     rating: 5,
     date: "1 week ago",
-    comment: "A H T E Flooring designed & laid a magnificent seamless white terrazzo floor for our new beach residential villa. The aggregate density and brass metal dividers are absolutely perfect. Truly an outstanding team of professional craftsmen in Dubai.",
+    comment: "Our contractor designed & laid a magnificent seamless white terrazzo floor for our new beach residential villa. The aggregate density and brass metal dividers are absolutely perfect. Truly an outstanding team of professional craftsmen in Dubai.",
     avatarBg: "bg-[#5A5A40]",
     avatarInitials: "TM"
   },
@@ -21,7 +21,7 @@ const GOOGLE_REVIEWS = [
     role: "Lead Architect, Studio-D",
     rating: 5,
     date: "3 weeks ago",
-    comment: "We specified A H T E's monolithic terrazzo system for a commercial art gallery in Al Quoz. The mirror gloss 800-grit finish exceeded expectations under gallery lighting. Highly responsive engineers who understand architectural drawings.",
+    comment: "We specified their monolithic terrazzo system for a commercial art gallery in Al Quoz. The mirror gloss 800-grit finish exceeded expectations under gallery lighting. Highly responsive engineers who understand architectural drawings.",
     avatarBg: "bg-[#1a1a1a]",
     avatarInitials: "EP"
   },
@@ -146,7 +146,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
               <div className="absolute -top-4 -left-4 w-32 h-32 bg-[#5A5A40]/10 rounded-[32px] -z-10"></div>
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMW1_pARDFC642BvwKcqqM1wZ7FNJXNZJjRIImirjyRZnCb7ufIPwVrDVlETY0pVhcEpBSqciY902tUKTbet_vVZ0Vd6ot-YGOb_fA1fxk0VnRQFv3PGf8ngCgiyymYLSM0qEKGxDdUxJdwiLR3KXRmFf07j2jtdSAorVh8AHLXHONydxp_puqtFwUlrvk0wrM5mPmWFZfRzfCQYXX9Wfjevp1OAx3dy2k8IL5QKhpNarsDESlyYKFYAkjM__35qoymN1444EONfE"
-                alt="A H T E Architectural Showroom Board"
+                alt="Architectural Showroom Board"
                 width={500}
                 height={480}
                 className="w-full h-[480px] object-cover rounded-[32px] border border-[#e1e1d7] shadow-xl"
@@ -167,7 +167,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
                 Crafting Exceptional Architectural Foundations for 5 Years &mdash; Al Quoz Dubai.
               </h2>
               <p className="text-base text-[#5a5650] leading-relaxed">
-                A H T E Flooring has designed and laid over 400,000 square meters of high-spec monolithic floors across commercial skyscrapers, palatial residential estates, and industrial hubs. Our team coordinates every stage from base grinding to underfloor heating integration and water-jet brass linear inlay design.
+                Our team has designed and laid over 400,000 square meters of high-spec monolithic floors across commercial skyscrapers, palatial residential estates, and industrial hubs. We coordinate every stage from base grinding to underfloor heating integration and water-jet brass linear inlay design.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">

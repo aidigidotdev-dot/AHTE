@@ -3,17 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Layers, Menu, Phone, X } from "lucide-react";
+import { Layers, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  const mainSiteLinks = [
-    { href: "/about-us", label: "About Us" },
-    { href: "/services", label: "Services" },
-    { href: "/gallery", label: "Gallery" },
-  ];
 
   const getLinkClasses = (href: string, isMobile: boolean) => {
     const isActive = pathname === href;
@@ -28,43 +22,9 @@ export default function Header() {
     }
   };
 
-  const renderLinks = (isMobile = false) => (
-    <>
-      <Link
-        href="/"
-        onClick={() => setIsMenuOpen(false)}
-        className={getLinkClasses("/", isMobile)}
-      >
-        Cost Calculator
-      </Link>
-      {mainSiteLinks.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          onClick={() => setIsMenuOpen(false)}
-          className={getLinkClasses(link.href, isMobile)}
-        >
-          {link.label}
-        </Link>
-      ))}
-    </>
-  );
-
   return (
     <header className="sticky top-0 z-50 bg-[#f5f5f0]/95 backdrop-blur-md border-b border-[#e1e1d7]">
-      <div className="hidden min-[1150px]:block bg-[#1a1a1a] text-[#edebe1] border-b border-[#e1e1d7]/10">
-        <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-end gap-5 font-mono text-[10px] uppercase tracking-wider">
-          <a href="tel:+971501920298" className="inline-flex items-center gap-2 text-[#a09c94] hover:text-white transition-colors">
-            <Phone className="w-3.5 h-3.5 text-[#5A5A40]" />
-            +971 50 1920298
-          </a>
-          <span className="text-[#5A5A40]">|</span>
-          <a href="tel:+971529234069" className="text-[#a09c94] hover:text-white transition-colors">
-            +971 52 9234069
-          </a>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 min-[1150px]:h-24 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link 
           href="/"
@@ -76,29 +36,38 @@ export default function Header() {
           </div>
           <div className="min-w-0">
             <span className="font-serif font-bold text-xl sm:text-2xl tracking-tighter uppercase italic text-[#1a1a1a] block truncate">
-              A H T E Flooring
+              Seamless Surfaces
             </span>
             <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
-              Flooring Cost Calculator
+              Interactive Lead Calculator
             </span>
           </div>
         </Link>
 
         {/* Navigation Links */}
         <nav className="hidden min-[1150px]:flex items-center gap-8">
-          {renderLinks()}
+          <Link
+            href="/"
+            className={getLinkClasses("/", false)}
+          >
+            Home
+          </Link>
+          <Link
+            href="/terrazzo"
+            className={getLinkClasses("/terrazzo", false)}
+          >
+            Quote Calculator
+          </Link>
         </nav>
 
         {/* Action Button */}
         <div className="hidden min-[1150px]:block">
-          <a
-            href="https://ahteflooring.ae/contact-us/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/terrazzo"
             className="text-[10px] uppercase font-bold tracking-widest text-[#5A5A40] px-5 py-2.5 border border-[#5A5A40] rounded-full hover:bg-[#5A5A40] hover:text-[#f5f5f0] transition-all cursor-pointer"
           >
-            Contact Us
-          </a>
+            Get Quote
+          </Link>
         </div>
 
         <button
@@ -115,20 +84,30 @@ export default function Header() {
       {isMenuOpen && (
         <div className="min-[1150px]:hidden border-t border-[#e1e1d7] bg-[#f5f5f0] shadow-lg">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 grid gap-2">
-            {renderLinks(true)}
-            <a
-              href="https://ahteflooring.ae/contact-us/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/"
+              onClick={() => setIsMenuOpen(false)}
+              className={getLinkClasses("/", true)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/terrazzo"
+              onClick={() => setIsMenuOpen(false)}
+              className={getLinkClasses("/terrazzo", true)}
+            >
+              Quote Calculator
+            </Link>
+            <Link
+              href="/terrazzo"
               onClick={() => setIsMenuOpen(false)}
               className="mt-2 text-center text-[10px] uppercase font-bold tracking-widest text-white bg-[#5A5A40] px-5 py-3 rounded-full hover:bg-[#1a1a1a] transition-colors cursor-pointer"
             >
-              Contact Us
-            </a>
+              Get Quote
+            </Link>
           </nav>
         </div>
       )}
     </header>
   );
 }
-

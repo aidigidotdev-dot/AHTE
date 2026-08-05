@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Layers, Mail, Phone, MapPin, Award, CheckCircle, ChevronDown, HelpCircle, Instagram, Linkedin } from "lucide-react";
+import { Layers, Mail, Phone, MapPin, Award, CheckCircle, ChevronDown, HelpCircle } from "lucide-react";
 import { GENERAL_SPECS } from "../data";
 
 export default function Footer() {
@@ -18,7 +18,7 @@ export default function Footer() {
       answer: "Standard projects average 7 to 14 operational days depending on the structural layout complexity. The process involves substrate preparation, precise brass linear profiling, monolithic casting, a 30-day hydration cure window (for cementitious), followed by finishing and sealing."
     },
     {
-      question: "What structural warranties cover A H T E Flooring systems?",
+      question: "What structural warranties cover these seamless floor systems?",
       answer: "We offer a 5-year structural warranty on residential and commercial epoxy and cementitious terrazzo systems. This warranty covers slab bonding adhesion, pigment UV colorfast stability under GCC heat, and localized micro-fracture prevention when installed according to approved site conditions."
     }
   ];
@@ -58,17 +58,19 @@ export default function Footer() {
                   >
                     <button
                       onClick={() => toggleFaq(index)}
-                      className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#f5f5f0]/40 transition-colors cursor-pointer"
+                      className="w-full px-6 py-5 text-left flex justify-between items-center gap-4 hover:bg-[#f5f5f0]/50 transition-colors"
+                      aria-expanded={isOpen}
                     >
-                      <span className="font-sans font-bold text-xs md:text-sm text-[#1a1a1a] pr-4">
+                      <span className="font-serif font-bold text-[#1a1a1a] text-sm md:text-base">
                         {faq.question}
                       </span>
                       <ChevronDown 
-                        className={`w-4 h-4 text-[#5A5A40] shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} 
+                        className={`w-4.5 h-4.5 text-[#5A5A40] shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} 
                       />
                     </button>
+                    
                     {isOpen && (
-                      <div className="px-6 pb-6 pt-1 border-t border-[#e1e1d7] text-xs md:text-sm text-[#5a5650] leading-relaxed font-sans">
+                      <div className="px-6 pb-6 pt-1 text-xs md:text-sm text-[#5a5650] leading-relaxed border-t border-[#f5f5f0] bg-[#fbfbf9]/60 font-sans">
                         {faq.answer}
                       </div>
                     )}
@@ -80,175 +82,136 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer className="bg-[#1a1a1a] text-[#edebe1] border-t border-[#e1e1d7]/20">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          {/* Brand Info */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-[#5A5A40] text-[#f5f5f0] font-bold">
-                <Layers className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="font-serif font-bold text-xl text-white tracking-tighter uppercase italic block">
-                  A H T E Flooring
-                </span>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block -mt-1 font-semibold">
-                  Premium Architectural Floors
-                </span>
-              </div>
-            </div>
-            <p className="text-sm text-[#a09c94] leading-relaxed font-sans">
-              Dubai's choice commercial & residential flooring contractor. Pioneering seamless Terrazzo and durable architectural flooring systems.
-            </p>
-            <div className="pt-2 flex flex-col gap-1.5 font-mono text-xs text-[#5A5A40]">
-              <span className="text-[#a09c94]">Experience: <span className="text-white font-semibold">{GENERAL_SPECS.yearsInBusiness}</span></span>
-              <span className="text-[#a09c94]">Portfolio: <span className="text-white font-semibold">{GENERAL_SPECS.projectsCompleted}</span></span>
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/in/a-h-t-e-flooring-llc-945936220"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="A H T E Flooring on LinkedIn"
-                className="text-[#a09c94] hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.instagram.com/ahte_flooring_llc"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="A H T E Flooring on Instagram"
-                className="text-[#a09c94] hover:text-white transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Quick Nav links */}
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-[#f5f5f0] mb-4 border-b border-[#e1e1d7]/10 pb-2 font-bold">
-              Navigation
-            </h4>
-            <ul className="space-y-2.5 text-sm font-sans">
-              <li>
-                <Link
-                  href="/"
-                  className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
-                >
-                  Home Showcase
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
-                >
-                  Flooring Systems
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terrazzo"
-                  className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
-                >
-                  Seamless Terrazzo
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/gallery"
-                  className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
-                >
-                  Completed Works
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/authority"
-                  className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
-                >
-                  EEAT Technical Hub
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Details */}
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-[#f5f5f0] mb-4 border-b border-[#e1e1d7]/10 pb-2 font-bold">
-              Office & Showroom
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
-                <span className="text-[#a09c94] font-sans leading-snug">
-                  Warehouse 2, 364-11A ST, AI Quoz Ind 1st, PO BOX: 8854, Dubai U.A.E
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
-                <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
-                  <a href="tel:+971501920298" className="hover:text-white transition-colors">
-                    +971 50 1920298
-                  </a>
-                  <a href="tel:+971529234069" className="hover:text-white transition-colors">
-                    +971 52 9234069
-                  </a>
+      {/* Main Footer */}
+      <footer className="bg-[#1a1a1a] text-[#edebe1] border-t border-[#e1e1d7]/10 py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            {/* Brand Info */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white text-[#1a1a1a] shrink-0">
+                  <Layers className="w-5 h-5" />
                 </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
-                <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
-                  <a href="mailto:hafeez@ahteflooring.ae" className="hover:text-white transition-colors">
-                    hafeez@ahteflooring.ae
-                  </a>
-                  <a href="mailto:namish@ahteflooring.ae" className="hover:text-white transition-colors">
-                    namish@ahteflooring.ae
-                  </a>
-                  <a href="mailto:info@ahteflooring.ae" className="hover:text-white transition-colors">
-                    info@ahteflooring.ae
-                  </a>
+                <div>
+                  <span className="font-serif font-bold text-lg text-white tracking-tight block">
+                    Seamless Surfaces
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block -mt-1 font-semibold">
+                    Interactive Lead Template
+                  </span>
                 </div>
-              </li>
-            </ul>
-          </div>
+              </div>
+              <p className="text-sm text-[#a09c94] leading-relaxed font-sans">
+                Premium lead generation and dynamic quote estimation templates for architectural flooring installers and contractors.
+              </p>
+              <div className="pt-2 flex flex-col gap-1.5 font-mono text-xs text-[#5A5A40]">
+                <span className="text-[#a09c94]">Experience: <span className="text-white font-semibold">15+ Years</span></span>
+                <span className="text-[#a09c94]">Portfolio: <span className="text-white font-semibold">500+ Projects</span></span>
+              </div>
+            </div>
 
-          {/* Certifications and municipal codes */}
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-[#f5f5f0] mb-4 border-b border-[#e1e1d7]/10 pb-2 font-bold">
-              Standards & Quality
-            </h4>
-            <ul className="space-y-2.5 text-xs text-[#a09c94] font-sans">
-              {GENERAL_SPECS.certifications.map((cert, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>{cert}</span>
+            {/* Quick Nav links */}
+            <div>
+              <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-[#f5f5f0] mb-4 border-b border-[#e1e1d7]/10 pb-2 font-bold">
+                Navigation
+              </h4>
+              <ul className="space-y-2.5 text-sm font-sans">
+                <li>
+                  <Link
+                    href="/"
+                    className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
+                  >
+                    Home Showcase
+                  </Link>
                 </li>
-              ))}
-              <li className="pt-2 flex items-center gap-2">
-                <Award className="w-4 h-4 text-[#5A5A40]" />
-                <span className="font-mono text-[10px] uppercase text-[#5a5650] font-bold tracking-widest">
-                  5 Years in Dubai UAE
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
+                <li>
+                  <Link
+                    href="/terrazzo"
+                    className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
+                  >
+                    Quote Calculator
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/buy"
+                    className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
+                  >
+                    Buy Template
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-        {/* Legal footer rights */}
-        <div className="border-t border-[#e1e1d7]/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-[#5a5650]">
-          <span>&copy; {new Date().getFullYear()} A H T E Flooring Contracting LLC. All rights reserved.</span>
-          <div className="flex gap-6">
-            <span className="hover:text-[#a09c94] transition-colors cursor-pointer">Terms of Service</span>
-            <span className="hover:text-[#a09c94] transition-colors cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-[#a09c94] transition-colors cursor-pointer">DM Approval Guidelines</span>
+            {/* Contact Details */}
+            <div>
+              <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-[#f5f5f0] mb-4 border-b border-[#e1e1d7]/10 pb-2 font-bold">
+                Office & Showroom
+              </h4>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
+                  <span className="text-[#a09c94] font-sans leading-snug">
+                    Your Business Address, Dubai, UAE
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
+                  <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
+                    <a href="tel:+971589163867" className="hover:text-white transition-colors">
+                      +971 58 916 3867
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Mail className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
+                  <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
+                    <a href="mailto:sales@yourdomain.com" className="hover:text-white transition-colors">
+                      sales@yourdomain.com
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Certifications and municipal codes */}
+            <div>
+              <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-[#f5f5f0] mb-4 border-b border-[#e1e1d7]/10 pb-2 font-bold">
+                Standards & Quality
+              </h4>
+              <ul className="space-y-2.5 text-xs text-[#a09c94] font-sans">
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>DM-SPEC-2026 Compliant</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Al Sa'fat Green Standards</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>ISO 9001 Certified Quality</span>
+                </li>
+                <li className="pt-2 flex items-center gap-2">
+                  <Award className="w-4 h-4 text-[#5A5A40]" />
+                  <span className="font-mono text-[10px] uppercase text-[#5a5650] font-bold tracking-widest">
+                    GCC Quality Certified
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Legal footer rights */}
+          <div className="border-t border-[#e1e1d7]/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-[#5a5650]">
+            <span>&copy; {new Date().getFullYear()} Flooring Template. All rights reserved.</span>
+            <div className="flex gap-6">
+              <span className="hover:text-[#a09c94] transition-colors cursor-pointer">Terms of Service</span>
+              <span className="hover:text-[#a09c94] transition-colors cursor-pointer">Privacy Policy</span>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
     </>
   );
 }
