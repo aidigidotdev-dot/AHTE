@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Laptop, PlusCircle, Sparkles, X, Edit, RotateCcw } from "lucide-react";
+import { Laptop, PlusCircle, Sparkles, X, Edit, RotateCcw, Upload, Paintbrush, Type } from "lucide-react";
 import { usePersonalization } from "../context/PersonalizationContext";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -11,7 +11,8 @@ export default function WhatsAppFloat() {
 
   const { 
     companyName, aboutText, locationText, contactText, inquiriesText, 
-    isPersonalized, updatePersonalization, resetPersonalization 
+    logoImage, primaryColor, fontFamily, isPersonalized,
+    updatePersonalization, resetPersonalization 
   } = usePersonalization();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -22,6 +23,9 @@ export default function WhatsAppFloat() {
   const [formLocation, setFormLocation] = useState(locationText);
   const [formContact, setFormContact] = useState(contactText);
   const [formInquiries, setFormInquiries] = useState(inquiriesText);
+  const [formLogo, setFormLogo] = useState<string | null>(logoImage);
+  const [formColor, setFormColor] = useState(primaryColor);
+  const [formFont, setFormFont] = useState(fontFamily);
 
   // Synchronize form states when drawer opens
   const openDrawer = () => {
@@ -30,6 +34,9 @@ export default function WhatsAppFloat() {
     setFormLocation(locationText);
     setFormContact(contactText);
     setFormInquiries(inquiriesText);
+    setFormLogo(logoImage);
+    setFormColor(primaryColor);
+    setFormFont(fontFamily);
     setIsDrawerOpen(true);
   };
 
@@ -39,7 +46,10 @@ export default function WhatsAppFloat() {
       aboutText: formAbout,
       locationText: formLocation,
       contactText: formContact,
-      inquiriesText: formInquiries
+      inquiriesText: formInquiries,
+      logoImage: formLogo,
+      primaryColor: formColor,
+      fontFamily: formFont
     });
     setIsDrawerOpen(false);
   };
@@ -52,8 +62,32 @@ export default function WhatsAppFloat() {
     setFormLocation("Your Business Address, Dubai, UAE");
     setFormContact("+971 58 916 3867");
     setFormInquiries("sales@yourdomain.com");
+    setFormLogo(null);
+    setFormColor("#5A5A40");
+    setFormFont("Inter");
     setIsDrawerOpen(false);
   };
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormLogo(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const availableFonts = [
+    "Inter",
+    "Poppins",
+    "Montserrat",
+    "Playfair Display",
+    "Lora",
+    "Cormorant Garamond",
+    "JetBrains Mono"
+  ];
 
   return (
     <>
@@ -128,7 +162,7 @@ export default function WhatsAppFloat() {
                 {/* Close Button */}
                 <button
                   onClick={() => setIsDrawerOpen(false)}
-                  className="absolute top-6 right-6 p-2 text-[#a09c94] hover:text-[#1a1a1a] transition-colors cursor-pointer"
+                  className="absolute top-6 right-6 p-2 text-[#a09c94] hover:text-[#1a1a1a] transition-colors cursor-pointer animate-fade-in"
                   aria-label="Close panel"
                 >
                   <X className="w-5 h-5" />
@@ -140,68 +174,141 @@ export default function WhatsAppFloat() {
                     Interactive Live Demo
                   </span>
                 </div>
-                <h3 className="font-serif font-bold text-2xl text-[#1a1a1a] mt-1.5">
+                <h3 className="font-serif font-bold text-2xl text-[#1a1a1a] mt-1.5 font-serif">
                   Personalize This Website
                 </h3>
                 <p className="text-xs text-[#a09c94] mt-2 leading-relaxed">
-                  Enter your company's information below. The entire site layout, headers, footers, and brand name will update live in real-time.
+                  Upload your logo, adjust colors/fonts, and edit descriptions. All website layouts will instantly reflect these updates in real-time.
                 </p>
 
-                <div className="mt-8 space-y-5">
-                  {/* Inputs */}
-                  <div>
-                    <label className="text-xs font-semibold text-[#5a5650] block mb-1">Company / Brand Name</label>
-                    <input
-                      type="text"
-                      value={formCompany}
-                      onChange={(e) => setFormCompany(e.target.value)}
-                      placeholder="e.g. Apex Flooring Group"
-                      className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
-                    />
+                <div className="mt-8 space-y-6">
+                  {/* Branding / Copy section */}
+                  <div className="border-b border-[#e1e1d7] pb-6 space-y-4">
+                    <h4 className="font-mono text-[10px] uppercase tracking-widest text-[#5A5A40] font-bold">
+                      Branding & Texts
+                    </h4>
+
+                    <div>
+                      <label className="text-xs font-semibold text-[#5a5650] block mb-1">Company / Brand Name</label>
+                      <input
+                        type="text"
+                        value={formCompany}
+                        onChange={(e) => setFormCompany(e.target.value)}
+                        placeholder="e.g. Apex Flooring Group"
+                        className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-semibold text-[#5a5650] block mb-1">About Us Description</label>
+                      <textarea
+                        value={formAbout}
+                        onChange={(e) => setFormAbout(e.target.value)}
+                        rows={3}
+                        placeholder="A short sentence describing your architectural flooring systems."
+                        className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans resize-none leading-relaxed"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-semibold text-[#5a5650] block mb-1">Contact Phone</label>
+                        <input
+                          type="text"
+                          value={formContact}
+                          onChange={(e) => setFormContact(e.target.value)}
+                          placeholder="e.g. +971 50 XXXXXXX"
+                          className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-semibold text-[#5a5650] block mb-1">Inquiries Email</label>
+                        <input
+                          type="email"
+                          value={formInquiries}
+                          onChange={(e) => setFormInquiries(e.target.value)}
+                          placeholder="e.g. contact@yourcompany.com"
+                          className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-semibold text-[#5a5650] block mb-1">Office Address</label>
+                      <input
+                        type="text"
+                        value={formLocation}
+                        onChange={(e) => setFormLocation(e.target.value)}
+                        placeholder="e.g. Al Quoz Industrial 3, Dubai, UAE"
+                        className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <label className="text-xs font-semibold text-[#5a5650] block mb-1">About Us Description</label>
-                    <textarea
-                      value={formAbout}
-                      onChange={(e) => setFormAbout(e.target.value)}
-                      rows={3}
-                      placeholder="A short sentence describing your architectural flooring systems and installations."
-                      className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans resize-none leading-relaxed"
-                    />
-                  </div>
+                  {/* Visual Style Customization section */}
+                  <div className="space-y-4 pt-2">
+                    <h4 className="font-mono text-[10px] uppercase tracking-widest text-[#5A5A40] font-bold">
+                      Visual Themes
+                    </h4>
 
-                  <div>
-                    <label className="text-xs font-semibold text-[#5a5650] block mb-1">Office / Showroom Location</label>
-                    <input
-                      type="text"
-                      value={formLocation}
-                      onChange={(e) => setFormLocation(e.target.value)}
-                      placeholder="e.g. Warehouse 12, Al Quoz 3, Dubai, UAE"
-                      className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
-                    />
-                  </div>
+                    {/* Logo Image Uploader */}
+                    <div>
+                      <label className="text-xs font-semibold text-[#5a5650] block mb-1">Upload Brand Logo</label>
+                      <div className="flex items-center gap-4">
+                        <label className="flex items-center gap-2 px-4 py-2 border border-[#e1e1d7] rounded-lg cursor-pointer bg-[#f5f5f0]/50 hover:bg-[#edebe1] text-[#1a1a1a] font-mono text-[10px] sm:text-xs uppercase font-extrabold transition shrink-0">
+                          <Upload className="w-4 h-4 text-[#5A5A40]" />
+                          <span>Choose Image</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleLogoChange}
+                            className="hidden"
+                          />
+                        </label>
+                        {formLogo && (
+                          <div className="flex items-center gap-2 border border-[#e1e1d7] px-3 py-1.5 rounded-lg bg-stone-50 min-w-0 flex-1">
+                            <img src={formLogo} alt="Logo preview" className="h-6 w-auto object-contain shrink-0 max-w-[80px]" />
+                            <button
+                              onClick={() => setFormLogo(null)}
+                              className="text-[10px] text-red-500 hover:text-red-700 font-bold ml-auto shrink-0 uppercase tracking-widest"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
 
-                  <div>
-                    <label className="text-xs font-semibold text-[#5a5650] block mb-1">Contact Phone Number</label>
-                    <input
-                      type="text"
-                      value={formContact}
-                      onChange={(e) => setFormContact(e.target.value)}
-                      placeholder="e.g. +971 50 XXXXXXX"
-                      className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
-                    />
-                  </div>
+                    {/* Color and Font pickers side by side */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-semibold text-[#5a5650] block mb-1">Primary Color</label>
+                        <div className="flex items-center gap-2 border border-[#e1e1d7] rounded-lg p-1.5 bg-[#f5f5f0]/30">
+                          <input
+                            type="color"
+                            value={formColor}
+                            onChange={(e) => setFormColor(e.target.value)}
+                            className="w-10 h-8 rounded border border-[#e1e1d7] cursor-pointer shrink-0"
+                          />
+                          <span className="font-mono text-xs text-[#1a1a1a] uppercase">{formColor}</span>
+                        </div>
+                      </div>
 
-                  <div>
-                    <label className="text-xs font-semibold text-[#5a5650] block mb-1">Inquiries Email Address</label>
-                    <input
-                      type="email"
-                      value={formInquiries}
-                      onChange={(e) => setFormInquiries(e.target.value)}
-                      placeholder="e.g. contact@yourcompany.com"
-                      className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-indigo-500 font-sans"
-                    />
+                      <div>
+                        <label className="text-xs font-semibold text-[#5a5650] block mb-1">Brand Typography</label>
+                        <select
+                          value={formFont}
+                          onChange={(e) => setFormFont(e.target.value)}
+                          className="w-full border border-[#e1e1d7] rounded-lg p-2 text-sm text-[#1a1a1a] bg-white focus:outline-none focus:border-indigo-500 cursor-pointer font-sans"
+                        >
+                          {availableFonts.map((font) => (
+                            <option key={font} value={font}>
+                              {font}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -226,7 +333,7 @@ export default function WhatsAppFloat() {
                   }`}
                 >
                   <Edit className="w-3.5 h-3.5" />
-                  Apply Preview
+                  Apply Theme
                 </button>
               </div>
             </motion.div>

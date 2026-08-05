@@ -9,7 +9,7 @@ import { usePersonalization } from "../context/PersonalizationContext";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { companyName } = usePersonalization();
+  const { companyName, logoImage } = usePersonalization();
 
   const getLinkClasses = (href: string, isMobile: boolean) => {
     const isActive = pathname === href;
@@ -33,17 +33,23 @@ export default function Header() {
           onClick={() => setIsMenuOpen(false)}
           className="flex items-center gap-3 cursor-pointer group min-w-0"
         >
-          <div className="p-2 bg-[#5A5A40] text-[#f5f5f0] rounded-none group-hover:bg-[#1a1a1a] transition-colors shrink-0">
-            <Layers className="w-5 h-5" />
-          </div>
-          <div className="min-w-0">
-            <span className="font-serif font-bold text-xl sm:text-2xl tracking-tighter uppercase italic text-[#1a1a1a] block truncate">
-              {companyName}
-            </span>
-            <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
-              Interactive Lead Calculator
-            </span>
-          </div>
+          {logoImage ? (
+            <img src={logoImage} alt={companyName} className="h-10 w-auto object-contain shrink-0 max-w-[180px]" />
+          ) : (
+            <>
+              <div className="p-2 bg-[#5A5A40] text-[#f5f5f0] rounded-none group-hover:bg-[#1a1a1a] transition-colors shrink-0">
+                <Layers className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <span className="font-serif font-bold text-xl sm:text-2xl tracking-tighter uppercase italic text-[#1a1a1a] block truncate">
+                  {companyName}
+                </span>
+                <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
+                  Interactive Lead Calculator
+                </span>
+              </div>
+            </>
+          )}
         </Link>
 
         {/* Navigation Links */}

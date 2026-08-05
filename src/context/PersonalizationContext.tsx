@@ -8,6 +8,9 @@ export interface PersonalizationData {
   locationText: string;
   contactText: string;
   inquiriesText: string;
+  logoImage: string | null;
+  primaryColor: string;
+  fontFamily: string;
   isPersonalized: boolean;
 }
 
@@ -22,6 +25,9 @@ const DEFAULT_VALUES: PersonalizationData = {
   locationText: "Your Business Address, Dubai, UAE",
   contactText: "+971 58 916 3867",
   inquiriesText: "sales@yourdomain.com",
+  logoImage: null,
+  primaryColor: "#5A5A40",
+  fontFamily: "Inter",
   isPersonalized: false
 };
 
@@ -36,7 +42,12 @@ export function PersonalizationProvider({ children }: { children: React.ReactNod
     try {
       const saved = localStorage.getItem("flooring_studio_personalization");
       if (saved) {
-        setState(JSON.parse(saved));
+        // Merge with DEFAULT_VALUES in case some properties are missing in old caches
+        const parsed = JSON.parse(saved);
+        setState({
+          ...DEFAULT_VALUES,
+          ...parsed
+        });
       }
     } catch (e) {
       console.error("Failed to load personalization state", e);

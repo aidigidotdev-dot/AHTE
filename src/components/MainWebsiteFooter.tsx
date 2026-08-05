@@ -22,15 +22,19 @@ const footerLinkClass =
   "inline-block text-sm leading-relaxed text-[#111111] transition-opacity hover:opacity-60";
 
 export default function MainWebsiteFooter() {
-  const { companyName, aboutText, locationText, contactText, inquiriesText } = usePersonalization();
+  const { companyName, aboutText, locationText, contactText, inquiriesText, logoImage } = usePersonalization();
   return (
     <footer className="w-full bg-[#fbf8ef] px-5 py-[60px] lg:py-[90px] border-t border-[#e1e1d7]">
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-start gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1.2fr_1fr_1fr]">
         <div className="flex flex-col gap-6">
           <Link href="/" className="block">
-            <span className="font-serif font-bold text-xl uppercase italic text-black tracking-tight">
-              {companyName}
-            </span>
+            {logoImage ? (
+              <img src={logoImage} alt={companyName} className="h-8 w-auto object-contain shrink-0 max-w-[150px]" />
+            ) : (
+              <span className="font-serif font-bold text-xl uppercase italic text-black tracking-tight">
+                {companyName}
+              </span>
+            )}
           </Link>
           <p className="m-0 text-sm font-normal leading-[1.6] text-[#111111]">
             {aboutText}

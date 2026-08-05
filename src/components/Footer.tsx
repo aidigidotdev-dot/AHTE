@@ -8,7 +8,7 @@ import { usePersonalization } from "../context/PersonalizationContext";
 
 export default function Footer() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { companyName, aboutText, locationText, contactText, inquiriesText } = usePersonalization();
+  const { companyName, aboutText, locationText, contactText, inquiriesText, logoImage } = usePersonalization();
 
   const faqs = [
     {
@@ -91,17 +91,23 @@ export default function Footer() {
             {/* Brand Info */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-white text-[#1a1a1a] shrink-0">
-                  <Layers className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-serif font-bold text-lg text-white tracking-tight block">
-                    {companyName}
-                  </span>
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block -mt-1 font-semibold">
-                    Interactive Lead Template
-                  </span>
-                </div>
+                {logoImage ? (
+                  <img src={logoImage} alt={companyName} className="h-8 w-auto object-contain shrink-0 max-w-[150px]" />
+                ) : (
+                  <>
+                    <div className="p-2 bg-white text-[#1a1a1a] shrink-0">
+                      <Layers className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="font-serif font-bold text-lg text-white tracking-tight block">
+                        {companyName}
+                      </span>
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block -mt-1 font-semibold">
+                        Interactive Lead Template
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
               <p className="text-sm text-[#a09c94] leading-relaxed font-sans">
                 {aboutText}
