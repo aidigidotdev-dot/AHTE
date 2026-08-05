@@ -105,7 +105,7 @@ export default function WhatsAppFloat() {
 
         {/* 2. Red Button: Buy This Website */}
         <Link
-          href="/buy"
+          href="https://ahte-flooring.vercel.app/buy"
           className="flex items-center gap-2.5 bg-[#FF4C4C] hover:bg-[#E03A3A] text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-103 group font-mono text-[9px] sm:text-xs uppercase tracking-wider font-extrabold cursor-pointer"
           title="Buy This Full Website Template"
         >
@@ -115,7 +115,7 @@ export default function WhatsAppFloat() {
 
         {/* 3. Orange Button: Add Calculator To Existing Website */}
         <Link
-          href="/buy?plan=starter"
+          href="https://ahte-flooring.vercel.app/buy?plan=starter"
           className="flex items-center gap-2.5 bg-[#FF6B4A] hover:bg-[#E05230] text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-103 group font-mono text-[9px] sm:text-xs uppercase tracking-wider font-extrabold cursor-pointer text-right"
           title="Add Quote Calculator to Your Website"
         >

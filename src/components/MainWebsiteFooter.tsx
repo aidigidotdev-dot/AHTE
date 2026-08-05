@@ -8,7 +8,7 @@ import { usePersonalization } from "../context/PersonalizationContext";
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "Calculator", href: "/terrazzo" },
-  { label: "Buy Template", href: "/buy" },
+  { label: "Buy Template", href: "https://ahte-flooring.vercel.app/buy" },
 ];
 
 const SERVICE_LINKS = [

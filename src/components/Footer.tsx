@@ -149,7 +149,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/buy"
+                    href="https://ahte-flooring.vercel.app/buy"
                     className="hover:text-white transition-colors cursor-pointer text-[#a09c94] text-left block"
                   >
                     Buy Template
