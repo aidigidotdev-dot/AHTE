@@ -37,57 +37,55 @@ function BuyPageContent() {
     {
       id: "starter",
       name: "Calculator Widget",
-      description: "Instantly add our interactive cost estimator to your existing website (WordPress, Wix, Webflow, etc.). Very cheap entry-level lead generation.",
+      description: "Instantly add our interactive cost estimator widget to your existing website. A simple, low-cost way to generate customer leads.",
       monthlyPrice: 99,
       yearlyPrice: 79,
       features: [
-        "Interactive cost estimation tool",
+        "1 Interactive calculator widget",
         "Add to any existing site easily",
         "Capture client phone numbers & emails",
         "Custom colors matching your branding",
         "Instant email notifications for new leads",
         "Works perfectly on mobile phones",
         "Complete 24-hour setup support",
-        "No SEO ranking setup included"
+        "Add-on options for more products available"
       ],
-      badge: "Widget Only"
+      badge: "1 Widget Page"
     },
     {
       id: "growth",
       name: "Turnkey Website",
-      description: "A complete, modern showcase website built entirely around the quote calculator. We handle the setup for you.",
+      description: "A complete, modern showcase website built around the quote calculator. Includes up to 3 custom product pages.",
       monthlyPrice: 199,
       yearlyPrice: 159,
       features: [
-        "Includes everything in Calculator Plan",
-        "Fully standalone modern website template",
-        "Built-in project showcase gallery page",
+        "Everything in the Calculator Plan",
+        "Fully standalone modern website",
+        "Up to 3 custom product / service pages",
         "Secure leads storage panel to track bids",
-        "Managed website domain and cloud hosting",
-        "Weekly automated backups & updates",
+        "Standard domain & hosting setup",
         "Text and logo adjustments included",
-        "No SEO ranking setup included"
+        "Add-on options for more products available"
       ],
-      badge: "Most Popular",
+      badge: "Up to 3 Pages",
       featured: true
     },
     {
       id: "enterprise",
-      name: "Ultimate Growth & SEO",
-      description: "Get maximum local leads. A customized website plus dedicated local Google search ranking campaigns managed for you.",
+      name: "Premium Growth Website",
+      description: "Our top tier website setup with up to 8 custom product pages, auto-blogging, and monthly site maintenance.",
       monthlyPrice: 399,
       yearlyPrice: 319,
       features: [
-        "Includes everything in Turnkey Plan",
-        "Exclusive: Google SEO local search setup",
-        "Local business directory optimization",
-        "Monthly custom local article creation",
-        "Search engine rank performance tracking",
-        "Dedicated marketing account manager",
+        "Everything in the Turnkey Plan",
+        "Up to 8 custom product / service pages",
+        "Auto-blogging (5 article posts per month)",
+        "Full monthly website maintenance & updates",
         "Bespoke layout changes to match your brand",
-        "Priority 24/7 client support"
+        "Add-on options for more products available",
+        "Priority 24/7 dedicated support"
       ],
-      badge: "Managed Marketing"
+      badge: "Up to 8 Pages"
     }
   ];
 
@@ -285,9 +283,9 @@ function BuyPageContent() {
               <div className="p-2.5 bg-white border border-[#e1e1d7] text-[#5A5A40] w-fit rounded-xl">
                 <Globe className="w-5 h-5" />
               </div>
-              <h4 className="font-serif font-bold text-[#1a1a1a]">Local Google SEO</h4>
+              <h4 className="font-serif font-bold text-[#1a1a1a]">Auto Blogging</h4>
               <p className="text-xs text-[#5a5650] leading-relaxed">
-                Appear at the top of local Google searches in your area. Help nearby property owners find your business easily. (Exclusive to growth plans).
+                Receive 5 custom, informative articles posted to your website's blog automatically every single month. (Exclusive to the Premium plan).
               </p>
             </div>
           </div>
