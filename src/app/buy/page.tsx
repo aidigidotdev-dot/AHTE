@@ -138,15 +138,18 @@ function BuyPageContent() {
         {/* 1. Value Proposition Header */}
         <div className="max-w-4xl mx-auto text-center space-y-6 mb-16">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#5A5A40] bg-[#5A5A40]/10 px-4 py-2 rounded-full inline-block">
-            Flooring B2B SaaS Solution
+            Flooring B2B Lead Solution
           </span>
           <h1 className="font-serif font-light text-5xl md:text-6xl text-[#1a1a1a] leading-tight">
             Double Your Flooring Leads With <br />
             Our <span className="font-bold italic">Interactive Calculator</span> Tool.
           </h1>
           <p className="text-[#5a5650] text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Stop losing website traffic to boring contact forms. Deliver instant, interactive estimates that capture customer contact details automatically. Proven to boost client inquiries.
+            Stop losing traffic. Turn visitors into hot sales inquiries with a high-converting estimator built as a **lead magnet** for your business. **Perfect for running Google Ads and Meta Ads** campaigns to generate concrete inquiries.
           </p>
+          <div className="bg-[#edebe1] rounded-2xl p-4 max-w-xl mx-auto text-xs text-[#5A5A40] border border-[#e1e1d7] font-semibold">
+            ✨ <strong>Turnkey Setup Included:</strong> We handle all configuration. Every page is fully customized to match your company's branding, services, and local needs.
+          </div>
         </div>
 
         {/* 2. Toggle Switch Billing */}
@@ -246,6 +249,69 @@ function BuyPageContent() {
           })}
         </div>
 
+        {/* Ad Optimization & Done-For-You Setup Showcase */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 items-stretch">
+          <div className="bg-white border border-[#e1e1d7] rounded-[32px] p-8 md:p-10 shadow-sm space-y-6 flex flex-col justify-between">
+            <div className="space-y-6">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] bg-[#5A5A40]/10 px-3.5 py-1.5 rounded-full inline-block">
+                Built For Paid Traffic
+              </span>
+              <h2 className="font-serif font-light text-3xl md:text-4xl text-[#1a1a1a] leading-tight">
+                Optimized For Running <br /><strong>Google Ads & Meta Ads</strong>
+              </h2>
+              <p className="text-xs md:text-sm text-[#5a5650] leading-relaxed">
+                Flooring companies fail on Google and Meta because they send expensive ad clicks to slow, boring pages. Our templates are designed for lightning-fast loads, crystal-clear action points, and an interactive cost calculator that works as a powerful lead magnet.
+              </p>
+            </div>
+            <ul className="space-y-3.5 text-xs text-[#5a5650] border-t border-[#f5f5f0] pt-6">
+              <li className="flex items-center gap-2.5">
+                <BadgeCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                <span><strong>Meta Pixel Ready:</strong> Easily track quote submissions and optimize conversions.</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <BadgeCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                <span><strong>Google Ads Friendly:</strong> Fast loading layouts that lower cost-per-click.</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <BadgeCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                <span><strong>Engaging Lead Magnets:</strong> Capture contact details before giving final prices.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-white border border-[#e1e1d7] rounded-[32px] p-8 md:p-10 shadow-sm space-y-6 flex flex-col justify-between">
+            <div className="space-y-4">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-indigo-600 bg-indigo-50 px-3.5 py-1.5 rounded-full inline-block">
+                100% Done-For-You Setup
+              </span>
+              <h3 className="font-serif font-bold text-2xl text-[#1a1a1a]">
+                We Customize Everything For You
+              </h3>
+              <p className="text-xs text-[#5a5650] leading-relaxed">
+                You don't need to write code or configure layouts. Once you select a plan, our team does the heavy lifting:
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#5a5650] border-t border-[#f5f5f0] pt-6">
+              <div className="bg-[#f5f5f0]/40 p-4 border border-[#e1e1d7] rounded-2xl">
+                <strong className="text-[#1a1a1a] block mb-1">Logo & Color Sync</strong>
+                <p className="text-[11px] text-[#a09c94] leading-relaxed">We apply your logo and primary company theme colors.</p>
+              </div>
+              <div className="bg-[#f5f5f0]/40 p-4 border border-[#e1e1d7] rounded-2xl">
+                <strong className="text-[#1a1a1a] block mb-1">Local Services Config</strong>
+                <p className="text-[11px] text-[#a09c94] leading-relaxed">Product catalog customized for your exact flooring materials.</p>
+              </div>
+              <div className="bg-[#f5f5f0]/40 p-4 border border-[#e1e1d7] rounded-2xl">
+                <strong className="text-[#1a1a1a] block mb-1">Custom Contact Details</strong>
+                <p className="text-[11px] text-[#a09c94] leading-relaxed">All phone calls, emails, and WhatsApp CTAs route to you.</p>
+              </div>
+              <div className="bg-[#f5f5f0]/40 p-4 border border-[#e1e1d7] rounded-2xl">
+                <strong className="text-[#1a1a1a] block mb-1">Launch & Maintenance</strong>
+                <p className="text-[11px] text-[#a09c94] leading-relaxed">We setup your custom domain, security, and monthly updates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 4. Core Features & Capabilities */}
         <div className="border border-[#e1e1d7] bg-white rounded-[32px] p-8 md:p-12 shadow-sm mb-20">
           <div className="max-w-3xl mb-12 space-y-2">
@@ -291,21 +357,32 @@ function BuyPageContent() {
           </div>
         </div>
 
-        {/* 5. Trust Badges / Social Proof Ticker */}
-        <div className="text-center space-y-6">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#a09c94] block font-bold">
-            Trusted by premium installers
+        {/* 5. Trust Badges Showcase */}
+        <div className="bg-white border border-[#e1e1d7] rounded-[32px] p-8 shadow-sm mb-20 text-center space-y-8">
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] block">
+            Guaranteed Secure & Optimized Deployment
           </span>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-55">
-            <span className="font-serif font-extrabold text-lg text-[#1a1a1a] tracking-tight flex items-center gap-1.5 select-none">
-              <BadgeCheck className="w-5 h-5 text-[#5A5A40]" /> 100% QUALITY ASSURED
-            </span>
-            <span className="font-serif font-extrabold text-lg text-[#1a1a1a] tracking-tight flex items-center gap-1.5 select-none">
-              <Users className="w-5 h-5 text-[#5A5A40]" /> 150+ CONTRACTORS
-            </span>
-            <span className="font-serif font-extrabold text-lg text-[#1a1a1a] tracking-tight flex items-center gap-1.5 select-none">
-              <Star className="w-5 h-5 text-[#5A5A40] fill-[#5A5A40]" /> 5.0 GOOGLE RATING
-            </span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="flex flex-col items-center p-4 bg-[#f5f5f0]/30 rounded-2xl border border-[#e1e1d7]">
+              <ShieldCheck className="w-8 h-8 text-[#5A5A40] mb-2" />
+              <span className="font-serif font-bold text-sm text-[#1a1a1a]">Secure Checkout</span>
+              <span className="text-[10px] text-[#a09c94] mt-1">Stripe-encrypted secure monthly billing</span>
+            </div>
+            <div className="flex flex-col items-center p-4 bg-[#f5f5f0]/30 rounded-2xl border border-[#e1e1d7]">
+              <Sparkles className="w-8 h-8 text-[#5A5A40] mb-2" />
+              <span className="font-serif font-bold text-sm text-[#1a1a1a]">Google Ads Friendly</span>
+              <span className="text-[10px] text-[#a09c94] mt-1">Fast landing layouts for paid searches</span>
+            </div>
+            <div className="flex flex-col items-center p-4 bg-[#f5f5f0]/30 rounded-2xl border border-[#e1e1d7]">
+              <Zap className="w-8 h-8 text-[#5A5A40] mb-2" />
+              <span className="font-serif font-bold text-sm text-[#1a1a1a]">Meta Pixel Ready</span>
+              <span className="text-[10px] text-[#a09c94] mt-1">Optimized for Facebook/Instagram ads</span>
+            </div>
+            <div className="flex flex-col items-center p-4 bg-[#f5f5f0]/30 rounded-2xl border border-[#e1e1d7]">
+              <BadgeCheck className="w-8 h-8 text-[#5A5A40] mb-2" />
+              <span className="font-serif font-bold text-sm text-[#1a1a1a]">Done-For-You Setup</span>
+              <span className="text-[10px] text-[#a09c94] mt-1">No technical setups needed from you</span>
+            </div>
           </div>
         </div>
       </div>
