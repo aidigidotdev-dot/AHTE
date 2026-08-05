@@ -253,7 +253,7 @@ export default function WhatsAppFloat() {
 
                     {/* Logo Image Uploader */}
                     <div>
-                      <label className="text-xs font-semibold text-[#5a5650] block mb-1">Upload Brand Logo</label>
+                      <label className="text-xs font-semibold text-[#5a5650] block mb-1">Upload Brand Logo (Transparent PNG, landscape format, e.g. 250x60px recommended)</label>
                       <div className="flex items-center gap-4">
                         <label className="flex items-center gap-2 px-4 py-2 border border-[#e1e1d7] rounded-lg cursor-pointer bg-[#f5f5f0]/50 hover:bg-[#edebe1] text-[#1a1a1a] font-mono text-[10px] sm:text-xs uppercase font-extrabold transition shrink-0">
                           <Upload className="w-4 h-4 text-[#5A5A40]" />

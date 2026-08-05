@@ -29,7 +29,12 @@ export default function MainWebsiteFooter() {
         <div className="flex flex-col gap-6">
           <Link href="/" className="block">
             {logoImage ? (
-              <img src={logoImage} alt={companyName} className="h-8 w-auto object-contain shrink-0 max-w-[150px]" />
+              <img 
+                src={logoImage} 
+                alt={companyName} 
+                className="h-12 w-auto object-contain shrink-0 max-w-[180px]" 
+                style={{ mixBlendMode: "multiply" }} 
+              />
             ) : (
               <span className="font-serif font-bold text-xl uppercase italic text-black tracking-tight">
                 {companyName}

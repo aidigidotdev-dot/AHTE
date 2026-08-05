@@ -92,7 +92,14 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 {logoImage ? (
-                  <img src={logoImage} alt={companyName} className="h-8 w-auto object-contain shrink-0 max-w-[150px]" />
+                  <div className="bg-white rounded-lg p-1.5 inline-block shrink-0 shadow-sm">
+                    <img 
+                      src={logoImage} 
+                      alt={companyName} 
+                      className="h-10 w-auto object-contain max-w-[160px]" 
+                      style={{ mixBlendMode: "multiply" }} 
+                    />
+                  </div>
                 ) : (
                   <>
                     <div className="p-2 bg-white text-[#1a1a1a] shrink-0">

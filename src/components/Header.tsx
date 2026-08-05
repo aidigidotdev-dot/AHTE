@@ -34,7 +34,12 @@ export default function Header() {
           className="flex items-center gap-3 cursor-pointer group min-w-0"
         >
           {logoImage ? (
-            <img src={logoImage} alt={companyName} className="h-10 w-auto object-contain shrink-0 max-w-[180px]" />
+            <img 
+              src={logoImage} 
+              alt={companyName} 
+              className="h-14 sm:h-16 w-auto object-contain shrink-0 max-w-[240px]" 
+              style={{ mixBlendMode: "multiply" }}
+            />
           ) : (
             <>
               <div className="p-2 bg-[#5A5A40] text-[#f5f5f0] rounded-none group-hover:bg-[#1a1a1a] transition-colors shrink-0">
