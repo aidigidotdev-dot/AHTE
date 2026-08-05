@@ -89,22 +89,16 @@ export default function Header() {
           {renderLinks()}
         </nav>
 
-        {/* Action Buttons */}
-        <div className="hidden min-[1150px]:flex items-center gap-3">
+        {/* Action Button */}
+        <div className="hidden min-[1150px]:block">
           <a
             href="https://ahteflooring.ae/contact-us/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] uppercase font-bold tracking-widest text-[#5A5A40] px-4 py-2 border border-[#5A5A40] rounded-full hover:bg-[#5A5A40] hover:text-[#f5f5f0] transition-all cursor-pointer"
+            className="text-[10px] uppercase font-bold tracking-widest text-[#5A5A40] px-5 py-2.5 border border-[#5A5A40] rounded-full hover:bg-[#5A5A40] hover:text-[#f5f5f0] transition-all cursor-pointer"
           >
             Contact Us
           </a>
-          <Link
-            href="/buy"
-            className="text-[10px] uppercase font-bold tracking-widest bg-[#5A5A40] hover:bg-[#1a1a1a] text-white px-4.5 py-2.5 rounded-full transition-all cursor-pointer shadow-sm shadow-[#5A5A40]/20"
-          >
-            Buy Website
-          </Link>
         </div>
 
         <button
@@ -127,17 +121,10 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
-              className="mt-2 text-center text-[10px] uppercase font-bold tracking-widest text-[#5A5A40] border border-[#5A5A40] px-5 py-3 rounded-full hover:bg-[#5A5A40] hover:text-white transition-colors cursor-pointer"
+              className="mt-2 text-center text-[10px] uppercase font-bold tracking-widest text-white bg-[#5A5A40] px-5 py-3 rounded-full hover:bg-[#1a1a1a] transition-colors cursor-pointer"
             >
               Contact Us
             </a>
-            <Link
-              href="/buy"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-center text-[10px] uppercase font-bold tracking-widest text-white bg-[#5A5A40] px-5 py-3 rounded-full hover:bg-[#1a1a1a] transition-colors cursor-pointer"
-            >
-              Buy Website
-            </Link>
           </nav>
         </div>
       )}

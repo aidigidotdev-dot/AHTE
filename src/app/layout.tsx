@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../components/Header";
 import MainWebsiteFooter from "../components/MainWebsiteFooter";
+import WhatsAppFloat from "../components/WhatsAppFloat";
 import "../index.css";
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
           {children}
         </main>
         <MainWebsiteFooter />
+        <WhatsAppFloat />
       </body>
     </html>
   );
