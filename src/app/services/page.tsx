@@ -1,5 +1,18 @@
-import { permanentRedirect } from "next/navigation";
+"use client";
+
+import ServicesView from "../../components/ServicesView";
+import { useRouter } from "next/navigation";
 
 export default function ServicesPage() {
-  permanentRedirect("https://ahteflooring.ae/services");
+  const router = useRouter();
+
+  const handleNavigate = (tab: string) => {
+    if (tab === "home" || tab === "") {
+      router.push("/");
+    } else {
+      router.push(`/${tab}`);
+    }
+  };
+
+  return <ServicesView onNavigate={handleNavigate} />;
 }

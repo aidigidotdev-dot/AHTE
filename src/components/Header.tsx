@@ -2,41 +2,50 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Layers, Menu, Phone, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const desktopLinkClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40]/70 hover:text-[#1a1a1a] border-b-2 border-transparent hover:border-[#5A5A40] pb-1 transition-colors cursor-pointer";
-  const desktopCalculatorClass = "text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] border-b-2 border-[#5A5A40] pb-1 transition-all cursor-pointer";
-  const mobileLinkClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] hover:text-[#1a1a1a] hover:bg-[#edebe1]/70 border border-[#e1e1d7] px-4 py-3 rounded-xl transition-colors";
-  const mobileCalculatorClass = "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] bg-[#edebe1] border border-[#e1e1d7] px-4 py-3 rounded-xl transition-all";
   const mainSiteLinks = [
-    { href: "https://ahteflooring.ae/about-us/", label: "About Us" },
-    { href: "https://ahteflooring.ae/services", label: "Services" },
-    { href: "https://ahteflooring.ae/gallery", label: "Gallery" },
+    { href: "/about-us", label: "About Us" },
+    { href: "/services", label: "Services" },
+    { href: "/gallery", label: "Gallery" },
   ];
+
+  const getLinkClasses = (href: string, isMobile: boolean) => {
+    const isActive = pathname === href;
+    if (isMobile) {
+      return isActive
+        ? "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] bg-[#edebe1] border border-[#e1e1d7] px-4 py-3 rounded-xl transition-all"
+        : "w-full text-left text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40] hover:text-[#1a1a1a] hover:bg-[#edebe1]/70 border border-[#e1e1d7] px-4 py-3 rounded-xl transition-colors";
+    } else {
+      return isActive
+        ? "text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a] border-b-2 border-[#5A5A40] pb-1 transition-all cursor-pointer"
+        : "text-xs font-bold uppercase tracking-[0.2em] text-[#5A5A40]/70 hover:text-[#1a1a1a] border-b-2 border-transparent hover:border-[#5A5A40] pb-1 transition-colors cursor-pointer";
+    }
+  };
 
   const renderLinks = (isMobile = false) => (
     <>
       <Link
         href="/"
         onClick={() => setIsMenuOpen(false)}
-        className={isMobile ? mobileCalculatorClass : desktopCalculatorClass}
+        className={getLinkClasses("/", isMobile)}
       >
         Cost Calculator
       </Link>
       {mainSiteLinks.map((link) => (
-        <a
+        <Link
           key={link.href}
           href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
           onClick={() => setIsMenuOpen(false)}
-          className={isMobile ? mobileLinkClass : desktopLinkClass}
+          className={getLinkClasses(link.href, isMobile)}
         >
           {link.label}
-        </a>
+        </Link>
       ))}
     </>
   );
