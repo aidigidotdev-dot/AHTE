@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Check, ArrowRight, ShieldCheck, Sparkles, Star, Zap, Code, Database, 
-  X, Globe, BadgeCheck, Users
+  Check, ArrowRight, ShieldCheck, Sparkles, Star, Zap, Laptop, Database, 
+  X, Globe, BadgeCheck, Users, MessageSquare, PlusCircle
 } from "lucide-react";
 
-export default function BuyPage() {
+function BuyPageContent() {
+  const searchParams = useSearchParams();
+  const planParam = searchParams.get("plan");
+
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly");
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -18,57 +22,72 @@ export default function BuyPage() {
   const [clientPhone, setClientPhone] = useState("");
   const [clientCompany, setClientCompany] = useState("");
 
+  // Pre-select plan if passed in query parameters
+  useEffect(() => {
+    if (planParam === "starter") {
+      setSelectedPlan("starter");
+    } else if (planParam === "growth") {
+      setSelectedPlan("growth");
+    } else if (planParam === "enterprise") {
+      setSelectedPlan("enterprise");
+    }
+  }, [planParam]);
+
   const plans = [
     {
       id: "starter",
-      name: "Starter Template",
-      description: "Perfect for independent local flooring contractors looking to establish a professional digital presence.",
+      name: "Calculator Widget",
+      description: "Instantly add our interactive cost estimator to your existing website (WordPress, Wix, Webflow, etc.). Very cheap entry-level lead generation.",
       monthlyPrice: 99,
       yearlyPrice: 79,
       features: [
-        "Interactive Terrazzo Quote Estimator",
-        "Fully Responsive Layout (Mobile / Tablet)",
-        "Vanilla CSS Glassmorphism Design",
-        "Email lead notifications",
-        "Standard local SEO optimizations",
-        "Self-hosted template code delivery"
+        "Interactive cost estimation tool",
+        "Add to any existing site easily",
+        "Capture client phone numbers & emails",
+        "Custom colors matching your branding",
+        "Instant email notifications for new leads",
+        "Works perfectly on mobile phones",
+        "Complete 24-hour setup support",
+        "No SEO ranking setup included"
       ],
-      badge: "Self-Managed"
+      badge: "Widget Only"
     },
     {
       id: "growth",
-      name: "Growth Engine",
-      description: "Our most popular plan. Outrank competitors, capture qualified bids, and store them securely in a database.",
+      name: "Turnkey Website",
+      description: "A complete, modern showcase website built entirely around the quote calculator. We handle the setup for you.",
       monthlyPrice: 199,
       yearlyPrice: 159,
       features: [
-        "Everything in Starter Plan",
-        "PostgreSQL Database Lead Integration",
-        "Custom Shader & Color Swatch Setup",
-        "Topical Google EEAT SEO Hub",
-        "Standard cloud maintenance & updates",
-        "Vercel SSL & global CDN hosting setup",
-        "1-click PDF estimate export configuration"
+        "Includes everything in Calculator Plan",
+        "Fully standalone modern website template",
+        "Built-in project showcase gallery page",
+        "Secure leads storage panel to track bids",
+        "Managed website domain and cloud hosting",
+        "Weekly automated backups & updates",
+        "Text and logo adjustments included",
+        "No SEO ranking setup included"
       ],
       badge: "Most Popular",
       featured: true
     },
     {
       id: "enterprise",
-      name: "Enterprise Authority",
-      description: "For established regional contractors seeking customized layouts, dedicated servers, and managed growth campaigns.",
+      name: "Ultimate Growth & SEO",
+      description: "Get maximum local leads. A customized website plus dedicated local Google search ranking campaigns managed for you.",
       monthlyPrice: 399,
       yearlyPrice: 319,
       features: [
-        "Everything in Growth Plan",
-        "Complete bespoke UI layout redesign",
-        "Dedicated cloud database instance",
-        "Monthly custom SEO content updates",
-        "Weekly automated database backups",
-        "24/7 dedicated developer support",
-        "Custom branding & typography alignment"
+        "Includes everything in Turnkey Plan",
+        "Exclusive: Google SEO local search setup",
+        "Local business directory optimization",
+        "Monthly custom local article creation",
+        "Search engine rank performance tracking",
+        "Dedicated marketing account manager",
+        "Bespoke layout changes to match your brand",
+        "Priority 24/7 client support"
       ],
-      badge: "Fully Managed"
+      badge: "Managed Marketing"
     }
   ];
 
@@ -88,7 +107,7 @@ export default function BuyPage() {
           name: clientName,
           email: clientEmail,
           phone: clientPhone,
-          company: clientCompany || "Independent Flooring Co.",
+          company: clientCompany || "Flooring Business Owner",
           flooringType: "SaaS Calculator Template",
           areaSqm: 0,
           projectSector: "SaaS Template Purchase",
@@ -125,10 +144,10 @@ export default function BuyPage() {
           </span>
           <h1 className="font-serif font-light text-5xl md:text-6xl text-[#1a1a1a] leading-tight">
             Double Your Flooring Leads With <br />
-            Our <span className="font-bold italic">Interactive Calculator</span> Site.
+            Our <span className="font-bold italic">Interactive Calculator</span> Tool.
           </h1>
           <p className="text-[#5a5650] text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Stop losing traffic to generic contact forms. Deliver instant, interactive estimates that qualify clients automatically. Standard-compliant, high-speed, and SEO-ready template.
+            Stop losing website traffic to boring contact forms. Deliver instant, interactive estimates that capture customer contact details automatically. Proven to boost client inquiries.
           </p>
         </div>
 
@@ -236,39 +255,39 @@ export default function BuyPage() {
               Core Capabilities
             </span>
             <h2 className="font-serif font-bold text-3xl text-[#1a1a1a] tracking-tight">
-              Engineered For Premium Flooring Businesses
+              Engineered For Flooring Businesses
             </h2>
             <p className="text-xs md:text-sm text-[#5a5650] leading-relaxed">
-              We provide more than code. We establish a complete local authority and bid generation pipeline specifically built for the high-end flooring industry.
+              We provide ready-made tools to increase your sales. Capture qualified leads who want estimates and follow up with them immediately.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-3 p-6 bg-[#f5f5f0]/40 border border-[#e1e1d7] rounded-[24px]">
               <div className="p-2.5 bg-white border border-[#e1e1d7] text-[#5A5A40] w-fit rounded-xl">
-                <Code className="w-5 h-5" />
+                <PlusCircle className="w-5 h-5" />
               </div>
-              <h4 className="font-serif font-bold text-[#1a1a1a]">Bespoke Swatches</h4>
+              <h4 className="font-serif font-bold text-[#1a1a1a]">Bespoke Customizer</h4>
               <p className="text-xs text-[#5a5650] leading-relaxed">
-                Allow users to toggle between Crystalline, Terracotta, or Basalt monolithic shades. Easily swap color specs for your local stock list.
+                Allow customers to toggle between cement bases, gloss levels, and aggregate combinations to get a realistic preview of their floor.
               </p>
             </div>
             <div className="space-y-3 p-6 bg-[#f5f5f0]/40 border border-[#e1e1d7] rounded-[24px]">
               <div className="p-2.5 bg-white border border-[#e1e1d7] text-[#5A5A40] w-fit rounded-xl">
                 <Database className="w-5 h-5" />
               </div>
-              <h4 className="font-serif font-bold text-[#1a1a1a]">Secure Postgres Leads</h4>
+              <h4 className="font-serif font-bold text-[#1a1a1a]">Secure Lead Logs</h4>
               <p className="text-xs text-[#5a5650] leading-relaxed">
-                Never lose a lead to server restarts. Bids are logged immediately into a PostgreSQL table for your sales reps to view and download.
+                Never lose a customer inquiry. Bids are logged immediately into your private dashboard and sent to your email for direct sales follow-ups.
               </p>
             </div>
             <div className="space-y-3 p-6 bg-[#f5f5f0]/40 border border-[#e1e1d7] rounded-[24px]">
               <div className="p-2.5 bg-white border border-[#e1e1d7] text-[#5A5A40] w-fit rounded-xl">
                 <Globe className="w-5 h-5" />
               </div>
-              <h4 className="font-serif font-bold text-[#1a1a1a]">Authority SEO Hub</h4>
+              <h4 className="font-serif font-bold text-[#1a1a1a]">Local Google SEO</h4>
               <p className="text-xs text-[#5a5650] leading-relaxed">
-                Rank high on Google search. Out-of-the-box local directories, structural specs solving logs, and structured EEAT articles.
+                Appear at the top of local Google searches in your area. Help nearby property owners find your business easily. (Exclusive to growth plans).
               </p>
             </div>
           </div>
@@ -277,11 +296,11 @@ export default function BuyPage() {
         {/* 5. Trust Badges / Social Proof Ticker */}
         <div className="text-center space-y-6">
           <span className="font-mono text-[10px] uppercase tracking-widest text-[#a09c94] block font-bold">
-            Trusted by premium architectural installers
+            Trusted by premium installers
           </span>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-55">
             <span className="font-serif font-extrabold text-lg text-[#1a1a1a] tracking-tight flex items-center gap-1.5 select-none">
-              <BadgeCheck className="w-5 h-5 text-[#5A5A40]" /> DM APPROVED SPECS
+              <BadgeCheck className="w-5 h-5 text-[#5A5A40]" /> 100% QUALITY ASSURED
             </span>
             <span className="font-serif font-extrabold text-lg text-[#1a1a1a] tracking-tight flex items-center gap-1.5 select-none">
               <Users className="w-5 h-5 text-[#5A5A40]" /> 150+ CONTRACTORS
@@ -324,7 +343,7 @@ export default function BuyPage() {
                   Setup Your {activePlanObj.name}
                 </h3>
                 <p className="text-xs text-[#a09c94] mt-2 leading-relaxed">
-                  Enter your business details to request your custom calculator domain. We configure database connections and launch within 48 working hours.
+                  Enter your business details to request your custom calculator domain. We configure your dashboard and launch within 48 working hours.
                 </p>
 
                 {!isFormSubmitted ? (
@@ -344,7 +363,7 @@ export default function BuyPage() {
                       <label className="text-xs text-[#5a5650] block mb-1">Flooring Company Name</label>
                       <input
                         type="text"
-                        placeholder="Dubai Epoxy Installations LLC"
+                        placeholder="Epoxy Installations LLC"
                         value={clientCompany}
                         onChange={(e) => setClientCompany(e.target.value)}
                         className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-[#5A5A40]"
@@ -354,7 +373,7 @@ export default function BuyPage() {
                       <label className="text-xs text-[#5a5650] block mb-1">Email Address</label>
                       <input
                         type="email"
-                        placeholder="abdullah@dubaiepoxy.ae"
+                        placeholder="abdullah@yourdomain.com"
                         value={clientEmail}
                         onChange={(e) => setClientEmail(e.target.value)}
                         className="w-full border border-[#e1e1d7] rounded-lg p-2.5 text-sm text-[#1a1a1a] bg-[#f5f5f0]/30 focus:outline-none focus:border-[#5A5A40]"
@@ -395,7 +414,7 @@ export default function BuyPage() {
                     </div>
                     <h4 className="font-serif font-bold text-xl text-[#1a1a1a]">Order Registered!</h4>
                     <p className="text-sm text-[#5a5650] max-w-sm mx-auto leading-relaxed">
-                      Thank you, <span className="font-semibold text-stone-900">{clientName}</span>. We have logged your request. Our integration engineers will contact you on <span className="font-semibold text-stone-900">{clientPhone}</span> within 24 hours to organize your custom swatches and database connection.
+                      Thank you, <span className="font-semibold text-stone-900">{clientName}</span>. We have logged your request. Our integration engineers will contact you on <span className="font-semibold text-stone-900">{clientPhone}</span> within 24 hours to organize your custom calculator layout.
                     </p>
                   </div>
                 )}
@@ -431,5 +450,17 @@ export default function BuyPage() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function BuyPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-[#f5f5f0] min-h-screen flex items-center justify-center font-mono text-xs uppercase text-[#a09c94] tracking-widest">
+        Loading plans...
+      </div>
+    }>
+      <BuyPageContent />
+    </Suspense>
   );
 }
