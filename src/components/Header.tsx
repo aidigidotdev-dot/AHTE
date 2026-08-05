@@ -54,6 +54,28 @@ export default function Header() {
           >
             Home
           </Link>
+          {pathname !== "/buy" && (
+            <>
+              <Link
+                href="/services"
+                className={getLinkClasses("/services", false)}
+              >
+                Services
+              </Link>
+              <Link
+                href="/gallery"
+                className={getLinkClasses("/gallery", false)}
+              >
+                Gallery
+              </Link>
+              <Link
+                href="/about-us"
+                className={getLinkClasses("/about-us", false)}
+              >
+                About Us
+              </Link>
+            </>
+          )}
           <Link
             href="/terrazzo"
             className={getLinkClasses("/terrazzo", false)}
@@ -93,6 +115,31 @@ export default function Header() {
             >
               Home
             </Link>
+            {pathname !== "/buy" && (
+              <>
+                <Link
+                  href="/services"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={getLinkClasses("/services", true)}
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/gallery"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={getLinkClasses("/gallery", true)}
+                >
+                  Gallery
+                </Link>
+                <Link
+                  href="/about-us"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={getLinkClasses("/about-us", true)}
+                >
+                  About Us
+                </Link>
+              </>
+            )}
             <Link
               href="/terrazzo"
               onClick={() => setIsMenuOpen(false)}
