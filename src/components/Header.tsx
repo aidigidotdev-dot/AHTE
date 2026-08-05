@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Layers, Menu, X } from "lucide-react";
+import { usePersonalization } from "../context/PersonalizationContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { companyName } = usePersonalization();
 
   const getLinkClasses = (href: string, isMobile: boolean) => {
     const isActive = pathname === href;
@@ -36,7 +38,7 @@ export default function Header() {
           </div>
           <div className="min-w-0">
             <span className="font-serif font-bold text-xl sm:text-2xl tracking-tighter uppercase italic text-[#1a1a1a] block truncate">
-              Seamless Surfaces
+              {companyName}
             </span>
             <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-[#5A5A40] block -mt-1 font-semibold truncate">
               Interactive Lead Calculator

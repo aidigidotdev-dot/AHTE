@@ -4,9 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Layers, Mail, Phone, MapPin, Award, CheckCircle, ChevronDown, HelpCircle } from "lucide-react";
 import { GENERAL_SPECS } from "../data";
+import { usePersonalization } from "../context/PersonalizationContext";
 
 export default function Footer() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { companyName, aboutText, locationText, contactText, inquiriesText } = usePersonalization();
 
   const faqs = [
     {
@@ -94,7 +96,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <span className="font-serif font-bold text-lg text-white tracking-tight block">
-                    Seamless Surfaces
+                    {companyName}
                   </span>
                   <span className="font-mono text-[9px] uppercase tracking-widest text-[#a09c94] block -mt-1 font-semibold">
                     Interactive Lead Template
@@ -102,7 +104,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className="text-sm text-[#a09c94] leading-relaxed font-sans">
-                Premium lead generation and dynamic quote estimation templates for architectural flooring installers and contractors.
+                {aboutText}
               </p>
               <div className="pt-2 flex flex-col gap-1.5 font-mono text-xs text-[#5A5A40]">
                 <span className="text-[#a09c94]">Experience: <span className="text-white font-semibold">15+ Years</span></span>
@@ -152,22 +154,22 @@ export default function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                   <span className="text-[#a09c94] font-sans leading-snug">
-                    Your Business Address, Dubai, UAE
+                    {locationText}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Phone className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                   <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
-                    <a href="tel:+971589163867" className="hover:text-white transition-colors">
-                      +971 58 916 3867
+                    <a href={`tel:${contactText}`} className="hover:text-white transition-colors">
+                      {contactText}
                     </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail className="w-4.5 h-4.5 text-[#5A5A40] mt-0.5 shrink-0" />
                   <div className="text-[#a09c94] font-mono leading-snug flex flex-col gap-1">
-                    <a href="mailto:sales@yourdomain.com" className="hover:text-white transition-colors">
-                      sales@yourdomain.com
+                    <a href={`mailto:${inquiriesText}`} className="hover:text-white transition-colors">
+                      {inquiriesText}
                     </a>
                   </div>
                 </li>

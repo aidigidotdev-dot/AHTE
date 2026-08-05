@@ -92,7 +92,7 @@ function formatLeadHtmlEmail(payload: LeadEmailPayload) {
     <div style="margin:0;padding:24px;background:#f5f3eb;font-family:Arial,Helvetica,sans-serif;color:#171717;">
       <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e1ddd2;border-radius:12px;overflow:hidden;">
         <div style="padding:22px 24px;background:#171717;color:#ffffff;">
-          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b8b09e;">Seamless Surfaces</div>
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b8b09e;">Flooring Studio</div>
           <h1 style="margin:8px 0 0;font-size:22px;line-height:1.25;">New Website Lead</h1>
         </div>
         <div style="padding:22px 24px;">
