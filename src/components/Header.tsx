@@ -43,15 +43,14 @@ export default function Header() {
         <Link
           href="/"
           onClick={() => setIsMenuOpen(false)}
-          className="flex min-w-0 flex-col leading-none text-[#1f1f1f]"
+          className="flex min-w-0 items-center"
           aria-label="A H T E Flooring LLC home"
         >
-          <span className="text-[28px] font-black uppercase tracking-[0.18em] sm:text-[34px]">
-            A H T E
-          </span>
-          <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.42em] text-[#8b8b8b] sm:text-[11px]">
-            Flooring LLC
-          </span>
+          <img
+            src="/ahte-logo.png"
+            alt="A H T E Flooring LLC"
+            className="h-[58px] w-auto max-w-[180px] object-contain sm:h-[66px] sm:max-w-[220px]"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 xl:flex">

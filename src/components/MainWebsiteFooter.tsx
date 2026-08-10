@@ -49,13 +49,12 @@ export default function MainWebsiteFooter() {
     <footer className="w-full bg-[#171717] text-[#f5f5f0]">
       <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-10 px-5 py-16 sm:grid-cols-2 lg:grid-cols-[1.35fr_1.05fr_0.8fr_1.15fr] lg:py-20">
         <div className="flex flex-col gap-6">
-          <Link href="/" className="inline-flex flex-col leading-none" aria-label="A H T E Flooring LLC home">
-            <span className="text-[30px] font-black uppercase tracking-[0.18em] text-white">
-              A H T E
-            </span>
-            <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.42em] text-[#b9975b]">
-              Flooring LLC
-            </span>
+          <Link href="/" className="inline-flex items-center rounded bg-white px-3 py-2" aria-label="A H T E Flooring LLC home">
+            <img
+              src="/ahte-logo.png"
+              alt="A H T E Flooring LLC"
+              className="h-[58px] w-auto max-w-[210px] object-contain"
+            />
           </Link>
 
           <p className="m-0 max-w-md text-sm leading-7 text-[#d8d8d8]">
