@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Header from "../components/Header";
 import MainWebsiteFooter from "../components/MainWebsiteFooter";
 import { PersonalizationProvider } from "../context/PersonalizationContext";
 import PersonalizationBanner from "../components/PersonalizationBanner";
-import WhatsAppFloat from "../components/WhatsAppFloat";
 import "../index.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Flooring Cost Calculator | Flooring Studio",
@@ -29,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
+    <html lang="en">
       <body className="flex flex-col min-h-screen bg-natural-bg overflow-x-hidden relative font-sans text-natural-dark antialiased selection:bg-primary-earth/30 selection:text-natural-dark">
         <PersonalizationProvider>
           <PersonalizationStyles />
@@ -39,7 +31,6 @@ export default function RootLayout({
             {children}
           </main>
           <MainWebsiteFooter />
-          <WhatsAppFloat />
         </PersonalizationProvider>
       </body>
     </html>
